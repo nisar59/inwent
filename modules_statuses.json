@@ -1,0 +1,9 @@
+{
+    "Roles": true,
+    "Admins": true,
+    "Settings": true,
+    "Users": true,
+    "Countries": true,
+    "States": true,
+    "Cities": true
+}

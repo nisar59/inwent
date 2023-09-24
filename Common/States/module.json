@@ -1,0 +1,11 @@
+{
+    "name": "States",
+    "alias": "states",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Common\\States\\Providers\\StatesServiceProvider"
+    ],
+    "files": []
+}
