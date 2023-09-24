@@ -1,0 +1,11 @@
+{
+    "name": "Languages",
+    "alias": "languages",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Common\\Languages\\Providers\\LanguagesServiceProvider"
+    ],
+    "files": []
+}

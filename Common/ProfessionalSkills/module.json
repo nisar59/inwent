@@ -1,0 +1,11 @@
+{
+    "name": "ProfessionalSkills",
+    "alias": "professionalskills",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Common\\ProfessionalSkills\\Providers\\ProfessionalSkillsServiceProvider"
+    ],
+    "files": []
+}

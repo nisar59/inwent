@@ -1,0 +1,11 @@
+{
+    "name": "ProfessionalTools",
+    "alias": "professionaltools",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Common\\ProfessionalTools\\Providers\\ProfessionalToolsServiceProvider"
+    ],
+    "files": []
+}

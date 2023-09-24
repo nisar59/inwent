@@ -5,5 +5,8 @@
     "Users": true,
     "Countries": true,
     "States": true,
-    "Cities": true
+    "Cities": true,
+    "Languages": true,
+    "ProfessionalSkills": true,
+    "ProfessionalTools": true
 }
