@@ -9,7 +9,8 @@ class ProfessionalTools extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['type','title'];
+    protected $table='professional_tools';
     
     protected static function newFactory()
     {

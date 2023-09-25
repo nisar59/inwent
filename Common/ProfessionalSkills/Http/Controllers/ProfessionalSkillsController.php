@@ -5,7 +5,11 @@ namespace Common\ProfessionalSkills\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-
+use Common\ProfessionalSkills\Entities\ProfessionalSkills;
+use Throwable;
+use DataTables;
+use Auth;
+use DB;
 class ProfessionalSkillsController extends Controller
 {
     /**
@@ -14,6 +18,40 @@ class ProfessionalSkillsController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+        $professionalskills=ProfessionalSkills::select('*')->orderBy('id','ASC')->get();
+           return DataTables::of($professionalskills)
+           ->addColumn('action',function ($row){
+               $action='';
+               if(Auth::user()->can('professionalskills.edit')){
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('professionalskills/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+            }
+            if(Auth::user()->can('professionalskills.delete')){
+               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('professionalskills/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+           }
+               return $action;
+           })
+           ->addColumn('type',function ($row){
+               $type='';
+               if($row->type==1){
+               $type.='<span>Other</span>';
+                }else{
+               $type.='<span>Major</span>';                
+           }
+               return $type;
+           })
+           ->addColumn('status',function ($row){
+               $status='';
+               if($row->status==1){
+               $status.='<a class="btn btn-success btn-sm m-1" href="'.url('professionalskills/status/'.$row->id).'">Active</a>';
+                }else{
+               $status.='<a class="btn btn-danger btn-sm m-1" href="'.url('professionalskills/status/'.$row->id).'">Deactive</a>';                
+           }
+               return $status;
+           })
+           ->rawColumns(['action','status','type'])
+           ->make(true);
+        }
         return view('professionalskills::index');
     }
 
@@ -31,9 +69,26 @@ class ProfessionalSkillsController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        $req->validate([
+        'type'=>'required',
+        'title'=>'required',
+       ]);
+        DB::beginTransaction();
+        try{
+            ProfessionalSkills::create($req->except('_token'));
+            DB::commit();
+            return redirect('professionalskills')->with('success','Professional Skills successfully created');
+         }catch(Exception $ex){
+            DB::rollback();
+         return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
+        }catch(Throwable $ex){
+            DB::rollback();
+        return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
+
+
+        }
     }
 
     /**
@@ -53,7 +108,37 @@ class ProfessionalSkillsController extends Controller
      */
     public function edit($id)
     {
-        return view('professionalskills::edit');
+        $professionalskills=ProfessionalSkills::find($id);   
+        return view('professionalskills::edit',compact('professionalskills'));
+    }
+       /**
+     * Update status.
+     * @param int $id
+     * @return Renderable
+     */
+    public function status($id)
+    {
+        DB::beginTransaction();
+        try{
+        $professionalskills=ProfessionalSkills::find($id);
+
+        if($professionalskills->status==1){
+            $professionalskills->status=0;
+        }
+        else{
+            $professionalskills->status=1;
+        }
+        $professionalskills->save();
+        DB::commit();
+         return redirect('professionalskills')->with('success','Professional Skills status successfully updated');
+         
+         } catch(Exception $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }catch(Throwable $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }
     }
 
     /**
@@ -62,9 +147,26 @@ class ProfessionalSkillsController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
-        //
+        $req->validate([
+        'type'=>'required',
+        'title'=>'required',
+       ]);
+        DB::beginTransaction();
+        try{
+            ProfessionalSkills::find($id)->update($req->except('_token'));
+            DB::commit();
+            return redirect('professionalskills')->with('success','Professional Skills successfully Updated');
+         }catch(Exception $ex){
+            DB::rollback();
+         return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
+        }catch(Throwable $ex){
+            DB::rollback();
+        return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
+
+
+        }
     }
 
     /**
@@ -74,6 +176,17 @@ class ProfessionalSkillsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+        try{
+        ProfessionalSkills::find($id)->delete();
+        DB::commit();
+         return redirect('professionalskills')->with('success','Professional Skills successfully deleted');
+         } catch(Exception $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }catch(Throwable $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }
     }
 }

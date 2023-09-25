@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/professionalskills', function (Request $request) {
-    return $request->user();
+Route::group(['prefix'=>'professional-skills', 'middleware'=>['jwt.verify']],function(){
+    Route::get('/{type}', 'API\ProfessionalSkillsController@index');
 });
