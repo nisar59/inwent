@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/cities', function (Request $request) {
-    return $request->user();
+Route::group(['prefix'=>'cities', 'middleware'=>['jwt.verify']],function(){
+    Route::get('by-country/{id}', 'API\CitiesController@citiesByCountry');
+    Route::get('by-state/{id}', 'API\CitiesController@citiesByState');
 });

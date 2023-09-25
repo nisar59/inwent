@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/professionaltools', function (Request $request) {
-    return $request->user();
+
+Route::group(['prefix'=>'professional-tools', 'middleware'=>['jwt.verify']],function(){
+    Route::get('/{type}', 'API\ProfessionalToolsController@index');
 });

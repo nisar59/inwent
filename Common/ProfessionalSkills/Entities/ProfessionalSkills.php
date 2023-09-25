@@ -9,7 +9,8 @@ class ProfessionalSkills extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['type','title'];
+    protected $table='professional_skills';
     
     protected static function newFactory()
     {
