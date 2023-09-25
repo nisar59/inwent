@@ -9,7 +9,8 @@ class ProfessionalProfileAwards extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $table='professional_profile_awards';
+    protected $fillable = ['user_id', 'professional_profile_id', 'title', 'awarded_by','type','awarded_year'];
     
     protected static function newFactory()
     {

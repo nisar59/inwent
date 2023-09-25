@@ -19,5 +19,6 @@ Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function()
     Route::post('basic-profile', 'API\UsersController@basicProfileUpdate');
     Route::get('professional-profile', 'API\ProfessionalProfileController@index');
     Route::post('professional-profile', 'API\ProfessionalProfileController@professionalProfileUpdate');
+    Route::post('professional-profile-awards/{id}', 'API\ProfessionalProfileController@professionalProfileAwardsUpdate');
 
 });
