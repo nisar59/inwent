@@ -9,7 +9,8 @@ class ProfessionalProfileProjects extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['user_id', 'professional_profile_id','project_title','project_tage_line','project_cover_image','project_link','project_tags','project_description','workplace_name','country_id','city_id'];
+    protected $table='professional_profile_projects';
     
     protected static function newFactory()
     {

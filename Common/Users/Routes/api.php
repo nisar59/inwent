@@ -20,5 +20,18 @@ Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function()
     Route::get('professional-profile', 'API\ProfessionalProfileController@index');
     Route::post('professional-profile', 'API\ProfessionalProfileController@professionalProfileUpdate');
     Route::post('professional-profile-awards/{id}', 'API\ProfessionalProfileController@professionalProfileAwardsUpdate');
+    Route::post('professional-profile-articles/{id}', 'API\ProfessionalProfileController@professionalProfileArticlesUpdate');
+    Route::post('professional-profile-career-break/{id}', 'API\ProfessionalProfileController@professionalProfileCareerBreakUpdate');
+    Route::post('professional-profile-certifications/{id}', 'API\ProfessionalProfileController@professionalProfileCertificationsUpdate');
+    Route::post('professional-profile-courses/{id}', 'API\ProfessionalProfileController@professionalProfileCoursesUpdate');
+    Route::post('professional-profile-education/{id}', 'API\ProfessionalProfileController@professionalProfileEducationUpdate');
+    Route::post('professional-profile-languages/{id}', 'API\ProfessionalProfileController@professionalProfileLanguagesUpdate');
+    Route::post('professional-profile-volunteering/{id}', 'API\ProfessionalProfileController@professionalProfileVolunteeringUpdate');
+    Route::post('professional-profile-work-experiences/{id}', 'API\ProfessionalProfileController@professionalProfileWorkExperiencesUpdate');
+    Route::post('professional-profile-conferences/{id}', 'API\ProfessionalProfileController@professionalProfileConferencesUpdate');
+    Route::post('professional-profile-patent-details/{id}', 'API\ProfessionalProfileController@professionalProfilePatentDetailsUpdate');
+    Route::post('professional-profile-projects/{id}', 'API\ProfessionalProfileController@professionalProfileProjectsUpdate');
+    Route::post('professional-profile-publications/{id}', 'API\ProfessionalProfileController@professionalProfilePublicationsUpdate');
+
 
 });

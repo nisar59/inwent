@@ -9,7 +9,8 @@ class ProfessionalProfileVolunteering extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['user_id', 'professional_profile_id','role','others','organization','description','validity_start_date','validity_end_date','no_expiry'];
+    protected $table='professional_profile_volunteering';
     
     protected static function newFactory()
     {

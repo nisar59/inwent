@@ -9,7 +9,8 @@ class ProfessionalProfileLanguages extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['user_id', 'professional_profile_id','language','language_level','description'];
+    protected $table='professional_profile_languages';
     
     protected static function newFactory()
     {

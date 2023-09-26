@@ -9,7 +9,8 @@ class ProfessionalProfileCourses extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['user_id', 'professional_profile_id','course_title','issued_by','course_description','start_date','end_date','currently_enrolled'];
+    protected $table='professional_profile_courses';
     
     protected static function newFactory()
     {

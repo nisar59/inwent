@@ -9,7 +9,8 @@ class ProfessionalProfileCareerBreak extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['user_id', 'professional_profile_id','reason','start_date','end_date','currently_on_break'];
+    protected $table='professional_profile_career_break';
     
     protected static function newFactory()
     {
