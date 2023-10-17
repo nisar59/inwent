@@ -15,5 +15,5 @@ use Illuminate\Http\Request;
 
 
 Route::group(['prefix'=>'professional-tools', 'middleware'=>['jwt.verify']],function(){
-    Route::get('/{type}', 'API\ProfessionalToolsController@index');
+    Route::get('/', 'API\ProfessionalToolsController@index');
 });

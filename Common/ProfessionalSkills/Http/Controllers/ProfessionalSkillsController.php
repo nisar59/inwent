@@ -24,10 +24,10 @@ class ProfessionalSkillsController extends Controller
            ->addColumn('action',function ($row){
                $action='';
                if(Auth::user()->can('professionalskills.edit')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('professionalskills/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('professional-skills/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
             }
             if(Auth::user()->can('professionalskills.delete')){
-               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('professionalskills/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('professional-skills/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
                return $action;
            })
@@ -79,7 +79,7 @@ class ProfessionalSkillsController extends Controller
         try{
             ProfessionalSkills::create($req->except('_token'));
             DB::commit();
-            return redirect('professionalskills')->with('success','Professional Skills successfully created');
+            return redirect('professional-skills')->with('success','Professional Skills successfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -130,7 +130,7 @@ class ProfessionalSkillsController extends Controller
         }
         $professionalskills->save();
         DB::commit();
-         return redirect('professionalskills')->with('success','Professional Skills status successfully updated');
+         return redirect('professional-skills')->with('success','Professional Skills status successfully updated');
          
          } catch(Exception $e){
             DB::rollback();
@@ -157,7 +157,7 @@ class ProfessionalSkillsController extends Controller
         try{
             ProfessionalSkills::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('professionalskills')->with('success','Professional Skills successfully Updated');
+            return redirect('professional-skills')->with('success','Professional Skills successfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -180,7 +180,7 @@ class ProfessionalSkillsController extends Controller
         try{
         ProfessionalSkills::find($id)->delete();
         DB::commit();
-         return redirect('professionalskills')->with('success','Professional Skills successfully deleted');
+         return redirect('professional-skills')->with('success','Professional Skills successfully deleted');
          } catch(Exception $e){
             DB::rollback();
             return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());

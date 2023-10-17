@@ -4,6 +4,7 @@ namespace Common\Users\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Common\Users\Entities\ProfessionalProfileProjects;
 
 class ProfessionalProfile extends Model
 {
@@ -37,6 +38,12 @@ class ProfessionalProfile extends Model
     public function getToolsOtherTagsAttribute($value)
     {
         return json_decode($value);
+    }
+
+
+    public function projects()
+    {
+       return $this->hasMany(ProfessionalProfileProjects::class,'professional_profile_id', 'id');
     }
 
 

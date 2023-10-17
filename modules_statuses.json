@@ -8,5 +8,7 @@
     "Cities": true,
     "Languages": true,
     "ProfessionalSkills": true,
-    "ProfessionalTools": true
+    "ProfessionalTools": true,
+    "Draft": true,
+    "Posts": true
 }

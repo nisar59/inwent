@@ -15,18 +15,17 @@ class ProfessionalSkillsController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index($typ)
+    public function index()
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
-            $type=0;
-            if($typ!="major"){
-                $type=1;
-            }
-            $skills=ProfessionalSkills::where('status', 1)->where('type', $type)->get();
+
+            $skills=ProfessionalSkills::where(['status'=>1, 'type'=>0])->get();
+            $other_skills=ProfessionalSkills::where(['status'=>1, 'type'=>1])->get();
 
             $data=[
-                'skills'=>$skills
+                'skills'=>$skills,
+                'other_skills'=>$other_skills
             ];
 
             $res=['success'=>true,'message'=>'Professional Skills successfully fetched','errors'=>[],'data'=>$data];

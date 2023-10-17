@@ -34,13 +34,13 @@ class AppServiceProvider extends ServiceProvider
                 'verification.verify',$expire_in,
                 [
                     'id' => $notifiable->getKey(),
-                    'hash' => Encrypt($notifiable->getEmailForVerification()),
+                    'hash' => InwntEncrypt($notifiable->getEmailForVerification()),
                 ]
             );
 
             $segmat=isset(explode('?', $verifyUrl)[1]) ? '?'.explode('?', $verifyUrl)[1] : '';
 
-            $url='http://127.0.0.1:4200/auth/email/verify/'.Encrypt($notifiable->getKey()).$segmat;
+            $url='http://127.0.0.1:4200/auth/email/verify/'.InwntEncrypt($notifiable->getKey()).$segmat;
 
             return (new MailMessage)
                 ->markdown('vendor.notifications.email')

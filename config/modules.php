@@ -14,8 +14,8 @@ return [
     |
     */
 
-    'namespace' => 'Common',
-    //'namespace' => 'Network',
+    //'namespace' => 'Common',
+    'namespace' => 'Network',
     //'namespace' => 'Freelancing',
     //'namespace' => 'CrowdFunding',
 
@@ -74,8 +74,8 @@ return [
         |
         */
 
-        'modules' => base_path('Common'),
-        //'modules' => base_path('Network'),
+        //'modules' => base_path('Common'),
+        'modules' => base_path('Network'),
         //'modules' => base_path('Freelancing'),
         //'modules' => base_path('CrowdFunding'),
 
@@ -206,9 +206,13 @@ return [
     */
 
     'scan' => [
-        'enabled' => false,
+        'enabled' => true,
         'paths' => [
             base_path('vendor/*/*'),
+            base_path('Common'),
+            base_path('Network'),
+            base_path('Freelancing'),
+            base_path('CrowdFunding'),
         ],
     ],
     /*

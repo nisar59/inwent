@@ -59,9 +59,9 @@ class AuthController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
 
-            $user = User::findOrFail(Decrypt($id));
+            $user = User::findOrFail(InwntDecrypt($id));
 
-            if ($user!=null && $user->link_expire_time>now() && $user->email==Decrypt($req->hash)) {
+            if ($user!=null && $user->link_expire_time>now() && $user->email==InwntDecrypt($req->hash)) {
                 $user->markEmailAsVerified();
                 $res=['success'=>true,'message'=>'Your email has been successfully verified', 'errors'=>[],'data'=>null];
             }else{
@@ -85,7 +85,7 @@ class AuthController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {
           
-          $user=User::findOrFail(Decrypt($id));
+          $user=User::findOrFail(InwntDecrypt($id));
           if($user==null){
             $res=['success'=>false,'message'=>'Something went wrong','errors'=>[],'data'=>null];
             return response()->json($res);
@@ -128,6 +128,7 @@ class AuthController extends Controller
             if ($val->fails()) {
                 $res=['success'=>false,'message'=>'Required Fields are missing','errors'=>$val->messages()->all(),'data'=>null];
             }
+
             elseif(!$token = Auth::attempt($req->all()))
             {
                 $res=['success'=>false,'message'=>'Unauthorized, email or password is wrong','errors'=>[],'data'=>null];
@@ -157,6 +158,52 @@ class AuthController extends Controller
             }
 
     }
+
+
+
+public function refresh()
+    {
+        $res=['success'=>true,'message'=>null,'errors'=>[],'data'=>null];
+
+        try {
+            if(!$token = Auth::refresh())
+            {
+                $res=['success'=>false,'message'=>'Unauthorized, email or password is wrong','errors'=>[],'data'=>null];
+            }
+            else{
+                Auth::setToken($token);
+                $user = Auth::user();
+                $user['access_token']=$token;
+                $res=['success'=>true,'message'=>'Authentication Successfull','errors'=>[],'data'=>$user];
+            }
+
+            return response()->json($res);
+
+            
+            } catch (Exception $e) {
+                if ($e instanceof \PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException){
+                    $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                    return response()->json($res, 403);                
+                }
+
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+            } catch (Throwable $e){
+                
+                if ($e instanceof \PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException){
+                    $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                    return response()->json($res, 403);                
+                }
+
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+
+            }
+
+    }
+
 
 
     public function logout()

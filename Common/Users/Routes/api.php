@@ -13,11 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function()
-{
+Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function(){
     Route::get('basic-profile', 'API\UsersController@basicProfile');
     Route::post('basic-profile', 'API\UsersController@basicProfileUpdate');
-    Route::get('professional-profile', 'API\ProfessionalProfileController@index');
+    Route::post('image-update', 'API\UsersController@UserImageUpdate');
+    
+    Route::get('professional-profile', 'API\ProfessionalProfileController@professionalProfile');
     Route::post('professional-profile', 'API\ProfessionalProfileController@professionalProfileUpdate');
     Route::post('professional-profile-awards/{id}', 'API\ProfessionalProfileController@professionalProfileAwardsUpdate');
     Route::post('professional-profile-articles/{id}', 'API\ProfessionalProfileController@professionalProfileArticlesUpdate');
@@ -29,8 +30,10 @@ Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function()
     Route::post('professional-profile-volunteering/{id}', 'API\ProfessionalProfileController@professionalProfileVolunteeringUpdate');
     Route::post('professional-profile-work-experiences/{id}', 'API\ProfessionalProfileController@professionalProfileWorkExperiencesUpdate');
     Route::post('professional-profile-conferences/{id}', 'API\ProfessionalProfileController@professionalProfileConferencesUpdate');
-    Route::post('professional-profile-patent-details/{id}', 'API\ProfessionalProfileController@professionalProfilePatentDetailsUpdate');
-    Route::post('professional-profile-projects/{id}', 'API\ProfessionalProfileController@professionalProfileProjectsUpdate');
+    Route::post('professional-profile-patent-details', 'API\ProfessionalProfileController@professionalProfilePatentDetailsUpdate');
+
+    Route::post('professional-profile-projects', 'API\ProfessionalProfileController@professionalProfileProjectsUpdate');
+
     Route::post('professional-profile-publications/{id}', 'API\ProfessionalProfileController@professionalProfilePublicationsUpdate');
 
 

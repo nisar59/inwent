@@ -52,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
 
     public function getIdAttribute($value)
     {
-        return Encrypt($value);
+        return InwntEncrypt($value);
     }
 
 
@@ -66,8 +66,7 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
      */
     public function getJWTIdentifier()
     {
-
-        return Decrypt($this->getKey());
+        return InwntDecrypt($this->getKey());
     }
 
     /**
@@ -80,14 +79,19 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
         return [];
     }
 
+    public function getImageAttribute($value)
+    {
+
+        return StorageFile($value);
+    }
+
     public function getBasicProfileAttribute()
     {
-        if(BasicProfile::where('user_id', Decrypt($this->id))->count()>0){
+        if(BasicProfile::where('user_id', InwntDecrypt($this->id))->count()>0){
             return true;
         }else{
             return false;
         }
     }
-
 
 }

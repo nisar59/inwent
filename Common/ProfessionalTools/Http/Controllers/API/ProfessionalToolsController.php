@@ -15,18 +15,17 @@ class ProfessionalToolsController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index($typ)
+    public function index()
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
-            $type=0;
-            if($typ!="major"){
-                $type=1;
-            }
-            $skills=ProfessionalTools::where('status', 1)->where('type', $type)->get();
+
+            $tools=ProfessionalTools::where(['status'=>1,'type'=>0])->get();
+            $other_tools=ProfessionalTools::where(['status'=>1,'type'=>1])->get();
 
             $data=[
-                'skills'=>$skills
+                'tools'=>$tools,
+                'other_tools'=>$other_tools
             ];
 
             $res=['success'=>true,'message'=>'Professional Tools successfully fetched','errors'=>[],'data'=>$data];

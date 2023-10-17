@@ -19,6 +19,7 @@ use Common\Users\Entities\ProfessionalProfileConferences;
 use Common\Users\Entities\ProfessionalProfilePatentDetails;
 use Common\Users\Entities\ProfessionalProfileProjects;
 use Common\Users\Entities\ProfessionalProfilePublications;
+use Common\Draft\Entities\Draft;
 use Throwable;
 use Auth;
 use DB;
@@ -32,6 +33,36 @@ class ProfessionalProfileController extends Controller
     {
         
     }
+
+
+
+    public function professionalProfile()
+    {
+
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+            $user_id=InwntDecrypt(Auth::id()); 
+
+            $professional_profile=ProfessionalProfile::with('projects')->where(['user_id'=>$user_id])->first();
+
+            $data=[
+                'user'=>Auth::user(),
+                'professional_profile'=>$professional_profile
+            ];
+
+            $res=['success'=>true,'message'=>'Professional profile successfully fetched','errors'=>[],'data'=>$data];
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }       
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -80,26 +111,26 @@ class ProfessionalProfileController extends Controller
      */
     public function professionalProfileUpdate(Request $req)
     {
-        $req->validate([
-            'profile_status'=>'required',
-            'regulatory_compliance'=>'required',
-            'agree_to_terms'=>'required',
-            'agree_to_get_offers'=>'required'
-        ]);
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id()); 
+            $user_id=InwntDecrypt(Auth::id()); 
 
             $professional_profile=ProfessionalProfile::firstOrNew(['user_id'=>$user_id]);
 
             $inputs=$req->except('skills_tags', 'skills_other_tags', 'tools_tags', 'tools_other_tags');
-
-            $inputs['skills_tags']=json_encode($req->skills_tags);
-            $inputs['skills_other_tags']=json_encode($req->skills_other_tags);
-            $inputs['tools_tags']=json_encode($req->tools_tags);
-            $inputs['tools_other_tags']=json_encode($req->tools_other_tags);
-
+            if($req->has('skills_tags')){
+                $inputs['skills_tags']=json_encode($req->skills_tags);
+            }
+            if($req->has('skills_other_tags')){
+                $inputs['skills_other_tags']=json_encode($req->skills_other_tags);
+            }
+            if($req->has('tools_tags')){
+                $inputs['tools_tags']=json_encode($req->tools_tags);
+            }
+            if($req->has('tools_other_tags')){
+                $inputs['tools_other_tags']=json_encode($req->tools_other_tags);
+            }
 
 
             $professional_profile->fill($inputs);
@@ -138,7 +169,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
 
             /*Need to be changed start*/
 
@@ -192,7 +223,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
 
             /*Need to be changed start*/
 
@@ -252,7 +283,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
             /*Need to be changed start*/
             $ppa=ProfessionalProfileCareerBreak::where('user_id', $user_id)->where('professional_profile_id', $id);
             if($ppa->count()>0){
@@ -300,7 +331,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
             /*Need to be changed start*/
             $ppa=ProfessionalProfileCertifications::where('user_id', $user_id)->where('professional_profile_id', $id);
             if($ppa->count()>0){
@@ -352,7 +383,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
             /*Need to be changed start*/
             $ppa=ProfessionalProfileCourses::where('user_id', $user_id)->where('professional_profile_id', $id);
             if($ppa->count()>0){
@@ -402,7 +433,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
             /*Need to be changed start*/
             $ppa=ProfessionalProfileEducation::where('user_id', $user_id)->where('professional_profile_id', $id);
             if($ppa->count()>0){
@@ -458,7 +489,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
             /*Need to be changed start*/
             $ppa=ProfessionalProfileLanguages::where('user_id', $user_id)->where('professional_profile_id', $id);
             if($ppa->count()>0){
@@ -505,7 +536,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
             /*Need to be changed start*/
             $ppa=ProfessionalProfileVolunteering::where('user_id', $user_id)->where('professional_profile_id', $id);
             if($ppa->count()>0){
@@ -556,7 +587,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
             /*Need to be changed start*/
             $ppa=ProfessionalProfileWorkExperiences::where('user_id', $user_id)->where('professional_profile_id', $id);
             if($ppa->count()>0){
@@ -618,7 +649,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
             /*Need to be changed start*/
             $ppa=ProfessionalProfileConferences::where('user_id', $user_id)->where('professional_profile_id', $id);
             if($ppa->count()>0){
@@ -673,7 +704,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
             /*Need to be changed start*/
             $ppa=ProfessionalProfilePatentDetails::where('user_id', $user_id)->where('professional_profile_id', $id);
             if($ppa->count()>0){
@@ -723,31 +754,36 @@ class ProfessionalProfileController extends Controller
      * @param int $id
      * @return Renderable
      */
-     public function professionalProfileProjectsUpdate(Request $req, $id)
+     public function professionalProfileProjectsUpdate(Request $req)
     {
+
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
+
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
+
             /*Need to be changed start*/
-            $ppa=ProfessionalProfileProjects::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfileProjects::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
-            foreach($req->project_title as $key => $award){
-                ProfessionalProfileProjects::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'project_title'=>$award,
-                    'project_tage_line'=>$req->project_tage_line[$key],
-                    'project_cover_image'=>$req->project_cover_image[$key],
-                    'project_link'=>$req->project_link[$key],
-                    'project_tags'=>$req->project_tags[$key],
-                    'project_description'=>$req->project_description[$key],
-                    'workplace_name'=>$req->workplace_name[$key],
-                    'country_id'=>$req->country_id[$key],
-                    'city_id'=>$req->city_id[$key],
-                ]);
+            
+            foreach($req->projectDetails as $key => $project){
+                $project['user_id']=$user_id;
+                $project['professional_profile_id']=$pp->id;
+                ProfessionalProfileProjects::create($project);
+
+                $draft=Draft::where('media_file', $project['project_cover_image']);
+                if($draft->count()>0){
+                    $draft->delete();
+                }
             }
             /*Need to be changed end*/
 
@@ -781,7 +817,7 @@ class ProfessionalProfileController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id());
+            $user_id=InwntDecrypt(Auth::id());
             /*Need to be changed start*/
             $ppa=ProfessionalProfilePublications::where('user_id', $user_id)->where('professional_profile_id', $id);
             if($ppa->count()>0){

@@ -14,7 +14,9 @@ function FileUpload($file, $path)
         $extension = $file->getClientOriginalExtension();
  
         //filename to store
-        $filenametostore =$path.'/'.$filename.'_'.uniqid().'.'.$extension;
+        $filenametostore =$path.'/'.$filename.'_'.uniqid().'_'.now()->timestamp.'.'.$extension;
+
+        $filenametostore=str_replace(' ', '-', $filenametostore);
  
         //Upload File to external server
         if(Storage::disk('ftp')->put($filenametostore, fopen($file, 'r+'))){
@@ -23,6 +25,8 @@ function FileUpload($file, $path)
 
     }
 }
+
+
 
 function StorageUrl()
 {
@@ -37,10 +41,36 @@ function FileExists($filename)
 }
 
 function StorageFile($filename)
-{
-   if(FileExists($filename)){
-    return StorageUrl().$filename;
+{   
+    if($filename==null OR $filename==""){
+        return StorageUrl().'default/no-image.png';
+    }
+   else if(FileExists($filename)){
+        return StorageUrl().$filename;
    }else{
-    return StorageUrl().'default/no-image.png';
+        return StorageUrl().'default/no-image.png';
    }
+}
+
+
+function MoveStorageFiles($old, $new)
+{
+   if(Storage::disk('ftp')->move($old, $new)){
+      return Storage::disk('ftp')->url($new);
+   }else{
+      return Storage::disk('ftp')->url($old);
+   }
+
+}
+
+
+function DeleteStorageFiles($files)
+{
+   Storage::disk('ftp')->delete($files);
+}
+
+
+function DeleteStorageDirectory($dir)
+{
+    Storage::disk('ftp')->deleteDirectory($dir);
 }

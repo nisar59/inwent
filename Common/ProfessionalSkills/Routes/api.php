@@ -14,5 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['prefix'=>'professional-skills', 'middleware'=>['jwt.verify']],function(){
-    Route::get('/{type}', 'API\ProfessionalSkillsController@index');
+    Route::get('/', 'API\ProfessionalSkillsController@index');
 });

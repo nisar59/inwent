@@ -24,10 +24,10 @@ class ProfessionalToolsController extends Controller
            ->addColumn('action',function ($row){
                $action='';
                if(Auth::user()->can('professionaltools.edit')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('professionaltools/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('professional-tools/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
             }
             if(Auth::user()->can('professionaltools.delete')){
-               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('professionaltools/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('professional-tools/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
                return $action;
            })
@@ -79,7 +79,7 @@ class ProfessionalToolsController extends Controller
         try{
             ProfessionalTools::create($req->except('_token'));
             DB::commit();
-            return redirect('professionalskills')->with('success','Professional Tools successfully created');
+            return redirect('professional-tools')->with('success','Professional Tools successfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -116,7 +116,7 @@ class ProfessionalToolsController extends Controller
         }
         $professionaltools->save();
         DB::commit();
-         return redirect('professionaltools')->with('success','Professional Tools status successfully updated');
+         return redirect('professional-tools')->with('success','Professional Tools status successfully updated');
          
          } catch(Exception $e){
             DB::rollback();
@@ -154,7 +154,7 @@ class ProfessionalToolsController extends Controller
         try{
             ProfessionalTools::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('professionaltools')->with('success','Professional Tools successfully Updated');
+            return redirect('professional-tools')->with('success','Professional Tools successfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -177,7 +177,7 @@ class ProfessionalToolsController extends Controller
         try{
         ProfessionalTools::find($id)->delete();
         DB::commit();
-         return redirect('professionaltools')->with('success','Professional Tools successfully deleted');
+         return redirect('professional-tools')->with('success','Professional Tools successfully deleted');
          } catch(Exception $e){
             DB::rollback();
             return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());

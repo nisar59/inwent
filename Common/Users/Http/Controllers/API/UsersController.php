@@ -86,7 +86,7 @@ class UsersController extends Controller
 
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
-            $user_id=Decrypt(Auth::id()); 
+            $user_id=InwntDecrypt(Auth::id()); 
 
             $basic_profile=BasicProfile::where(['user_id'=>$user_id])->first();
 
@@ -113,7 +113,7 @@ class UsersController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
-            $user_id=Decrypt(Auth::id()); 
+            $user_id=InwntDecrypt(Auth::id()); 
 
             $basic_profile=BasicProfile::firstOrNew(['user_id'=>$user_id]);
             $inputs=$req->except('profile_tages', 'interests', 'social_links');
@@ -130,6 +130,42 @@ class UsersController extends Controller
             ];
 
             $res=['success'=>true,'message'=>'Basic profile successfully updated','errors'=>[],'data'=>$data];
+            DB::commit();
+             return response()->json($res);
+        } catch (Exception $e) {
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }        
+
+
+    }
+
+
+        public function UserImageUpdate(Request $req)
+    {
+
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        DB::beginTransaction();
+        try {          
+
+            $user=Auth::user();
+
+            if($req->image!=null){
+                $user->image=FileUpload($req->image, 'users/avatar');
+                $user->save();
+            }
+
+            $data=[
+                'user'=>Auth::user(),
+            ];
+
+            $res=['success'=>true,'message'=>'Profile Image successfully updated','errors'=>[],'data'=>$data];
             DB::commit();
              return response()->json($res);
         } catch (Exception $e) {

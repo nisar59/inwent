@@ -20,6 +20,6 @@ Route::group(['prefix'=>'auth', 'middleware'=>'api'],function()
    Route::get('email/verify/{id}', 'API\AuthController@verify')->name('verification.verify');
    Route::get('email/resend/{id}', 'API\AuthController@resend')->name('verification.resend');
    Route::post('login', 'API\AuthController@login');
+   Route::get('refresh', 'API\AuthController@refresh');
 });
-
 

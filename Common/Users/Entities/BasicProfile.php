@@ -31,15 +31,24 @@ class BasicProfile extends Model
 
     public function getIdAttribute($value)
     {
-        return Encrypt($value);
+        return InwntEncrypt($value);
     }
 
     public function getUserIdAttribute($value)
     {
-        return Encrypt($value);
+        return InwntEncrypt($value);
     }
 
+    public function getProfileTagesAttribute($value){
+        return json_decode($value);
+    }
 
+    public function getInterestsAttribute($value){
+        return json_decode($value);
+    }
 
+    public function getSocialLinksAttribute($value){
+        return json_decode($value);
+    }
 
 }

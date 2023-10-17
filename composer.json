@@ -30,7 +30,8 @@
         "files": [
             "app/Helpers/common.php",
             "app/Helpers/permissions.php",
-            "app/Helpers/modules.php"
+            "app/Helpers/modules.php",
+            "app/Helpers/encryption.php"
         ],
         "psr-4": {
             "App\\": "app/",

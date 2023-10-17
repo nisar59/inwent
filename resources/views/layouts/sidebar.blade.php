@@ -19,8 +19,8 @@ $prefix=request()->route()->getPrefix();
 						<li><a class="@if($prefix=='/roles') active @endif" href="{{url('roles')}}">Roles & Permissions</a></li>
 						<li><a class="@if($prefix=='/admins') active @endif" href="{{url('admins')}}">Admins</a></li>
 						<li><a class="@if($prefix=='/settings') active @endif" href="{{url('settings')}}">Settings</a></li>
-						<li><a class="@if($prefix=='/professional-skills') active @endif" href="{{url('professionalskills')}}">Professional Skills</a></li>
-						<li><a class="@if($prefix=='/professional-tools') active @endif" href="{{url('professionaltools')}}">Professional Tools</a></li>
+						<li><a class="@if($prefix=='/professional-skills') active @endif" href="{{url('professional-skills')}}">Professional Skills</a></li>
+						<li><a class="@if($prefix=='/professional-tools') active @endif" href="{{url('professional-tools')}}">Professional Tools</a></li>
 					</ul>
 				</li>
 

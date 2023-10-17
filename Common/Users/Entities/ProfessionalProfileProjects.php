@@ -16,4 +16,11 @@ class ProfessionalProfileProjects extends Model
     {
         return \Common\Users\Database\factories\ProfessionalProfileProjectsFactory::new();
     }
+
+
+    public function getProjectCoverImageAttribute($value)
+    {
+        return $value;
+       return StorageFile($value);
+    }
 }
