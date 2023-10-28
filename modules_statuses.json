@@ -10,5 +10,6 @@
     "ProfessionalSkills": true,
     "ProfessionalTools": true,
     "Draft": true,
-    "Posts": true
+    "Posts": true,
+    "Connects": true
 }

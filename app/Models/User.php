@@ -9,6 +9,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Common\Users\Entities\BasicProfile;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Str;
 class User extends Authenticatable implements MustVerifyEmail,JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -49,6 +50,34 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
     ];
 
     protected $appends=['basic_profile'];
+
+
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::created(function ($user) {
+            $user->slug = $user->generateSlug($user->name);
+            $user->save();
+        });
+    }
+    private function generateSlug($name)
+    {
+        if (static::whereSlug($slug = Str::slug($name))->exists()) {
+            $max = static::whereName($name)->latest('id')->skip(1)->value('slug');
+            if (isset($max[-1]) && is_numeric($max[-1])) {
+                return preg_replace_callback('/(\d+)$/', function($mathces) {
+                    return $mathces[1] + 1;
+                }, $max);
+            }
+            return $slug."-".rand(10, 10000);
+        }
+        return $slug;
+    } 
+
+
+
+
 
     public function getIdAttribute($value)
     {
@@ -92,6 +121,12 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
         }else{
             return false;
         }
+    }
+
+
+    public function basicProfile()
+    {
+        return $this->hasOne(BasicProfile::class, 'user_id', 'id');
     }
 
 }

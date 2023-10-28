@@ -12,6 +12,7 @@ class BasicProfile extends Model
     protected $table='basic_profiles';
     protected $fillable = ['user_id','title_prefixe','first_name','last_name','address','contact_no','brief_bio','website','profile_tages','interests','social_links','preferred_language','country_id','state_id','city_id','postal_code','job_title'];
     
+    protected $appends=['country_name', 'city_name'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -49,6 +50,16 @@ class BasicProfile extends Model
 
     public function getSocialLinksAttribute($value){
         return json_decode($value);
+    }
+
+    public function getCityNameAttribute()
+    {
+       return CityName($this->city_id);
+    }
+
+    public function getCountryNameAttribute()
+    {
+       return CountryName($this->country_id);
     }
 
 }

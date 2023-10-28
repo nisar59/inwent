@@ -107,6 +107,41 @@ class UsersController extends Controller
         }       
     }
 
+
+    public function basicProfileBySlug($slug)
+    {
+
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+            $user=User::where('slug', $slug)->first(); 
+
+            if($user==null){
+            $res=['success'=>true,'message'=>'User not found','errors'=>[],'data'=>null];
+
+            }else{
+                $basic_profile=BasicProfile::where(['user_id'=>$user->id])->first();
+
+                $data=[
+                    'user'=>Auth::user(),
+                    'basic_profile'=>$basic_profile
+                ];
+
+                $res=['success'=>true,'message'=>'Basic profile successfully fetched','errors'=>[],'data'=>$data];
+            }
+
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }       
+    }
+
+
+
     public function basicProfileUpdate(Request $req)
     {
 

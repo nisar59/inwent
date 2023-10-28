@@ -818,25 +818,21 @@ class ProfessionalProfileController extends Controller
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
-            /*Need to be changed start*/
-            $ppa=ProfessionalProfilePublications::where('user_id', $user_id)->where('professional_profile_id', $id);
-            if($ppa->count()>0){
-                $ppa->delete();
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
             }
-            foreach($req->publication_title as $key => $award){
-                ProfessionalProfilePublications::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'publication_title'=>$award,
-                    'publication_abstract'=>$req->publication_abstract[$key],
-                    'publication_cover_image'=>$req->publication_cover_image[$key],
-                    'publication_link'=>$req->publication_link[$key],
-                    'publication_tags'=>$req->publication_tags[$key],
-                    'publication_description'=>$req->publication_description[$key],
-                    'workplace_name'=>$req->workplace_name[$key],
-                    'country_id'=>$req->country_id[$key],
-                    'city_id'=>$req->city_id[$key],
-                ]);
+
+            /*Need to be changed start*/
+            $ppp=ProfessionalProfilePublications::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
+            if($ppp->count()>0){
+                $ppp->delete();
+            }
+            
+            foreach($req->publications as $publication){
+                ProfessionalProfilePublications::create($publication);
             }
             /*Need to be changed end*/
 

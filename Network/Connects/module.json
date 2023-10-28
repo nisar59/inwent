@@ -1,0 +1,11 @@
+{
+    "name": "Connects",
+    "alias": "connects",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Network\\Connects\\Providers\\ConnectsServiceProvider"
+    ],
+    "files": []
+}

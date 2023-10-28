@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function(){
     Route::get('basic-profile', 'API\UsersController@basicProfile');
+    Route::get('basic-profile/{slug}', 'API\UsersController@basicProfileBySlug');
     Route::post('basic-profile', 'API\UsersController@basicProfileUpdate');
     Route::post('image-update', 'API\UsersController@UserImageUpdate');
     
@@ -34,7 +35,7 @@ Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function(){
 
     Route::post('professional-profile-projects', 'API\ProfessionalProfileController@professionalProfileProjectsUpdate');
 
-    Route::post('professional-profile-publications/{id}', 'API\ProfessionalProfileController@professionalProfilePublicationsUpdate');
+    Route::post('professional-profile-publications', 'API\ProfessionalProfileController@professionalProfilePublicationsUpdate');
 
 
 });

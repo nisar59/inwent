@@ -23,3 +23,8 @@ Route::group(['prefix'=>'auth', 'middleware'=>'api'],function()
    Route::get('refresh', 'API\AuthController@refresh');
 });
 
+
+Route::group(['prefix'=>'setup', 'middleware'=>'api'],function()
+{
+  Route::get('/', 'API\CommonController@geo');
+});

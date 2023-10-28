@@ -28,6 +28,7 @@
     },
     "autoload": {
         "files": [
+            "app/Helpers/storage.php",
             "app/Helpers/common.php",
             "app/Helpers/permissions.php",
             "app/Helpers/modules.php",

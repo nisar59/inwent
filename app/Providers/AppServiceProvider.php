@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
 
             $segmat=isset(explode('?', $verifyUrl)[1]) ? '?'.explode('?', $verifyUrl)[1] : '';
 
-            $url='http://127.0.0.1:4200/auth/email/verify/'.InwntEncrypt($notifiable->getKey()).$segmat;
+            $url='http://inwent.ca/auth/email/verify/'.InwntEncrypt($notifiable->getKey()).$segmat;
 
             return (new MailMessage)
                 ->markdown('vendor.notifications.email')
