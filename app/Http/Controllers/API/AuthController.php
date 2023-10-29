@@ -44,7 +44,7 @@ class AuthController extends Controller
     
 
 
-           $user=User::create($req->all());
+           $user=User::create($inputs);
            $data=[
             'user'=>$user,
            ];
