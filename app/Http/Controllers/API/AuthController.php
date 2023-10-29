@@ -10,6 +10,7 @@ use Throwable;
 use Validator;
 use Auth;
 use DB;
+use Str;
 class AuthController extends Controller
 {
     function __construct()
@@ -31,6 +32,17 @@ class AuthController extends Controller
                 $res=['success'=>false,'message'=>'Required fields are missing','errors'=>$val->messages()->all(),'data'=>null];
                 return response()->json($res);
             }
+
+            $inputs=$req->all();
+            $slug = Str::slug($req->name);
+
+            if (User::whereSlug($slug)->exists()) {
+                $inputs['slug']=$slug."-".rand(10, 10000);
+            }
+            
+            $inputs['slug']=$slug;
+    
+
 
            $user=User::create($req->all());
            $data=[
