@@ -5,6 +5,7 @@ namespace Common\Users\Http\Controllers\API;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Common\Countries\Entities\Countries;
 use Common\Users\Entities\ProfessionalProfile;
 use Common\Users\Entities\ProfessionalProfileAwards;
 use Common\Users\Entities\ProfessionalProfileArticles;
@@ -19,6 +20,8 @@ use Common\Users\Entities\ProfessionalProfileConferences;
 use Common\Users\Entities\ProfessionalProfilePatentDetails;
 use Common\Users\Entities\ProfessionalProfileProjects;
 use Common\Users\Entities\ProfessionalProfilePublications;
+use Common\ProfessionalSkills\Entities\ProfessionalSkills;
+use Common\ProfessionalTools\Entities\ProfessionalTools;
 use Common\Draft\Entities\Draft;
 use Throwable;
 use Auth;
@@ -43,9 +46,23 @@ class ProfessionalProfileController extends Controller
         try {          
             $user_id=InwntDecrypt(Auth::id()); 
 
-            $professional_profile=ProfessionalProfile::with('projects')->where(['user_id'=>$user_id])->first();
+            $professional_profile=ProfessionalProfile::with('projects', 'publications')->where(['user_id'=>$user_id])->first();
+
+            $countries=Countries::all();
+            $skills=ProfessionalSkills::where(['status'=>1, 'type'=>0])->get();
+            $other_skills=ProfessionalSkills::where(['status'=>1, 'type'=>1])->get();
+
+            $tools=ProfessionalTools::where(['status'=>1,'type'=>0])->get();
+            $other_tools=ProfessionalTools::where(['status'=>1,'type'=>1])->get();
 
             $data=[
+                'skills'=>$skills,
+                'other_skills'=>$other_skills,
+
+                'tools'=>$tools,
+                'other_tools'=>$other_tools,
+
+                'countries'=>$countries,
                 'user'=>Auth::user(),
                 'professional_profile'=>$professional_profile
             ];
@@ -218,35 +235,31 @@ class ProfessionalProfileController extends Controller
      */
 
     /*Professional Profile Articles*/
-    public function professionalProfileArticlesUpdate(Request $req, $id)
+    public function professionalProfileArticlesUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
 
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
+
             /*Need to be changed start*/
 
-            $ppa=ProfessionalProfileArticles::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfileArticles::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
 
-            foreach($req->article_title as $key => $award){
-                ProfessionalProfileArticles::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'article_title'=>$award,
-                    'event_organizer'=>$req->event_organizer[$key],
-                    'article_abstract'=>$req->article_abstract[$key],
-                    'article_cover_image'=>$req->article_cover_image[$key],
-                    'article_link'=>$req->article_link[$key],
-                    'article_tags'=>$req->article_tags[$key],
-                    'article_tag_line'=>$req->article_tag_line[$key],
-                    'workplace_name'=>$req->workplace_name[$key],
-                    'country_id'=>$req->country_id[$key],
-                    'city_id'=>$req->city_id[$key],
-                ]);
+            foreach($req->articlesDetails as $key => $article){
+                $article['user_id']=$user_id;
+                $article['professional_profile_id']=$pp->id;
+                ProfessionalProfileArticles::create($article);
             }
 
             /*Need to be changed end*/
@@ -644,33 +657,30 @@ class ProfessionalProfileController extends Controller
      * @return Renderable
      */
     
-      public function professionalProfileConferencesUpdate(Request $req, $id)
+      public function professionalProfileConferencesUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
+            
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
+
             /*Need to be changed start*/
-            $ppa=ProfessionalProfileConferences::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfileConferences::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
-            foreach($req->presentation_title as $key => $award){
-                ProfessionalProfileConferences::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'presentation_title'=>$award,
-                    'status'=>$req->status[$key],
-                    'event_organizer'=>$req->event_organizer[$key],
-                    'presentation_abstract'=>$req->presentation_abstract[$key],
-                    'presentation_cover_image'=>$req->presentation_cover_image[$key],
-                    'presentation_link'=>$req->presentation_link[$key],
-                    'presentation_tags'=>$req->presentation_tags[$key],
-                    'presentation_tag_line'=>$req->presentation_tag_line[$key],
-                    'workplace_name'=>$req->workplace_name[$key],
-                    'country_id'=>$req->country_id[$key],
-                    'city_id'=>$req->city_id[$key],
-                ]);
+            foreach($req->conferenceDetails as $key => $conference){
+                $conference['user_id']=$user_id;
+                $conference['professional_profile_id']=$pp->id;
+
+                ProfessionalProfileConferences::create($conference);
             }
             /*Need to be changed end*/
 
@@ -699,33 +709,29 @@ class ProfessionalProfileController extends Controller
      * @param int $id
      * @return Renderable
      */
-       public function professionalProfilePatentDetailsUpdate(Request $req, $id)
+       public function professionalProfilePatentDetailsUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
+
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
+
             /*Need to be changed start*/
-            $ppa=ProfessionalProfilePatentDetails::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfilePatentDetails::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
-            foreach($req->patent_title as $key => $award){
-                ProfessionalProfilePatentDetails::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'patent_title'=>$award,
-                    'status'=>$req->status[$key],
-                    'patent_number'=>$req->patent_number[$key],
-                    'patent_abstract'=>$req->patent_abstract[$key],
-                    'patent_cover_image'=>$req->patent_cover_image[$key],
-                    'patent_link'=>$req->patent_link[$key],
-                    'patent_tags'=>$req->patent_tags[$key],
-                    'patent_tag_line'=>$req->patent_tag_line[$key],
-                    'workplace_name'=>$req->workplace_name[$key],
-                    'country_id'=>$req->country_id[$key],
-                    'city_id'=>$req->city_id[$key],
-                ]);
+            foreach($req->patentDetails as $key => $award){
+                $award['user_id']=$user_id;
+                $award['professional_profile_id']=$pp->id;
+                ProfessionalProfilePatentDetails::create($award);
             }
             /*Need to be changed end*/
 
@@ -812,7 +818,7 @@ class ProfessionalProfileController extends Controller
      * @param int $id
      * @return Renderable
      */
-     public function professionalProfilePublicationsUpdate(Request $req, $id)
+     public function professionalProfilePublicationsUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
@@ -832,6 +838,8 @@ class ProfessionalProfileController extends Controller
             }
             
             foreach($req->publications as $publication){
+                $publication['user_id']=$user_id;
+                $publication['professional_profile_id']=$pp->id;
                 ProfessionalProfilePublications::create($publication);
             }
             /*Need to be changed end*/
