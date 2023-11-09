@@ -1,0 +1,11 @@
+{
+    "name": "FooterMenu",
+    "alias": "footermenu",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CMS\\FooterMenu\\Providers\\FooterMenuServiceProvider"
+    ],
+    "files": []
+}

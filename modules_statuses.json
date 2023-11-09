@@ -11,5 +11,11 @@
     "ProfessionalTools": true,
     "Draft": true,
     "Posts": true,
-    "Connects": true
+    "Connects": true,
+    "Pages": true,
+    "MainMenu": true,
+    "FooterMenuHeadings": true,
+    "FooterMenu": true,
+    "Sliders": true,
+    "SliderImages": true
 }
