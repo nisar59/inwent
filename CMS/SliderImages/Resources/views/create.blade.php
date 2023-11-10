@@ -26,11 +26,11 @@
                     <div class="card-body">
                         <input type="text" hidden name="slider_id" value="{{request()->route('id')}}">
                         <div class="row field_wrapper">
-                            <div class="col-md-10">
+                            <div class="col-md-11">
                                 <label for="">Image</label>
                                 <input type="file" class="form-control" name="images[]" placeholder="Enter Text">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <button class="btn btn-success add_button" style="margin-top: 24px;" type="button"><i class="fas fa-plus "></i></button>
                             </div>
                         </div>
