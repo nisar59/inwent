@@ -35,10 +35,10 @@ $prefix=request()->route()->getPrefix();
 					</ul>
 				</li>
 
-				<li class="submenu @if($prefix=='/project-config') active @endif">
+				<li class="submenu @if($prefix=='/freelancing/project-config') active @endif">
 					<a href="javascript:void(0)"><i class="fa fa-user"></i><span>Freelancing</span> <span class="menu-arrow"></span></a>
 					<ul>
-						<li><a class="@if($prefix=='project-config') active @endif" href="{{url('project-config')}}">Project Configuration</a></li>
+						<li><a class="@if($prefix=='/freelancing/project-config') active @endif" href="{{url('project-config')}}">Project Configuration</a></li>
 					</ul>
 				</li>
 
