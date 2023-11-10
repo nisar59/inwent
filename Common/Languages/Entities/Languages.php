@@ -9,7 +9,8 @@ class Languages extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $table='world_languages';
+    protected $fillable = ['code', 'lang'];
     
     protected static function newFactory()
     {

@@ -6,6 +6,9 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Common\Users\Entities\BasicProfile;
+use Common\Users\Entities\BusinessProfile;
+use Common\Languages\Entities\Languages;
+use Common\Countries\Entities\Countries;
 use App\Models\User;
 use Auth;
 use DB;
@@ -89,9 +92,14 @@ class UsersController extends Controller
             $user_id=InwntDecrypt(Auth::id()); 
 
             $basic_profile=BasicProfile::where(['user_id'=>$user_id])->first();
+            $countries=Countries::all();
+            $languages=Languages::all();
+
 
             $data=[
                 'user'=>Auth::user(),
+                'countries'=>$countries,
+                'languages'=>$languages,
                 'basic_profile'=>$basic_profile
             ];
 
@@ -182,7 +190,7 @@ class UsersController extends Controller
     }
 
 
-        public function UserImageUpdate(Request $req)
+    public function UserImageUpdate(Request $req)
     {
 
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
@@ -214,8 +222,74 @@ class UsersController extends Controller
                 return response()->json($res);
         }        
 
+    }
+
+
+
+    public function businessProfile()
+    {
+
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+            $user_id=InwntDecrypt(Auth::id()); 
+
+            $business_profile=BusinessProfile::where(['user_id'=>$user_id])->first();
+            $countries=Countries::all();
+
+            $data=[
+                'user'=>Auth::user(),
+                'business_profile'=>$business_profile,
+                'countries'=>$countries,
+            ];
+
+            $res=['success'=>true,'message'=>'Business profile successfully fetched','errors'=>[],'data'=>$data];
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }       
+    }
+
+
+
+    public function businessProfileUpdate(Request $req)
+    {
+
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        DB::beginTransaction();
+        try {          
+            $user_id=InwntDecrypt(Auth::id()); 
+
+            $business_profile=BusinessProfile::firstOrNew(['user_id'=>$user_id]);
+
+            $business_profile->fill($req->all());
+            $business_profile->save();
+            $data=[
+                'user'=>Auth::user(),
+                'business_profile'=>$business_profile
+            ];
+
+            $res=['success'=>true,'message'=>'Business profile successfully updated','errors'=>[],'data'=>$data];
+            DB::commit();
+             return response()->json($res);
+        } catch (Exception $e) {
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }        
+
 
     }
+
 
 
 }

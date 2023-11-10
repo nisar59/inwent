@@ -19,6 +19,10 @@ Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function(){
     Route::post('basic-profile', 'API\UsersController@basicProfileUpdate');
     Route::post('image-update', 'API\UsersController@UserImageUpdate');
     
+    Route::get('business-profile', 'API\UsersController@businessProfile');
+    Route::post('business-profile', 'API\UsersController@businessProfileUpdate');
+
+
     Route::get('professional-profile', 'API\ProfessionalProfileController@professionalProfile');
 
     Route::post('professional-profile', 'API\ProfessionalProfileController@professionalProfileUpdate');
@@ -28,6 +32,8 @@ Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function(){
     Route::post('professional-profile-articles/', 'API\ProfessionalProfileController@professionalProfileArticlesUpdate');
 
     Route::post('professional-profile-career-break/', 'API\ProfessionalProfileController@professionalProfileCareerBreakUpdate');
+    
+    Route::post('professional-profile-compliance/', 'API\ProfessionalProfileController@professionalProfileComplianceUpdate');
 
     Route::post('professional-profile-certifications/', 'API\ProfessionalProfileController@professionalProfileCertificationsUpdate');
 

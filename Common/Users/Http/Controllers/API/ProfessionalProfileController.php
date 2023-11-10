@@ -20,9 +20,11 @@ use Common\Users\Entities\ProfessionalProfileConferences;
 use Common\Users\Entities\ProfessionalProfilePatentDetails;
 use Common\Users\Entities\ProfessionalProfileProjects;
 use Common\Users\Entities\ProfessionalProfilePublications;
+use Common\Users\Entities\ProfessionalProfileCompliance;
 use Common\ProfessionalSkills\Entities\ProfessionalSkills;
 use Common\ProfessionalTools\Entities\ProfessionalTools;
 use Common\Draft\Entities\Draft;
+use Common\Languages\Entities\Languages;
 use Throwable;
 use Auth;
 use DB;
@@ -46,7 +48,7 @@ class ProfessionalProfileController extends Controller
         try {          
             $user_id=InwntDecrypt(Auth::id()); 
 
-            $professional_profile=ProfessionalProfile::with('projects', 'publications')->where(['user_id'=>$user_id])->first();
+            $professional_profile=ProfessionalProfile::with('projects', 'publications', 'patents', 'conferences', 'articles' ,'experience', 'education', 'courses', 'certificates', 'volunteerings', 'awards', 'languages', 'breaks', 'compliances')->where(['user_id'=>$user_id])->first();
 
             $countries=Countries::all();
             $skills=ProfessionalSkills::where(['status'=>1, 'type'=>0])->get();
@@ -54,6 +56,7 @@ class ProfessionalProfileController extends Controller
 
             $tools=ProfessionalTools::where(['status'=>1,'type'=>0])->get();
             $other_tools=ProfessionalTools::where(['status'=>1,'type'=>1])->get();
+            $languages=Languages::all();
 
             $data=[
                 'skills'=>$skills,
@@ -63,6 +66,8 @@ class ProfessionalProfileController extends Controller
                 'other_tools'=>$other_tools,
 
                 'countries'=>$countries,
+                'languages'=>$languages,
+
                 'user'=>Auth::user(),
                 'professional_profile'=>$professional_profile
             ];
@@ -181,29 +186,30 @@ class ProfessionalProfileController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function professionalProfileAwardsUpdate(Request $req, $id)
+    public function professionalProfileAwardsUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
 
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
             /*Need to be changed start*/
 
-            $ppa=ProfessionalProfileAwards::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfileAwards::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
 
-            foreach($req->title as $key => $award){
-                ProfessionalProfileAwards::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'title'=>$award,
-                    'awarded_by'=>$req->awarded_by[$key],
-                    'type'=>$req->type[$key],
-                    'awarded_year'=>$req->awarded_year[$key],
-                ]);
+            foreach($req->awardsDetails as $key => $award){
+                $award['user_id']=$user_id;
+                $award['professional_profile_id']=$pp->id;
+                ProfessionalProfileAwards::create($award);
             }
 
             /*Need to be changed end*/
@@ -291,26 +297,29 @@ class ProfessionalProfileController extends Controller
      * @return Renderable
      */
     /*Professional ProfileCareer Break*/
-    public function professionalProfileCareerBreakUpdate(Request $req, $id)
+    public function professionalProfileCareerBreakUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
+
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
+
             /*Need to be changed start*/
-            $ppa=ProfessionalProfileCareerBreak::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfileCareerBreak::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
-            foreach($req->reason as $key => $award){
-                ProfessionalProfileCareerBreak::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'reason'=>$award,
-                    'start_date'=>$req->start_date[$key],
-                    'end_date'=>$req->end_date[$key],
-                    'currently_on_break'=>$req->currently_on_break[$key],
-                ]);
+            foreach($req->breaksDetails as $key => $brk){
+                $brk['user_id']=$user_id;
+                $brk['professional_profile_id']=$pp->id;
+                ProfessionalProfileCareerBreak::create($brk);
             }
             /*Need to be changed end*/
 
@@ -334,35 +343,89 @@ class ProfessionalProfileController extends Controller
                 return response()->json($res);
         } 
     }
+
+
     /**
      * Remove the specified resource from storage.
      * @param int $id
      * @return Renderable
      */
-    public function professionalProfileCertificationsUpdate(Request $req, $id)
+    /*Professional compliance*/
+    public function professionalProfileComplianceUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
+
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
+
             /*Need to be changed start*/
-            $ppa=ProfessionalProfileCertifications::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfileCompliance::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
-            foreach($req->certificate_title as $key => $award){
-                ProfessionalProfileCertifications::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'certificate_title'=>$award,
-                    'others'=>$req->others[$key],
-                    'certificate_name'=>$req->certificate_name[$key],
-                    'issued_by'=>$req->issued_by[$key],
-                    'certificate_number'=>$req->certificate_number[$key],
-                    'validity_start_date'=>$req->validity_start_date[$key],
-                    'validity_end_date'=>$req->validity_end_date[$key],
-                    'no_expiry'=>$req->no_expiry[$key],
-                ]);
+            foreach($req->complianceDetails as $key => $brk){
+                $brk['user_id']=$user_id;
+                $brk['professional_profile_id']=$pp->id;
+                ProfessionalProfileCompliance::create($brk);
+            }
+            /*Need to be changed end*/
+
+            $professional_profile_art=ProfessionalProfileArticles::where('user_id',$user_id)->first();
+            $data=[
+                'user'=>Auth::user(),
+                'professional_profile_art'=>$professional_profile_art
+            ];
+
+            $res=['success'=>true,'message'=>'Professional profile successfully updated','errors'=>[],'data'=>$data];
+            DB::commit();
+             return response()->json($res);
+        } catch (Exception $e) {
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param int $id
+     * @return Renderable
+     */
+    public function professionalProfileCertificationsUpdate(Request $req)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        DB::beginTransaction();
+        try {          
+            $user_id=InwntDecrypt(Auth::id());
+            
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
+
+            /*Need to be changed start*/
+            $ppa=ProfessionalProfileCertifications::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
+            if($ppa->count()>0){
+                $ppa->delete();
+            }
+            foreach($req->certificatesDetails as $key => $cert){
+                $cert['user_id']=$user_id;
+                $cert['professional_profile_id']=$pp->id;
+                ProfessionalProfileCertifications::create($cert);
             }
             /*Need to be changed end*/
 
@@ -391,28 +454,29 @@ class ProfessionalProfileController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function professionalProfileCoursesUpdate(Request $req, $id)
+    public function professionalProfileCoursesUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
+            
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
+
             /*Need to be changed start*/
-            $ppa=ProfessionalProfileCourses::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfileCourses::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
-            foreach($req->course_title as $key => $award){
-                ProfessionalProfileCourses::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'course_title'=>$award,
-                    'issued_by'=>$req->issued_by[$key],
-                    'course_description'=>$req->course_description[$key],
-                    'start_date'=>$req->start_date[$key],
-                    'end_date'=>$req->end_date[$key],
-                    'currently_enrolled'=>$req->currently_enrolled[$key],
-                ]);
+            foreach($req->courseDetails as $key => $course){
+                $course['user_id']=$user_id;
+                $course['professional_profile_id']=$pp->id;
+                ProfessionalProfileCourses::create($course);
             }
             /*Need to be changed end*/
 
@@ -441,34 +505,29 @@ class ProfessionalProfileController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function professionalProfileEducationUpdate(Request $req, $id)
+    public function professionalProfileEducationUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
+
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
+
             /*Need to be changed start*/
-            $ppa=ProfessionalProfileEducation::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfileEducation::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
-            foreach($req->institute_name as $key => $award){
-                ProfessionalProfileEducation::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'institute_name'=>$award,
-                    'others'=>$req->others[$key],
-                    'degree_cert_diploma_title'=>$req->degree_cert_diploma_title[$key],
-                    'degree_cert_diploma_type'=>$req->degree_cert_diploma_type[$key],
-                    'field_of_study'=>$req->field_of_study[$key],
-                    'start_date'=>$req->start_date[$key],
-                    'end_date'=>$req->end_date[$key],
-                    'currently_enrolled'=>$req->currently_enrolled[$key],
-                    'workplace_name'=>$req->workplace_name[$key],
-                    'country_id'=>$req->country_id[$key],
-                    'state_id'=>$req->state_id[$key],
-                    'city_id'=>$req->city_id[$key],
-                ]);
+            foreach($req->educationDetails as $key => $edu){
+                $edu['user_id']=$user_id;
+                $edu['professional_profile_id']=$pp->id;
+                ProfessionalProfileEducation::create($edu);
             }
             /*Need to be changed end*/
 
@@ -497,25 +556,28 @@ class ProfessionalProfileController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function professionalProfileLanguagesUpdate(Request $req, $id)
+    public function professionalProfileLanguagesUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
+
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
             /*Need to be changed start*/
-            $ppa=ProfessionalProfileLanguages::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfileLanguages::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
-            foreach($req->language as $key => $award){
-                ProfessionalProfileLanguages::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'language'=>$award,
-                    'language_level'=>$req->language_level[$key],
-                    'description'=>$req->description[$key],
-                ]);
+            foreach($req->languagesDetails as $key => $lng){
+                $lng['user_id']=$user_id;
+                $lng['professional_profile_id']=$pp->id;
+                ProfessionalProfileLanguages::create($lng);
             }
             /*Need to be changed end*/
 
@@ -544,29 +606,28 @@ class ProfessionalProfileController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function professionalProfileVolunteeringUpdate(Request $req, $id)
+    public function professionalProfileVolunteeringUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
+
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
             /*Need to be changed start*/
-            $ppa=ProfessionalProfileVolunteering::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfileVolunteering::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
-            foreach($req->role as $key => $award){
-                ProfessionalProfileVolunteering::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'role'=>$award,
-                    'others'=>$req->others[$key],
-                    'organization'=>$req->organization[$key],
-                    'description'=>$req->description[$key],
-                    'validity_start_date'=>$req->validity_start_date[$key],
-                    'validity_end_date'=>$req->validity_end_date[$key],
-                    'no_expiry'=>$req->no_expiry[$key],
-                ]);
+            foreach($req->volunteeringsDetails as $key => $vltr){
+                $vltr['user_id']=$user_id;
+                $vltr['professional_profile_id']=$pp->id;
+                ProfessionalProfileVolunteering::create($vltr);
             }
             /*Need to be changed end*/
 
@@ -595,39 +656,42 @@ class ProfessionalProfileController extends Controller
      * @param int $id
      * @return Renderable
      */
-     public function professionalProfileWorkExperiencesUpdate(Request $req, $id)
+     public function professionalProfileWorkExperiencesUpdate(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
+
+            $pp=ProfessionalProfile::where('user_id', $user_id)->first();
+
+            if($pp==null){
+                $res=['success'=>false,'message'=>'Something went wrong, please refresh and try again','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
             /*Need to be changed start*/
-            $ppa=ProfessionalProfileWorkExperiences::where('user_id', $user_id)->where('professional_profile_id', $id);
+            $ppa=ProfessionalProfileWorkExperiences::where('user_id', $user_id)->where('professional_profile_id', $pp->id);
             if($ppa->count()>0){
                 $ppa->delete();
             }
-            foreach($req->job_title as $key => $award){
-                ProfessionalProfileWorkExperiences::create([
-                    'user_id'=>$user_id,
-                    'professional_profile_id'=>$id,
-                    'job_title'=>$award,
-                    'company_name'=>$req->company_name[$key],
-                    'company_website'=>$req->company_website[$key],
-                    'start_date'=>$req->start_date[$key],
-                    'end_date'=>$req->end_date[$key],
-                    'work_email'=>$req->work_email[$key],
-                    'work_type'=>$req->work_type[$key],
-                    'country_id'=>$req->country_id[$key],
-                    'state_id'=>$req->state_id[$key],
-                    'city_id'=>$req->city_id[$key],
-                    'primary_role'=>$req->primary_role[$key],
-                    'job_duties'=>$req->job_duties[$key],
-                    'project_description'=>$req->project_description[$key],
-                    'workplace_name'=>$req->workplace_name[$key],
-                    'remote_work'=>$req->remote_work[$key],
-                    'skills'=>$req->skills[$key],
-                    'tools'=>$req->tools[$key],
-                ]);
+            foreach($req->experienceDetails as $key => $exp){
+                $exp['user_id']=$user_id;
+                $exp['professional_profile_id']=$pp->id;
+
+                if($exp['remote_work']){
+                    $exp['skills']=json_encode($exp['skills']);
+                    $exp['tools']=json_encode($exp['tools']);
+                }else{
+                    $exp['skills']='';
+                    $exp['tools']='';
+
+                    $exp['primary_role']='';
+                    $exp['job_duties']='';
+                    $exp['project_description']='';
+                    $exp['workplace_name']='';
+                }
+
+                ProfessionalProfileWorkExperiences::create($exp);
             }
             /*Need to be changed end*/
 
