@@ -1,0 +1,11 @@
+{
+    "name": "MainMenu",
+    "alias": "mainmenu",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CMS\\MainMenu\\Providers\\MainMenuServiceProvider"
+    ],
+    "files": []
+}

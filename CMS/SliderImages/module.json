@@ -1,0 +1,11 @@
+{
+    "name": "SliderImages",
+    "alias": "sliderimages",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CMS\\SliderImages\\Providers\\SliderImagesServiceProvider"
+    ],
+    "files": []
+}

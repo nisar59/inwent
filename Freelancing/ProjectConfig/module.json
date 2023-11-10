@@ -1,0 +1,11 @@
+{
+    "name": "ProjectConfig",
+    "alias": "projectconfig",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Freelancing\\ProjectConfig\\Providers\\ProjectConfigServiceProvider"
+    ],
+    "files": []
+}

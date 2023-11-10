@@ -24,6 +24,23 @@ $prefix=request()->route()->getPrefix();
 					</ul>
 				</li>
 
+				<li class="submenu @if($prefix=='/cms/pages' OR $prefix=='/cms/main-menu'OR $prefix=='/cms/footer-menu-headings' OR $prefix=='/cms/sliders') active @endif">
+					<a href="javascript:void(0)"><i class="fa fa-database"></i> <span>CMS</span> <span class="menu-arrow"></span></a>
+					<ul>
+						<li><a class="@if($prefix=='/cms/pages') active @endif" href="{{url('pages')}}">Pages</a></li>
+						<li><a class="@if($prefix=='/cms/main-menu') active @endif" href="{{url('main-menu')}}">Main Menu</a></li>
+						<li><a class="@if($prefix=='/cms/footer-menu-headings') active @endif" href="{{url('footer-menu-headings')}}">Footer Menu Headings</a></li>
+						<li><a class="@if($prefix=='/cms/sliders') active @endif" href="{{url('sliders')}}">Sliders</a></li>
+					</ul>
+				</li>
+
+				<li class="submenu @if($prefix=='/project-config') active @endif">
+					<a href="javascript:void(0)"><i class="fa fa-user"></i><span>Freelancing</span> <span class="menu-arrow"></span></a>
+					<ul>
+						<li><a class="@if($prefix=='project-config') active @endif" href="{{url('project-config')}}">Project Configuration</a></li>
+					</ul>
+				</li>
+
 
 				<li>
 					<a href="categories.html"><i data-feather="copy"></i> <span>Categories</span></a>
