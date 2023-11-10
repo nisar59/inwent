@@ -7,7 +7,7 @@
 			<img src="{{asset('assets/img/white-logo.png')}}" alt="Logo">
 		</a>
 		<a href="index.html" class="logo logo-small">
-			<img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+			<img src="{{asset('assets/img/logo-small.png')}}" alt="Logo" width="30" height="30">
 		</a>
 		<!-- Sidebar Toggle -->
 		<a href="javascript:void(0);" id="toggle_btn">
@@ -50,7 +50,7 @@
 							<a href="#">
 								<div class="media d-flex">
 									<span class="avatar avatar-sm flex-shrink-0">
-										<img class="avatar-img rounded-circle" alt="" src="assets/img/profiles/avatar-02.jpg">
+										<img class="avatar-img rounded-circle" alt="" src="{{asset('assets/img/profiles/avatar-02.jpg')}}">
 									</span>
 									<div class="media-body flex-grow-1">
 										<p class="noti-details"><span class="noti-title">Brian Johnson</span> paid the invoice <span class="noti-title">#DF65485</span></p>
@@ -63,7 +63,7 @@
 							<a href="#">
 								<div class="media d-flex">
 									<span class="avatar avatar-sm flex-shrink-0">
-										<img class="avatar-img rounded-circle" alt="" src="assets/img/profiles/avatar-03.jpg">
+										<img class="avatar-img rounded-circle" alt="" src="{{asset('assets/img/profiles/avatar-03.jpg')}}">
 									</span>
 									<div class="media-body flex-grow-1">
 										<p class="noti-details"><span class="noti-title">Marie Canales</span> has accepted your estimate <span class="noti-title">#GTR458789</span></p>
@@ -89,7 +89,7 @@
 							<a href="#">
 								<div class="media d-flex">
 									<span class="avatar avatar-sm flex-shrink-0">
-										<img class="avatar-img rounded-circle" alt="" src="assets/img/profiles/avatar-04.jpg">
+										<img class="avatar-img rounded-circle" alt="" src="{{asset('assets/img/profiles/avatar-04.jpg')}}">
 									</span>
 									<div class="media-body flex-grow-1">
 										<p class="noti-details"><span class="noti-title">Barbara Moore</span> declined the invoice <span class="noti-title">#RDW026896</span></p>
