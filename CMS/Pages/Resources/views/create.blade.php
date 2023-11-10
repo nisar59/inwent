@@ -39,14 +39,11 @@
                                 <label for="">Meta Title</label>
                                 <input type="text" name="meta_title" class="form-control"  placeholder="Enter Title">
                             </div>
-                             <div class="col-md-12 form-group">
+                            <div class="col-md-12 form-group">
                                 <label for="">Meta Description</label>
-                              <textarea name="meta_description" class="form-control"  id="" cols="68" placeholder="Enter Description" rows="10"></textarea>
-                            </div>
-
-                            
+                                <textarea name="meta_description" class="form-control"  id="" cols="68" placeholder="Enter Description" rows="10"></textarea>
+                            </div>                         
                         </div>
-                    </div>
                     </div>
                     <div class="card-footer text-end">
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -62,11 +59,11 @@
 @section('js')
 <script type="text/javascript">
 $(document).ready(function() {
-    $("#title").keyup(function() {
-  var Text = $(this).val();
-  Text = Text.toLowerCase();
-  Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
-  $("#slug").val(Text);        
+$("#title").keyup(function() {
+var Text = $(this).val();
+Text = Text.toLowerCase();
+Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
+$("#slug").val(Text);
 });
 });
 </script>

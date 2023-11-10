@@ -18,5 +18,6 @@
     "FooterMenu": true,
     "Sliders": true,
     "SliderImages": true,
-    "ProjectConfig": true
+    "ProjectConfig": true,
+    "Banner": true
 }

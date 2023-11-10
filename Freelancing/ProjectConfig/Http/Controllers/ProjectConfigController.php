@@ -56,7 +56,6 @@ class ProjectConfigController extends Controller
         $req->validate([
             'type'=>'required',
             'name'=>'required',
-            'description'=>'required',
         ]);
         DB::beginTransaction();
         try{
@@ -106,7 +105,6 @@ class ProjectConfigController extends Controller
          $req->validate([
             'type'=>'required',
             'name'=>'required',
-            'description'=>'required',
         ]);
         DB::beginTransaction();
         try{
