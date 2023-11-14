@@ -72,7 +72,7 @@ class FooterMenuHeadingsController extends Controller
         try{
             FooterMenuHeadings::create($req->except('_token'));
             DB::commit();
-            return redirect('footer-menu-headings')->with('success','Footer Menu Headings successfully created');
+            return redirect('footer-menu-headings')->with('success','Footer Menu Heading successfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -148,7 +148,7 @@ class FooterMenuHeadingsController extends Controller
         try{
             FooterMenuHeadings::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('footer-menu-headings')->with('success','Footer Menu Headings successfully Updated');
+            return redirect('footer-menu-headings')->with('success','Footer Menu Heading successfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -169,7 +169,7 @@ class FooterMenuHeadingsController extends Controller
         try{
         FooterMenuHeadings::find($id)->delete();
         DB::commit();
-         return redirect('footer-menu-headings')->with('success','Footer Menu Headings successfully deleted');
+         return redirect('footer-menu-headings')->with('success','Footer Menu Heading successfully deleted');
          } catch(Exception $e){
             DB::rollback();
             return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());

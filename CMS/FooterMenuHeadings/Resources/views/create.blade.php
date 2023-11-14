@@ -6,10 +6,10 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">Footer Menu Headings</h3>
+                    <h3 class="page-title">Footer Menu Heading</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{url('main-menu')}}">Footer Menu Headings</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('footer-menu-headings')}}">Footer Menu Heading</a></li>
                         <li class="breadcrumb-item active">Create</li>
                     </ul>
                 </div>
@@ -21,7 +21,7 @@
                 <form action="{{url('footer-menu-headings/store')}}" method="POST" class="card">
                     @csrf
                     <div class="card-header p-3">
-                        <h5 class="card-title">Add Footer Menu Headings</h5>
+                        <h5 class="card-title">Add Footer Menu Heading</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">

@@ -74,10 +74,7 @@ class SliderImagesController extends Controller
         }catch(Throwable $ex){
             DB::rollback();
         return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
-
-
-        }
-        
+        }  
         
      }
     

@@ -8,7 +8,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">Pages</h3>
+                    <h3 class="page-title">Page</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{url('pages')}}">Pages</a></li>
@@ -23,7 +23,7 @@
                 <form action="{{url('pages/update/'.$pages->id)}}" method="POST" class="card">
                     @csrf
                     <div class="card-header p-3">
-                        <h5 class="card-title">Edit Pages</h5>
+                        <h5 class="card-title">Edit Page</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -39,9 +39,9 @@
                                 <label for="">Meta Title</label>
                                 <input type="text" name="meta_title" value="{{$pages->meta_title}}" class="form-control"  placeholder="Enter Title">
                             </div>
-                             <div class="col-md-12 form-group">
+                            <div class="col-md-12 form-group">
                                 <label for="">Meta Description</label>
-                              <textarea name="meta_description" class="form-control"  id="" cols="68" placeholder="Enter Description" rows="10">{{$pages->meta_description}}</textarea>
+                                <textarea name="meta_description" class="form-control"  id="" cols="68" placeholder="Enter Description" rows="10">{{$pages->meta_description}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -59,11 +59,11 @@
 @section('js')
 <script type="text/javascript">
 $(document).ready(function() {
-    $("#title").keyup(function() {
-  var Text = $(this).val();
-  Text = Text.toLowerCase();
-  Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
-  $("#slug").val(Text);        
+$("#title").keyup(function() {
+var Text = $(this).val();
+Text = Text.toLowerCase();
+Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
+$("#slug").val(Text);
 });
 });
 </script>

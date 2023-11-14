@@ -8,7 +8,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">Pages</h3>
+                    <h3 class="page-title">Page</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{url('pages')}}">Pages</a></li>
@@ -23,7 +23,7 @@
                 <form action="{{url('pages/store')}}" method="POST" class="card">
                     @csrf
                     <div class="card-header p-3">
-                        <h5 class="card-title">Add Pages</h5>
+                        <h5 class="card-title">Add Page</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -42,7 +42,7 @@
                             <div class="col-md-12 form-group">
                                 <label for="">Meta Description</label>
                                 <textarea name="meta_description" class="form-control"  id="" cols="68" placeholder="Enter Description" rows="10"></textarea>
-                            </div>                         
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer text-end">

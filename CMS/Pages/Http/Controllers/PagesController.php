@@ -63,7 +63,7 @@ class PagesController extends Controller
         try{
             Pages::create($req->except('_token'));
             DB::commit();
-            return redirect('pages')->with('success','Pages successfully created');
+            return redirect('pages')->with('success','Page successfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -114,7 +114,7 @@ class PagesController extends Controller
         try{
             Pages::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('pages')->with('success','Pages successfully Updated');
+            return redirect('pages')->with('success','Page successfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -137,7 +137,7 @@ class PagesController extends Controller
         try{
         Pages::find($id)->delete();
         DB::commit();
-         return redirect('pages')->with('success','Pages successfully deleted');
+         return redirect('pages')->with('success','Page successfully deleted');
          } catch(Exception $e){
             DB::rollback();
             return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());

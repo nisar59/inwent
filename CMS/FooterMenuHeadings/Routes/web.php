@@ -24,8 +24,8 @@ Route::group(['prefix'=>'footer-menu-headings', 'middleware'=>['permission:foote
 Route::group(['prefix'=>'footer-menu-headings', 'middleware'=>['permission:footer-menu-headings.edit']],function() {
     Route::get('/edit/{id}', 'FooterMenuHeadingsController@edit');
     Route::POST('/update/{id}', 'FooterMenuHeadingsController@update');
- 	Route::get('/status/{id}', 'FooterMenuHeadingsController@status');});
-
+ 	Route::get('/status/{id}', 'FooterMenuHeadingsController@status');
+});
 Route::group(['prefix'=>'footer-menu-headings', 'middleware'=>['permission:footer-menu-headings.delete']],function() {
     Route::get('/destroy/{id}', 'FooterMenuHeadingsController@destroy');
 });

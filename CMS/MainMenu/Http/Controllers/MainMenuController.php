@@ -50,7 +50,16 @@ class MainMenuController extends Controller
            }
                return $target;
            })
-           ->rawColumns(['action','url_type','target'])
+             ->addColumn('status',function ($row){
+               $action='';
+               if($row->status==0){
+                   $action.='<a class="btn btn-success btn-sm m-1" href="'.url('main-menu/status/'.$row->id).'">Active</a>';
+                }else{
+                   $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('main-menu/status/'.$row->id).'">Deactive</a>';
+                }
+               return $action;
+           })
+           ->rawColumns(['action','url_type','target','status'])
            ->make(true);
         }
         return view('mainmenu::index');
@@ -101,6 +110,35 @@ class MainMenuController extends Controller
     public function show($id)
     {
         return view('mainmenu::show');
+    }
+    /**
+     * Update status.
+     * @param int $id
+     * @return Renderable
+     */
+    public function status($id)
+    {
+        DB::beginTransaction();
+        try{
+        $footer_menu=MainMenu::find($id);
+
+        if($footer_menu->status==1){
+            $footer_menu->status=0;
+        }
+        else{
+            $footer_menu->status=1;
+        }
+        $footer_menu->save();
+        DB::commit();
+         return redirect('main-menu')->with('success','Main Menu status successfully updated');
+         
+         } catch(Exception $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }catch(Throwable $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }
     }
 
     /**

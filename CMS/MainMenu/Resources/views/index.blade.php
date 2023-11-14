@@ -35,6 +35,7 @@
                                         <th class="text-center">URL Type</th>
                                         <th class="text-center">URL</th>
                                         <th class="text-center">Target</th>
+                                        <th class="text-center">Status</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -89,6 +90,13 @@ $(document).ready(function() {
             {
                 data: 'target',
                 name: 'target',
+                class:'text-center',
+                orderable:false,
+                searchable:false
+            },
+            {
+                data: 'status',
+                name: 'status',
                 class:'text-center',
                 orderable:false,
                 searchable:false

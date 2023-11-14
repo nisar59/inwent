@@ -1,0 +1,11 @@
+{
+    "name": "UserReviews",
+    "alias": "userreviews",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CMS\\UserReviews\\Providers\\UserReviewsServiceProvider"
+    ],
+    "files": []
+}

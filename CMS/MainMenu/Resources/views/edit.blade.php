@@ -55,45 +55,45 @@
                                     <option value="1"@if($main_menu->target=="1") selected @endif>New Tab</option>
                                 </select>
                             </div>
-                           
+                            
                         </div>
                     </div>
-                        <div class="card-footer text-end">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
+            
         </div>
     </div>
-    <!-- /Page Wrapper -->
-    @endsection
-    @section('js')
-    <script type="text/javascript">
-    $(document).ready(function() {
-    $(document).on('change', '#url_type_chnage',function() {
-    var url=`<div class="col-md-6 form-group">
+</div>
+<!-- /Page Wrapper -->
+@endsection
+@section('js')
+<script type="text/javascript">
+$(document).ready(function() {
+$(document).on('change', '#url_type_chnage',function() {
+var url=`<div class="col-md-6 form-group">
+    <label>URL</label>
+    <select class="form-control" name="url" id="type" style="width:492px;">
+        <option>Select URL</option>
+        @foreach($pages as $page)
+        <option value="{{$page->slug}}">{{$page->slug}}</option>
+        @endforeach
+    </select>
+</div>`;
+var pages=`<div class="col-md-6">
+    <div class="form-group">
         <label>URL</label>
-        <select class="form-control" name="url" id="type" style="width:492px;">
-            <option>Select URL</option>
-            @foreach($pages as $page)
-             <option value="{{$page->slug}}">{{$page->slug}}</option>
-            @endforeach
-        </select>
-    </div>`;
-    var pages=`<div class="col-md-6">
-        <div class="form-group">
-            <label>URL</label>
-            <input type="link" class="form-control" style="width:492px;" name="url" placeholder="Enter URL">
-        </div>
-    </div>`;
-    if($(this).val()==0){
-    $('#type-content').html(url);
-    }else{
-    $('#type-content').html(pages);
-    }
-    });
-    });
-    </script>
-    @endsection
+        <input type="link" class="form-control" style="width:492px;" name="url" placeholder="Enter URL">
+    </div>
+</div>`;
+if($(this).val()==0){
+$('#type-content').html(url);
+}else{
+$('#type-content').html(pages);
+}
+});
+});
+</script>
+@endsection

@@ -19,5 +19,9 @@
     "Sliders": true,
     "SliderImages": true,
     "ProjectConfig": true,
-    "Banner": true
+    "Banner": true,
+    "ActionBanner": true,
+    "OURClient": true,
+    "Categories": true,
+    "UserReviews": true
 }

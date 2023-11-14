@@ -1,0 +1,11 @@
+{
+    "name": "OURClient",
+    "alias": "ourclient",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CMS\\OURClient\\Providers\\OURClientServiceProvider"
+    ],
+    "files": []
+}

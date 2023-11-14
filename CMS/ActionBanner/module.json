@@ -1,0 +1,11 @@
+{
+    "name": "ActionBanner",
+    "alias": "actionbanner",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CMS\\ActionBanner\\Providers\\ActionBannerServiceProvider"
+    ],
+    "files": []
+}

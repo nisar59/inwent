@@ -43,3 +43,33 @@ function Types()
 ];
 	return $types;
 }
+
+function BannerTitleColors()
+{
+	$colors=[
+		'#000000'=>'Black',
+		'#6aa84f'=>'Green',
+		'#93c47d'=>'Light Green',
+		'#073763'=>'Blue',
+		'#6e41e1'=>'Purple',
+		'#8e7cc3'=>'Light Purple',
+	];
+
+	return $colors;
+}
+
+function ButtonTypes()
+{
+	$Colortypes=[
+		'btn btn-primary'=>'Primary',
+		'btn btn-secondary'=>'Secondary',
+		'btn btn-success'=>'Success',
+		'btn btn-danger'=>'Danger',
+		'btn btn-warning'=>'Warning',
+		'btn btn-info'=>'Info',
+		'btn btn-light'=>'Light',
+		'btn btn-dark'=>'Dark',
+		'btn btn-link'=>'Link',
+	];
+	return $Colortypes;
+}
