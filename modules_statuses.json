@@ -23,5 +23,7 @@
     "ActionBanner": true,
     "OURClient": true,
     "Categories": true,
-    "UserReviews": true
+    "UserReviews": true,
+    "Blog": true,
+    "InwentLegal": true
 }

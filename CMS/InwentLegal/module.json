@@ -1,0 +1,11 @@
+{
+    "name": "InwentLegal",
+    "alias": "inwentlegal",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CMS\\InwentLegal\\Providers\\InwentLegalServiceProvider"
+    ],
+    "files": []
+}

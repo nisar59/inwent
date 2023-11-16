@@ -24,7 +24,7 @@ $prefix=request()->route()->getPrefix();
 					</ul>
 				</li>
 
-				<li class="submenu @if($prefix=='/cms/pages' OR $prefix=='/cms/main-menu'OR $prefix=='/cms/footer-menu-headings' OR $prefix=='/cms/sliders' OR $prefix=='/cms/banner' OR $prefix=='/cms/action-banner' OR $prefix=='/cms/our-client'OR $prefix=='/cms/categories' OR $prefix=='/cms/user-reviews' ) active @endif">
+				<li class="submenu @if($prefix=='/cms/pages' OR $prefix=='/cms/main-menu'OR $prefix=='/cms/footer-menu-headings' OR $prefix=='/cms/sliders' OR $prefix=='/cms/banner' OR $prefix=='/cms/action-banner' OR $prefix=='/cms/our-client'OR $prefix=='/cms/categories' OR $prefix=='/cms/user-reviews' OR $prefix=='/cms/inwent-legal' OR $prefix=='/cms/blog') active @endif">
 					<a href="javascript:void(0)"><i class="fa fa-database"></i> <span>CMS</span> <span class="menu-arrow"></span></a>
 					<ul>
 						<li><a class="@if($prefix=='/cms/pages') active @endif" href="{{url('pages')}}">Pages</a></li>
@@ -36,6 +36,8 @@ $prefix=request()->route()->getPrefix();
 						<li><a class="@if($prefix=='/cms/our-client') active @endif" href="{{url('our-client')}}">OUR Client</a></li>
 						<li><a class="@if($prefix=='/cms/categories') active @endif" href="{{url('categories')}}">Categories</a></li>
 						<li><a class="@if($prefix=='/cms/user-reviews') active @endif" href="{{url('user-reviews')}}">User Reviews</a></li>
+						<li><a class="@if($prefix=='/cms/inwent-legal') active @endif" href="{{url('inwent-legal')}}">Inwent Legal</a></li>
+						<li><a class="@if($prefix=='/cms/blog') active @endif" href="{{url('blog')}}">Blog</a></li>
 					</ul>
 				</li>
 
