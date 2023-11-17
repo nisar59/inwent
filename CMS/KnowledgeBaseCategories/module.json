@@ -1,0 +1,11 @@
+{
+    "name": "KnowledgeBaseCategories",
+    "alias": "knowledgebasecategories",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CMS\\KnowledgeBaseCategories\\Providers\\KnowledgeBaseCategoriesServiceProvider"
+    ],
+    "files": []
+}

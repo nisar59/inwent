@@ -1,0 +1,11 @@
+{
+    "name": "KnowledgeBase",
+    "alias": "knowledgebase",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CMS\\KnowledgeBase\\Providers\\KnowledgeBaseServiceProvider"
+    ],
+    "files": []
+}

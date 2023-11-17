@@ -23,15 +23,17 @@ class FooterMenuHeadingsController extends Controller
            return DataTables::of($footer_menu)
            ->addColumn('action',function ($row){
                $action='';
+            
                if(Auth::user()->can('footer-menu-headings.edit')){
                $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('footer-menu-headings/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
             }
             if(Auth::user()->can('footer-menu-headings.delete')){
                $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('footer-menu-headings/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
-           if(Auth::user()){
+              if(Auth::user()->can('footer-menu-headings.edit')){
                $action.='<a class="btn btn-secondary btn-sm m-1" href="'.url('footer-menu/create/'.$row->id).'"><i class="fa fa-bars"></i></a>';
            }
+           
                return $action;
            })
             ->addColumn('status',function ($row){

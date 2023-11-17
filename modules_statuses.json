@@ -25,5 +25,8 @@
     "Categories": true,
     "UserReviews": true,
     "Blog": true,
-    "InwentLegal": true
+    "InwentLegal": true,
+    "Blocks": true,
+    "KnowledgeBaseCategories": true,
+    "KnowledgeBase": true
 }

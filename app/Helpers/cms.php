@@ -1,7 +1,8 @@
 <?php 
+function Blocks(){
+  
 return(object) $blocks =[
 	//All blocks 
-
 'our_clients' => [
     'name' => 'our_clients',
     'sample' => 'our_clients.png',
@@ -11,9 +12,7 @@ return(object) $blocks =[
       'action'=>['name'=>'action','type'=>'button'],
     ],
   ],
-
-
-  //Individuals & Professionals
+   //Individuals & Professionals
   'individuals_professionals' => [
     'name' => 'individuals_professionals',
     'sample' => 'individuals_professionals.png',
@@ -54,7 +53,6 @@ return(object) $blocks =[
 
     ],
   ],
-
   //For Investors
   'investors' => [
     'name' => 'investors',
@@ -97,8 +95,7 @@ return(object) $blocks =[
 
     ],
   ],
-
-  //INWENT FOR INDIVIDUALS & PROFESSIONALS
+    //INWENT FOR INDIVIDUALS & PROFESSIONALS
  'inwent_for_individuals_professionals' => [
     'name' => 'inwent_for_individuals_professionals',
     'sample' => 'inwent_for_individuals_professionals.png',
@@ -109,28 +106,28 @@ return(object) $blocks =[
       'list'=>['name'=>'list','type'=>'list'],
 
       'children_one'=>[
-      	'heading'=>['name'=>'heading','type'=>'text'],
-      	'icone'=>['name'=>'icone','type'=>'file'],
-      	'list'=>['name'=>'list','type'=>'list'],
+        'heading'=>['name'=>'heading','type'=>'text'],
+        'icone'=>['name'=>'icone','type'=>'file'],
+        'list'=>['name'=>'list','type'=>'list'],
       ],
 
       'children_two'=>[
-      	'heading'=>['name'=>'heading','type'=>'text'],
-      	'icone'=>['name'=>'icone','type'=>'file'],
-      	'list'=>['name'=>'list','type'=>'list'],
+        'heading'=>['name'=>'heading','type'=>'text'],
+        'icone'=>['name'=>'icone','type'=>'file'],
+        'list'=>['name'=>'list','type'=>'list'],
       ],
 
       'children_three'=>[
-      	'heading'=>['name'=>'heading','type'=>'text'],
-      	'icone'=>['name'=>'icone','type'=>'file'],
-      	'list'=>['name'=>'list','type'=>'list'],
+        'heading'=>['name'=>'heading','type'=>'text'],
+        'icone'=>['name'=>'icone','type'=>'file'],
+        'list'=>['name'=>'list','type'=>'list'],
       ],
     ],
   ],
 
-	//At Inwent, we are connecting all the professional dots together
+  //At Inwent, we are connecting all the professional dots together
 
-  	'professional_dots_together' => [
+    'professional_dots_together' => [
     'name' => 'professional_dots_together',
     'sample' => 'professional_dots_together.png',
     'data' => [
@@ -150,8 +147,8 @@ return(object) $blocks =[
       'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
 
        'children'=>[
-      	'heading'=>['name'=>'heading','type'=>'text'],
-      	'list'=>['name'=>'list','type'=>'list'],
+        'heading'=>['name'=>'heading','type'=>'text'],
+        'list'=>['name'=>'list','type'=>'list'],
       ],
 
     ],
@@ -166,8 +163,8 @@ return(object) $blocks =[
       'subheading'=>['name'=>'subheading','type'=>'text','class'=>'editor'],
       'list'=>['name'=>'list','type'=>'list'],
        'children'=>[
-      	'heading'=>['name'=>'heading','type'=>'text'],
-      	'list'=>['name'=>'list','type'=>'list'],
+        'heading'=>['name'=>'heading','type'=>'text'],
+        'list'=>['name'=>'list','type'=>'list'],
       ],
     ],
   ],
@@ -287,31 +284,31 @@ return(object) $blocks =[
       'action_two'=>['name'=>'action','type'=>'button'],
       'action_three'=>['name'=>'action','type'=>'button'],
        'children'=>[
-      	'heading'=>['name'=>'heading','type'=>'text'],
+        'heading'=>['name'=>'heading','type'=>'text'],
       ],
     ],
   ],
 
   //Crowdfunding Guide
-	'crowdfunding_guide' => [
-	    'name' => 'crowdfunding_guide',
-	    'sample' => 'crowdfunding_guide.png',
-	    'data' => [
-	      'heading'=>['name'=>'heading','type'=>'text'],
-	      'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
-	      'action'=>['name'=>'action','type'=>'text'],
-	    ],
-	  ],
+  'crowdfunding_guide' => [
+      'name' => 'crowdfunding_guide',
+      'sample' => 'crowdfunding_guide.png',
+      'data' => [
+        'heading'=>['name'=>'heading','type'=>'text'],
+        'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
+        'action'=>['name'=>'action','type'=>'text'],
+      ],
+    ],
 
-	 //What's great about it?
-	'about_it' => [
+   //What's great about it?
+  'about_it' => [
     'name' => 'about_it',
     'sample' => 'about_it.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
        'children'=>[
-      	'heading'=>['name'=>'heading','type'=>'text'],
-      	'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
+        'heading'=>['name'=>'heading','type'=>'text'],
+        'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
       ],
     ],
   ],
@@ -322,10 +319,10 @@ return(object) $blocks =[
     'sample' => 'motivation.png',
     'data' => [
        'children_one'=>[
-      	'heading'=>['name'=>'heading','type'=>'text'],
-      	'icone'=>['name'=>'icone','type'=>'file'],
-      	'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
-      	'action'=>['name'=>'action','type'=>'button'],
+        'heading'=>['name'=>'heading','type'=>'text'],
+        'icone'=>['name'=>'icone','type'=>'file'],
+        'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
+        'action'=>['name'=>'action','type'=>'button'],
       ],
     ],
   ],
@@ -403,28 +400,8 @@ return(object) $blocks =[
       'action'=>['name'=>'action','type'=>'text'],
     ],
   ],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ];
+}
 
 
  ?>

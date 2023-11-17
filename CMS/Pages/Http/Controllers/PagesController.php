@@ -29,6 +29,9 @@ class PagesController extends Controller
             if(Auth::user()->can('pages.delete')){
                $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('pages/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
+              if(Auth::user()->can('pages.edit')){
+               $action.='<a class="btn btn-secondary btn-sm m-1" href="'.url('blocks/'.$row->id).'"><i class="fa fa-bars"></i></a>';
+           }
                return $action;
            })
            ->rawColumns(['action'])
