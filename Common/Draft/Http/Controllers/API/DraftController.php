@@ -37,6 +37,7 @@ class DraftController extends Controller
     public function store(Request $req)
     {
 
+
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
             $file_name=null;
@@ -44,8 +45,16 @@ class DraftController extends Controller
 
                 $user_id=InwntDecrypt(Auth::id());
                 $upload_path='users/'.md5($user_id).'/'.$req->file_path;
-                $file_name=FileUpload($req->file, $upload_path);
-                
+                if($req->hasFile('file')){
+                    $file_name=FileUpload($req->file, $upload_path);
+                }
+                elseif(is_string($req->file)){
+                    $file_name=Base64FileUpload($req->file, $upload_path);
+                }else{
+                    $res=['success'=>false,'message'=>'File could not Uploaded, because of wrong format','errors'=>[],'data'=>$data];
+                    return response()->json($res);
+                }
+
                 Draft::create([
                     'user_id'=>$user_id,
                     'module'=>$req->module,

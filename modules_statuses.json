@@ -19,5 +19,7 @@
     "Sliders": true,
     "SliderImages": true,
     "ProjectConfig": true,
-    "Banner": true
+    "Banner": true,
+    "Projects": true,
+    "Messages": true
 }

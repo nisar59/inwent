@@ -26,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
         'image',
         'status',
         'password',
+        'fcm_token'
     ];
 
     /**
@@ -54,6 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
 
     protected $appends=['basic_profile'];
 
+    protected $with=['basicProfile'];
     public function getIdAttribute($value)
     {
         return InwntEncrypt($value);

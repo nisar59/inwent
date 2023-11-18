@@ -25,21 +25,24 @@ function Types()
 {
 	
 	$types=[
-	'type-of-work'=>"Type Of Work",
-	'servive'=>"Servive",
-	'expert-type'=>"Expert Type",
-	'job-type'=>"Job Type",
-	'qualification'=>"Qualification",
-	'industry'=>"Industry",
-	'category'=>"Category",
-	'topic-area'=>"Topic Area",
-	'activity'=>"Activity",
-	'deliverable'=>"Deliverable",
+	'type_of_works'=>"Type Of Works",
+	'servives'=>"Servives",
+	'expert_types'=>"Expert Types",
+	'job_types'=>"Job Types",
+	'qualifications'=>"Qualifications",
+	'industries'=>"Industries",
+	'categories'=>"Categories",
+	'topic_areas'=>"Topic Areas",
+	'activities'=>"Activities",
+	'deliverables'=>"Deliverables",
 	'skills'=>"Skills",
-	'subject-area'=>"Subject Area",
-	'subject-area-sub-catagory'=>"Subject Area Sub Catagory",
-	'certification'=>"Certification",
-	'lienses-and-permit'=>"Lienses And Permit",
+	'subject_areas'=>"Subject Areas",
+	'subject_area_sub_catagories'=>"Subject Area Sub Catagories",
+	'certifications'=>"Certifications",
+	'lienses_and_permits'=>"Lienses And Permits",
+	'experiences'=>'Experiences',
+	'project_duration'=>'Project Duration',
+	'skill_level'=>'Skill Level'
 ];
 	return $types;
 }

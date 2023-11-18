@@ -27,6 +27,24 @@ function FileUpload($file, $path)
 }
 
 
+function Base64FileUpload($file, $path)
+{
+    if($file!=null) {        
+        //filename to store
+        $filenametostore =$path.'/base64image_'.uniqid().'_'.now()->timestamp.'.jpeg';
+
+        $filenametostore=str_replace(' ', '-', $filenametostore);
+ 
+        //Upload File to external server
+        if(Storage::disk('ftp')->put($filenametostore, fopen($file, 'r+'))){
+            return Storage::disk('ftp')->url($filenametostore);
+        }
+
+    }
+}
+
+
+
 
 function StorageUrl()
 {
