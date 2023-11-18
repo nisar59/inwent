@@ -1,0 +1,11 @@
+{
+    "name": "Messages",
+    "alias": "messages",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Common\\Messages\\Providers\\MessagesServiceProvider"
+    ],
+    "files": []
+}
