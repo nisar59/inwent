@@ -29,7 +29,7 @@ class SlidersController extends Controller
             if(Auth::user()->can('sliders.delete')){
                $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('sliders/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
-           if(Auth::user()){
+           if(Auth::user()->can('sliders.edit')){
                $action.='<a class="btn btn-secondary btn-sm m-1" href="'.url('slider-images/create/'.$row->id).'"><i class="fas fa-sliders-h"></i></a>';
            }
                return $action;

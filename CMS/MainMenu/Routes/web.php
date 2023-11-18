@@ -24,6 +24,8 @@ Route::group(['prefix'=>'main-menu', 'middleware'=>['permission:main-menu.create
 Route::group(['prefix'=>'main-menu', 'middleware'=>['permission:main-menu.edit']],function() {
     Route::get('/edit/{id}', 'MainMenuController@edit');
     Route::POST('/update/{id}', 'MainMenuController@update');
+    Route::get('/status/{id}', 'MainMenuController@status');
+
 });
 
 Route::group(['prefix'=>'main-menu', 'middleware'=>['permission:main-menu.delete']],function() {

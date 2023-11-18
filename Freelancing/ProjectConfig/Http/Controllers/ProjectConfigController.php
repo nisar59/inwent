@@ -30,8 +30,17 @@ class ProjectConfigController extends Controller
                $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('project-config/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
                return $action;
+           })   
+           ->addColumn('status',function ($row){
+               $action='';
+               if($row->status==0){
+                   $action.='<a class="btn btn-success btn-sm m-1" href="'.url('project-config/status/'.$row->id).'">Active</a>';
+                }else{
+                   $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('project-config/status/'.$row->id).'">Deactive</a>';
+                }
+               return $action;
            })
-           ->rawColumns(['action'])
+           ->rawColumns(['action','status'])
            ->make(true);
         }
         return view('projectconfig::index');
@@ -81,6 +90,34 @@ class ProjectConfigController extends Controller
     public function show($id)
     {
         return view('projectconfig::show');
+    }/**
+     * Update status.
+     * @param int $id
+     * @return Renderable
+     */
+    public function status($id)
+    {
+        DB::beginTransaction();
+        try{
+        $pro_config=ProjectConfig::find($id);
+
+        if($pro_config->status==1){
+            $pro_config->status=0;
+        }
+        else{
+            $pro_config->status=1;
+        }
+        $pro_config->save();
+        DB::commit();
+         return redirect('project-config')->with('success','Project Configuration status successfully updated');
+         
+         } catch(Exception $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }catch(Throwable $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }
     }
 
     /**

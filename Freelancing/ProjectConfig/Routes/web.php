@@ -24,6 +24,8 @@ Route::group(['prefix'=>'project-config', 'middleware'=>['permission:project-con
 Route::group(['prefix'=>'project-config', 'middleware'=>['permission:project-config.edit']],function() {
     Route::get('/edit/{id}', 'ProjectConfigController@edit');
     Route::POST('/update/{id}', 'ProjectConfigController@update');
+    Route::get('/status/{id}', 'ProjectConfigController@status');
+
 });
 
 Route::group(['prefix'=>'project-config', 'middleware'=>['permission:project-config.delete']],function() {

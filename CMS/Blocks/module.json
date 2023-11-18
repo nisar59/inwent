@@ -1,0 +1,11 @@
+{
+    "name": "Blocks",
+    "alias": "blocks",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CMS\\Blocks\\Providers\\BlocksServiceProvider"
+    ],
+    "files": []
+}

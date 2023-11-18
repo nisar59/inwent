@@ -29,6 +29,9 @@ class PagesController extends Controller
             if(Auth::user()->can('pages.delete')){
                $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('pages/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
+              if(Auth::user()->can('pages.edit')){
+               $action.='<a class="btn btn-secondary btn-sm m-1" href="'.url('blocks/'.$row->id).'"><i class="fa fa-bars"></i></a>';
+           }
                return $action;
            })
            ->rawColumns(['action'])
@@ -63,7 +66,7 @@ class PagesController extends Controller
         try{
             Pages::create($req->except('_token'));
             DB::commit();
-            return redirect('pages')->with('success','Pages successfully created');
+            return redirect('pages')->with('success','Page successfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -114,7 +117,7 @@ class PagesController extends Controller
         try{
             Pages::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('pages')->with('success','Pages successfully Updated');
+            return redirect('pages')->with('success','Page successfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -137,7 +140,7 @@ class PagesController extends Controller
         try{
         Pages::find($id)->delete();
         DB::commit();
-         return redirect('pages')->with('success','Pages successfully deleted');
+         return redirect('pages')->with('success','Page successfully deleted');
          } catch(Exception $e){
             DB::rollback();
             return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());

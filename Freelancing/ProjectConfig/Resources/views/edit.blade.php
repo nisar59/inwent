@@ -11,7 +11,7 @@
                     <h3 class="page-title">Project Configuration</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{url('pages')}}">Project Configuration</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('project-config')}}">Project Configuration</a></li>
                         <li class="breadcrumb-item active">Edit</li>
                     </ul>
                 </div>

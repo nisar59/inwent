@@ -6,10 +6,10 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">Sliders</h3>
+                    <h3 class="page-title">Slider</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{url('main-menu')}}">Sliders</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('sliders')}}">Sliders</a></li>
                         <li class="breadcrumb-item active">Create</li>
                     </ul>
                 </div>
@@ -37,49 +37,42 @@
                             </div>
                         </div>
                     </div>
-                        <div class="card-footer text-end">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
+            
         </div>
     </div>
-    @endsection
-    @section('js')
-    <script type="text/javascript">
-      $(document).ready(function(){
-
-    var addButton = $('.add_button');  
-    var wrapper = $('#field_wrapper');  
-
-
-    $(addButton).click(function(){ 
-
-    var indx=0;
-    if($("#field_wrapper .row").length>0){
-        var row=$("#field_wrapper .row").last();
-        indx=row.data('index')+1;
-    }
-
-    var fieldHTML = `<div class="row" data-index="`+indx+`"><div class="col-md-5">
-                                <label for="">Text</label>
-                                <input type="text" class="form-control" name="actions[`+indx+`][text]" placeholder="Enter Text">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="">URL</label>
-                                <input type="link" class="form-control" name="actions[`+indx+`][url]" placeholder="Enter URL">
-                            </div><div class="col-md-1">
-                                <button class="btn btn-danger remove_button" style="margin-top: 24px;" type="button"><i class="fa fa-trash "></i></button>
-                            </div></div> `;  
-
-        $(wrapper).append(fieldHTML);
-    });
-
-    $(wrapper).on('click', '.remove_button', function(e){
-        $(this).closest('.row').remove();  
-    });
+</div>
+@endsection
+@section('js')
+<script type="text/javascript">
+$(document).ready(function(){
+var addButton = $('.add_button');
+var wrapper = $('#field_wrapper');
+$(addButton).click(function(){
+var indx=0;
+if($("#field_wrapper .row").length>0){
+var row=$("#field_wrapper .row").last();
+indx=row.data('index')+1;
+}
+var fieldHTML = `<div class="row" data-index="`+indx+`"><div class="col-md-5">
+    <label for="">Text</label>
+    <input type="text" class="form-control" name="actions[`+indx+`][text]" placeholder="Enter Text">
+</div>
+<div class="col-md-6">
+    <label for="">URL</label>
+    <input type="link" class="form-control" name="actions[`+indx+`][url]" placeholder="Enter URL">
+</div><div class="col-md-1">
+<button class="btn btn-danger remove_button" style="margin-top: 24px;" type="button"><i class="fa fa-trash "></i></button>
+</div></div> `;
+$(wrapper).append(fieldHTML);
 });
-    </script>
-    @endsection
+$(wrapper).on('click', '.remove_button', function(e){
+$(this).closest('.row').remove();
+});
+});
+</script>
+@endsection

@@ -11,7 +11,7 @@
                     <h3 class="page-title">Professional Tools</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{url('professionaltools')}}">Professional Tools</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('professional-tools')}}">Professional Tools</a></li>
                         <li class="breadcrumb-item active">Edit</li>
                     </ul>
                 </div>
