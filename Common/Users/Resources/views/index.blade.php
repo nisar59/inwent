@@ -16,7 +16,9 @@
                     </ul>
                 </div>
                 <div class="col-auto">
-
+                    <a href="{{url('users/create')}}" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -31,7 +33,6 @@
                                     <tr>
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Email</th>
-                                        <th class="text-center">Role</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
@@ -60,7 +61,7 @@ $(document).ready(function() {
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{url('admins')}}",
+                url: "{{url('users')}}",
                 data: data,
             },
             buttons: [],
@@ -74,11 +75,7 @@ $(document).ready(function() {
                 data: 'email',
                 name: 'email'
             },
-            {
-                data: 'role',
-                name: 'role',
-                class:'text-center'
-            },
+            
             {
                 data: 'status',
                 name: 'status',
@@ -86,9 +83,6 @@ $(document).ready(function() {
                 orderable:false,
                 searchable:false
             },
-
-
-
              {
                 data: 'action',
                 name: 'action',
@@ -107,24 +101,7 @@ $(document).ready(function() {
         data_table.destroy();
         DataTableInit(data);
     });
-    $(document).on('click', '.edit-role', function() {
-        var url = $(this).data('href');
-        $.ajax({
-            url: url,
-            type: 'GET',
-            success: function(res) {
-                if (res.success) {
-                    $("#mdl").html(res.data);
-                    $("#role-edit").modal('show');
-                } else {
-                    error(res.message);
-                }
-            },
-            error: function(err) {
-                error(err.responseText);
-            }
-        });
-    });
+  
 });
 </script>
 @endsection
