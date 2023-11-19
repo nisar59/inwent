@@ -6,10 +6,10 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">OUR Client</h3>
+                    <h3 class="page-title">Our Client</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{url('our-client')}}">OUR Client</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('our-client')}}">Our Client</a></li>
                         <li class="breadcrumb-item active">Create</li>
                     </ul>
                 </div>
@@ -21,7 +21,7 @@
                 <form action="{{url('our-client/store')}}" method="POST" class="card" enctype="multipart/form-data">
                     @csrf
                     <div class="card-header p-3">
-                        <h5 class="card-title">Add OUR Client</h5>
+                        <h5 class="card-title">Add Our Client</h5>
                     </div>
                     <div class="card-body">
                         <div class="row field_wrapper">

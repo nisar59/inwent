@@ -3,7 +3,7 @@
 
 function InwntEncrypt($data)
 {
-
+return $data;
 $ciphering = "AES-256-CBC";
 $options = 0;
 $encryption_iv=env('APP_IV');
@@ -17,6 +17,7 @@ return $data;
 
 function InwntDecrypt($hash)
 {
+	return $hash;
 $ciphering = "AES-256-CBC";
 $options = 0;
 $decryption_iv=env('APP_IV');

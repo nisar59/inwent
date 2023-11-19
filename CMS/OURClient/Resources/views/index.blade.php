@@ -8,11 +8,11 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">OUR Client</h3>
+                    <h3 class="page-title">Our Client</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                         
-                        <li class="breadcrumb-item active">OUR Client</li>
+                        <li class="breadcrumb-item active">Our Client</li>
                     </ul>
                 </div>
                 <div class="col-auto">
