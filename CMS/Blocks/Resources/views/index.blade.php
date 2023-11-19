@@ -76,7 +76,7 @@
                             @php
                             $block_name=ucfirst($key);
                             @endphp
-                            <li class="bg-primary row mb-1" data-toggle="tooltip" title='<img src="{{asset("block/".$block["sample"])}}" alt="Sample not found" class="w-100" />'>
+                            <li class="bg-primary row mb-1" data-toggle="tooltip" title='<img src="{{asset("blocks/".$block["sample"])}}" alt="Sample not found" class="w-100" />'>
                                 <h5 class="text-white col-8">{{str_replace('_', ' ',$block_name)}}</h5>
                                 <span class="col-4 handle text-end"><i class="fa fa-arrows-alt text-white fa-lg mt-2"></i></span>
                                 <input type="hidden" name="sections[]" class="section" value="{{$key}}">
