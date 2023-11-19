@@ -143,9 +143,101 @@ class BlocksController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
-        //
+        DB::beginTransaction();
+        try{
+          $block=Blocks::find($id);
+
+          if($block==null){
+                return redirect()->back()->with('error', "Block not found in this page");
+          }
+
+          $block_data=json_decode($block->data);
+          $key=$block->block_name;
+          $blocks=Blocks()->$key;
+          $path='cms/frontend';
+          $data=[];
+
+          foreach ($blocks['data'] as $key => $blck) {
+            $block_name=$blck['name'];
+            $block_type=$blck['type'];
+
+            if($block_type=="file"){
+                    if($req->$block_name!=null){
+                        $data[$block_name]=FileUpload($req->$block_name, $path);
+                    }
+                    else{
+                        $data[$block_name]=$block_data->$block_name;
+                    }
+            }
+
+
+            elseif($block_type=="listing"){
+                    if($req->$block_name!=null && is_array($req->$block_name)){
+                        $data[$block_name]=array_values($req->$block_name);
+                    }else{
+                        $data[$block_name]=$req->$block_name;
+                    }
+
+                }
+
+
+
+
+            elseif($block_type=="sub_sections"){
+                $sub_secs=array_values($req->$block_name);
+                $all_secs=isset($blck['sub_sections']) ? $blck['sub_sections'] : [];
+                $total_sections=isset($blck['total_sections']) ? $blck['total_sections'] : 0;
+                
+                for ($i=0; $i <$total_sections ; $i++) { 
+
+                    $indexed_value=isset($sub_secs[$i]) ? $sub_secs[$i] : [];
+
+                    foreach($all_secs as $seckey => $sec){
+                        $sec_name=isset($sec['name']) ? $sec['name'] : null;
+
+                        $final_value=isset($indexed_value[$sec_name]) ? $indexed_value[$sec_name] : null;
+
+
+
+                        if($sec['type']=='file'){
+                            if($final_value!=null){
+                            $data[$block_name][$i][$sec_name]=FileUpload($final_value, $path);
+                            }else{
+                                $data[$block_name][$i][$sec_name]=null;
+                            }
+                        }elseif($sec['type']=='listing'){
+                             $data[$block_name][$i][$sec_name]=explode(',', $final_value);
+                        }else{
+                             $data[$block_name][$i][$sec_name]=$final_value;
+                        }
+                    }
+                }
+
+
+            }
+
+
+
+            else{
+                  $data[$block_name]=$req->$block_name;
+            }
+          }
+
+
+
+          $block->update(['data'=>json_encode($data)]);
+          DB::commit();
+          return redirect()->back()->with('success', "Block Successfully updated");
+      }catch(Exception $e){
+          return redirect()->back()->with('error', "Something went wrong with this error: ".$e->getMessage());
+
+      }catch(Throwable $e){
+          return redirect()->back()->with('error', "Something went wrong with this error: ".$e->getMessage());
+      }
+            
+
     }
 
     /**

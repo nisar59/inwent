@@ -8,8 +8,10 @@ return(object) $blocks =[
     'sample' => 'our_clients.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
-      'clients'=>['name'=>'clients','type'=>'table'],
+      'our_clients'=>['name'=>'our_clients','type'=>'records'],
       'action'=>['name'=>'action','type'=>'button'],
+      'action_text'=>['name'=>'action_text','type'=>'text'],
+      'action_url'=>['name'=>'action_url','type'=>'text'],
     ],
   ],
    //Individuals & Professionals
@@ -20,6 +22,8 @@ return(object) $blocks =[
       'heading'=>['name'=>'heading','type'=>'text'],
       'subheading'=>['name'=>'subheading','type'=>'text'],
       'action'=>['name'=>'action','type'=>'button'],
+      'action_text'=>['name'=>'action_text','type'=>'text'],
+      'action_url'=>['name'=>'action_url','type'=>'text'],
       'list'=>['name'=>'list','type'=>'listing'],
       'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
 
@@ -34,7 +38,7 @@ return(object) $blocks =[
       'heading'=>['name'=>'heading','type'=>'text'],
       'subheading'=>['name'=>'subheading','type'=>'text'],
       'action'=>['name'=>'action','type'=>'button'],
-      'list'=>['name'=>'list','type'=>'list'],
+      'list'=>['name'=>'list','type'=>'listing'],
       'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
 
     ],
@@ -48,7 +52,9 @@ return(object) $blocks =[
       'heading'=>['name'=>'heading','type'=>'text'],
       'subheading'=>['name'=>'subheading','type'=>'text'],
       'action'=>['name'=>'action','type'=>'button'],
-      'list'=>['name'=>'list','type'=>'list'],
+      'action_text'=>['name'=>'action_text','type'=>'text'],
+      'action_url'=>['name'=>'action_url','type'=>'text'],
+      'list'=>['name'=>'list','type'=>'listing'],
       'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
 
     ],
@@ -61,6 +67,8 @@ return(object) $blocks =[
       'heading'=>['name'=>'heading','type'=>'text'],
       'subheading'=>['name'=>'subheading','type'=>'text'],
       'action'=>['name'=>'action','type'=>'button'],
+      'action_text'=>['name'=>'action_text','type'=>'text'],
+      'action_url'=>['name'=>'action_url','type'=>'text'],
       'list'=>['name'=>'list','type'=>'listing'],
       'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
 
@@ -73,7 +81,7 @@ return(object) $blocks =[
     'sample' => 'user_reviews.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
-      'reviews'=>['name'=>'reviews','type'=>'table'],
+      'user_reviews'=>['name'=>'user_reviews','type'=>'records'],
 
     ],
   ],
@@ -87,11 +95,26 @@ return(object) $blocks =[
       'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
       'subheading'=>['name'=>'subheading','type'=>'text'],
       'heading'=>['name'=>'heading','type'=>'text'],
-      'android_button'=>['name'=>'button','type'=>'android'],
-      'ios_button'=>['name'=>'button','type'=>'ios'],
-      'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
-      'action_one'=>['name'=>'action','type'=>'button'],
-      'action_two'=>['name'=>'action','type'=>'button'],
+
+      'android_button'=>['name'=>'android_button','type'=>'button'],
+      'android_button_text'=>['name'=>'android_button_text','type'=>'text'],
+      'android_button_url'=>['name'=>'android_button_url','type'=>'text'],
+
+
+      'ios_button'=>['name'=>'ios_button','type'=>'button'],
+      'ios_button_text'=>['name'=>'ios_button_text','type'=>'text'],
+      'ios_button_url'=>['name'=>'ios_button_url','type'=>'text'],
+
+      'sub_description'=>['name'=>'sub_description','type'=>'text', 'class'=>'editor'],
+
+      'action_one'=>['name'=>'action_one','type'=>'button'],
+      'action_one_text'=>['name'=>'action_one_text','type'=>'text'],
+      'action_one_url'=>['name'=>'action_one_url','type'=>'text'],
+
+
+      'action_two'=>['name'=>'action_two','type'=>'button'],
+      'action_two_text'=>['name'=>'action_two_text','type'=>'text'],
+      'action_two_url'=>['name'=>'action_one_url','type'=>'text'],
 
     ],
   ],
@@ -103,53 +126,56 @@ return(object) $blocks =[
       'heading'=>['name'=>'heading','type'=>'text'],
       'subheading'=>['name'=>'subheading','type'=>'text'],
       'action'=>['name'=>'action','type'=>'button'],
-      'list'=>['name'=>'list','type'=>'list'],
+      'action_text'=>['name'=>'action_text','type'=>'text'],
+      'action_url'=>['name'=>'action_url','type'=>'text'],
 
-      'children_one'=>[
-        'heading'=>['name'=>'heading','type'=>'text'],
-        'icone'=>['name'=>'icone','type'=>'file'],
-        'list'=>['name'=>'list','type'=>'list'],
+      'list'=>['name'=>'list','type'=>'listing'],
+
+      'sub_sections'=>['name'=>'sub_sections', 'type'=>'sub_sections',
+        'total_sections'=>3, 
+        'sub_sections'=>[
+                      'heading'=>['name'=>'heading','type'=>'text'],
+                      'icon'=>['name'=>'icon','type'=>'file'],
+                      'list'=>['name'=>'list','type'=>'listing'],
+                    ],
+
+        ],
       ],
 
-      'children_two'=>[
-        'heading'=>['name'=>'heading','type'=>'text'],
-        'icone'=>['name'=>'icone','type'=>'file'],
-        'list'=>['name'=>'list','type'=>'list'],
-      ],
-
-      'children_three'=>[
-        'heading'=>['name'=>'heading','type'=>'text'],
-        'icone'=>['name'=>'icone','type'=>'file'],
-        'list'=>['name'=>'list','type'=>'list'],
-      ],
     ],
-  ],
 
   //At Inwent, we are connecting all the professional dots together
 
-    'professional_dots_together' => [
+  'professional_dots_together' => [
     'name' => 'professional_dots_together',
     'sample' => 'professional_dots_together.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
       'action'=>['name'=>'action','type'=>'button'],
-      'list'=>['name'=>'list','type'=>'list'],
+      'action_text'=>['name'=>'action_text','type'=>'text'],
+      'action_url'=>['name'=>'action_url','type'=>'text'],
+
+      'list'=>['name'=>'list','type'=>'listing'],
     ],
   ],
 
   //INWENT FOR STARTUPS & BUSINESSES
-    'startup_businesses' => [
+  'startup_businesses' => [
     'name' => 'startup_businesses',
     'sample' => 'startup_businesses.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
-      'list'=>['name'=>'list','type'=>'list'],
       'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
+      'list'=>['name'=>'list','type'=>'listing'],
 
-       'children'=>[
-        'heading'=>['name'=>'heading','type'=>'text'],
-        'list'=>['name'=>'list','type'=>'list'],
-      ],
+      'sub_sections'=>['name'=>'sub_sections', 'type'=>'sub_sections',
+        'total_sections'=>1, 
+        'sub_sections'=>[
+                      'heading'=>['name'=>'heading','type'=>'text'],
+                      'list'=>['name'=>'list','type'=>'listing'],
+                    ],
+
+        ],
 
     ],
   ],
@@ -161,11 +187,15 @@ return(object) $blocks =[
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
       'subheading'=>['name'=>'subheading','type'=>'text','class'=>'editor'],
-      'list'=>['name'=>'list','type'=>'list'],
-       'children'=>[
-        'heading'=>['name'=>'heading','type'=>'text'],
-        'list'=>['name'=>'list','type'=>'list'],
-      ],
+      'list'=>['name'=>'list','type'=>'listing'],
+      'sub_sections'=>['name'=>'sub_sections', 'type'=>'sub_sections',
+        'total_sections'=>1, 
+        'sub_sections'=>[
+                      'heading'=>['name'=>'heading','type'=>'text'],
+                      'list'=>['name'=>'list','type'=>'listing'],
+                    ],
+
+        ],
     ],
   ],
 
@@ -188,20 +218,20 @@ return(object) $blocks =[
       'heading'=>['name'=>'heading','type'=>'text'],
       'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
       'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
-      'comaigns'=>['name'=>'comaigns','type'=>'table'],
+      'comaigns'=>['name'=>'comaigns','type'=>'records'],
 
     ],
   ],
 
   //Top Categories
-  'categories' => [
+  'fund_raising_categories' => [
     'name' => 'categories',
     'sample' => 'categories.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
       'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
       'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
-      'categories'=>['name'=>'categories','type'=>'table'],
+      'fund_raising_categories'=>['name'=>'fund_raising_categories','type'=>'records'],
     ],
   ],
 
@@ -211,9 +241,12 @@ return(object) $blocks =[
     'sample' => 'word_creativity.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
-      'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
+      'sub_heading'=>['name'=>'sub_heading','type'=>'text', 'class'=>'editor'],
       'action'=>['name'=>'action','type'=>'button'],
-      'link'=>['name'=>'link','type'=>'url'],
+      'action_text'=>['name'=>'action_text','type'=>'text'],
+      'action_url'=>['name'=>'action_url','type'=>'text'],
+      'link'=>['name'=>'link','type'=>'text'],
+      'link_text'=>['name'=>'link_text','type'=>'text'],
     ],
   ],
 
@@ -225,7 +258,7 @@ return(object) $blocks =[
       'heading'=>['name'=>'heading','type'=>'text'],
       'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
       'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
-      'comaigns'=>['name'=>'comaigns','type'=>'table'],
+      'comaigns'=>['name'=>'comaigns','type'=>'records'],
     ],
   ],
 
@@ -248,7 +281,7 @@ return(object) $blocks =[
       'heading'=>['name'=>'heading','type'=>'text'],
       'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
       'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
-      'categories'=>['name'=>'categories','type'=>'table'],
+      'projects'=>['name'=>'comaigns','type'=>'records'],
     ],
   ],
 
@@ -274,18 +307,25 @@ return(object) $blocks =[
   ],
 
   //News & Articles
-  'new_articles' => [
+  'news_articles' => [
     'name' => 'new_articles',
     'sample' => 'new_articles.png',
     'data' => [
-      'heading'=>['name'=>'heading','type'=>'text'],
-      'subheading'=>['name'=>'subheading','type'=>'text','class'=>'editor'],
-      'action_one'=>['name'=>'action','type'=>'button'],
-      'action_two'=>['name'=>'action','type'=>'button'],
-      'action_three'=>['name'=>'action','type'=>'button'],
-       'children'=>[
-        'heading'=>['name'=>'heading','type'=>'text'],
-      ],
+      'heading_one'=>['name'=>'heading_one','type'=>'text'],
+      'action_one'=>['name'=>'action_one','type'=>'button'],
+      'action_one_text'=>['name'=>'action_one_text','type'=>'text'],
+      'action_one_url'=>['name'=>'action_one_url','type'=>'text'],
+
+      'heading_two'=>['name'=>'heading_two','type'=>'text'],
+      'action_two'=>['name'=>'action_two','type'=>'button'],
+      'action_two_text'=>['name'=>'action_two_text','type'=>'text'],
+      'action_two_url'=>['name'=>'action_two_url','type'=>'text'],
+
+      'heading_three'=>['name'=>'heading_three','type'=>'text'],
+      'action_three'=>['name'=>'action_three','type'=>'button'],
+      'action_three_text'=>['name'=>'action_three_text','type'=>'text'],
+      'action_three_url'=>['name'=>'action_three_url','type'=>'text'],
+
     ],
   ],
 
@@ -306,10 +346,15 @@ return(object) $blocks =[
     'sample' => 'about_it.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
-       'children'=>[
-        'heading'=>['name'=>'heading','type'=>'text'],
-        'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
-      ],
+      'sub_sections'=>['name'=>'sub_sections', 'type'=>'sub_sections',
+        'total_sections'=>4, 
+        'sub_sections'=>[
+                      'heading'=>['name'=>'heading','type'=>'text'],
+                      'icon'=>['name'=>'icon','type'=>'file'],
+                      'description'=>['name'=>'description','type'=>'text'],
+                    ],
+
+        ],
     ],
   ],
 
@@ -319,10 +364,24 @@ return(object) $blocks =[
     'sample' => 'motivation.png',
     'data' => [
        'children_one'=>[
-        'heading'=>['name'=>'heading','type'=>'text'],
-        'icone'=>['name'=>'icone','type'=>'file'],
-        'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
-        'action'=>['name'=>'action','type'=>'button'],
+        'heading_one'=>['name'=>'heading_one','type'=>'text'],
+        'icon_one'=>['name'=>'icon_one','type'=>'file'],
+        'sub_heading_one'=>['name'=>'sub_heading_one','type'=>'text'],
+
+        'action_one'=>['name'=>'action_one','type'=>'button'],
+        'action_one_text'=>['name'=>'action_one_text','type'=>'text'],
+        'action_one_url'=>['name'=>'action_one_url','type'=>'text'],
+
+
+        'heading_two'=>['name'=>'heading_two','type'=>'text'],
+        'icon_two'=>['name'=>'icon_two','type'=>'file'],
+        'sub_heading_two'=>['name'=>'sub_heading_two','type'=>'text'],
+
+        'action_two'=>['name'=>'action_two','type'=>'button'],
+        'action_two_text'=>['name'=>'action_two_text','type'=>'text'],
+        'action_two_url'=>['name'=>'action_two_url','type'=>'text'],
+
+
       ],
     ],
   ],
@@ -331,14 +390,10 @@ return(object) $blocks =[
 'project_by_category' => [
     'name' => 'project_by_category',
     'sample' => 'project_by_category.png',
-    'heading'=>['name'=>'heading','type'=>'text'],
-    'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
-    'data' => [
-       'children'=>[
-        'heading'=>['name'=>'heading','type'=>'text'],
-        'icone'=>['name'=>'icone','type'=>'file'],
-        'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
-       ],
+    'data' => [    
+      'heading'=>['name'=>'heading','type'=>'text'],
+      'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
+      'freelancing_categories'=>['name'=>'freelancing_categories', 'type'=>'records']
     ],
   ],
 
@@ -349,10 +404,28 @@ return(object) $blocks =[
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
       'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
-      'description'=>['name'=>'description','type'=>'text', 'class'=>'editor'],
       'image'=>['name'=>'image','type'=>'file'],
+      'sub_sections'=>['name'=>'sub_sections', 'type'=>'sub_sections',
+        'total_sections'=>1, 
+        'sub_sections'=>[
+                      'icon'=>['name'=>'icon','type'=>'file'],
+                      'heading'=>['name'=>'heading','type'=>'text'],
+                      'description'=>['name'=>'description','type'=>'text'],
+                    ],
+
+        ],
     ],
   ],
+
+  //Freelancing Projects
+   'freelancing_projects' => [
+    'name' => 'freelancing_projects',
+    'sample' => 'freelancing_projects.png',
+    'data' => [
+      'freelancing_projects'=>['name'=>'freelancing_projects','type'=>'records'],
+    ],
+  ],
+
 
   //Most Hired Developers
    'hired_developers' => [
@@ -361,39 +434,29 @@ return(object) $blocks =[
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
       'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
+      'freelancers'=>['name'=>'freelancers','type'=>'records'],
       'action'=>['name'=>'action','type'=>'button'],
-      //missed few cards in hired Developers//
+      'action_text'=>['name'=>'action_text','type'=>'text'],
+      'action_url'=>['name'=>'action_url','type'=>'text'],
     ],
   ],
 
   //Featured Projects for you
-  'feactured_projects' => [
-    'name' => 'feactured_projects',
-    'sample' => 'feactured_projects.png',
+  'freelancing_featured_projects' => [
+    'name' => 'freelancing_featured_projects',
+    'sample' => 'freelancing_featured_projects.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
       'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
+      'freelancing_projects'=>['name'=>'freelancing_projects','type'=>'records'],
 
-      //missed few cards in Featured Projects//
-    ],
-  ],
-
-  //Explore all investment opportunities
-  'investment_opportunities' => [
-    'name' => 'investment_opportunities',
-    'sample' => 'investment_opportunities.png',
-    'data' => [
-      'heading'=>['name'=>'heading','type'=>'text'],
-      'sub_heading'=>['name'=>'sub_heading','type'=>'text'],
-
-      //missed few cards in investment opportunities//
     ],
   ],
 
   //Get Our Complete1
-  'get_our_complete' => [
-    'name' => 'get_our_complete',
-    'sample' => 'get_our_complete.png',
+  'freelancer_guide' => [
+    'name' => 'freelancer_guide',
+    'sample' => 'freelancer_guide.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
       'sub_heading'=>['name'=>'sub_heading','type'=>'text'],

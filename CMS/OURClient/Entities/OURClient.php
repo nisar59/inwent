@@ -10,7 +10,7 @@ class OURClient extends Model
     use HasFactory;
 
     protected $fillable = ['image'];
-    protected $table='our_client';
+    protected $table='our_clients';
     
     protected static function newFactory()
     {
