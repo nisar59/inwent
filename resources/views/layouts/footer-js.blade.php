@@ -12,8 +12,8 @@
 <script src="{{asset('assets/plugins/tinymce/tinymce2.min.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- ///////////////////////sortable/////////////////////////////////////////// -->
-<script src="{{asset('assets/plugins/jquery-ui/ui/jquery-sortable.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery-ui/ui/Sortable.min.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery-ui/ui/jquery-sortable.js')}}"></script>
 <script src="{{asset('assets/js/script.js')}}"></script>
 <script src="{{asset('assets/js/functions.js')}}"></script>
 <script type="text/javascript">

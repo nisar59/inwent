@@ -33,7 +33,8 @@ class BlocksController extends Controller
             $res=[
             'success'=>false,
             'html'=>'',
-            'data'=>''
+            'data'=>'',
+            'error'=>null,
         ];
         try{
         $blocks=Blocks()->$key;
@@ -59,9 +60,11 @@ class BlocksController extends Controller
         return response()->json($res);
 
         } catch(Exception $e){
+            $res['error']=$e->getMessage();
         return response()->json($res);
 
         } catch(Throwable $e){
+            $res['error']=$e->getMessage();
         return response()->json($res);
         }
 
@@ -75,7 +78,24 @@ class BlocksController extends Controller
      */
     public function store(Request $req, $id)
     {
-        //
+        $data=$req->except('_token','file_name','block_name');
+        DB::beginTransaction();
+        try{
+        $res=Blocks::create([
+                'page_id'=>$id,
+                'block_name'=>$req->block_name,
+                'file_name'=>$req->file_name,
+                'data'=>json_encode($data),
+                'sort_by'=>1,
+        ]);
+        DB::commit();
+        return $res;
+        }catch(Exception $e){
+            return false;
+        }catch(Throwable $e){
+            return false;
+        }
+
     }
 
     /**

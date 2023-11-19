@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Freelancing\ProjectConfig\Entities\ProjectConfig;
 use Freelancing\Projects\Entities\Projects;
 use Freelancing\Projects\Entities\ProjectProposals;
+use Freelancing\Projects\Entities\ProjectMilestones;
 use Throwable;
 use Auth;
 use DB;
@@ -162,8 +163,8 @@ class ProjectsController extends Controller
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
-
-            $projects=Projects::all();
+            $user_id=InwntDecrypt(Auth::id());
+            $projects=Projects::whereNot('user_id', $user_id)->get();
 
             $data=[
                 'projects'=>$projects
@@ -204,7 +205,7 @@ class ProjectsController extends Controller
 
             $data=[
                 'user'=>Auth::user(),
-                'projects'=>$proposal
+                'proposal'=>$proposal
             ];
 
             $res=['success'=>true,'message'=>'Proposal successfully sent','errors'=>[],'data'=>$data];
@@ -228,9 +229,49 @@ class ProjectsController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function createMilestone(Request $req)
     {
-        return view('projects::edit');
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        DB::beginTransaction();
+        try {          
+            $user_id=InwntDecrypt(Auth::id()); 
+
+            $milestone=ProjectMilestones::create([
+                'project_id'=>$req->project_id,
+                'user_from'=>$user_id,
+                'user_to'=>$req->user_to,
+                'milstone_price'=>$req->milstone_price,
+                'expected_closing_date'=>$req->expected_closing_date,
+                'description'=>$req->description,
+                'agree_to_terms'=>$req->agree_to_terms,
+            ]);
+            $project=Projects::find($req->project_id);
+
+            $hired_freelancer=$roject->hired_freelancer;
+
+            $hired_freelancer[]=$req->user_to;
+            $project->hired_freelancer=$hired_freelancer;
+
+            $project->save();
+            
+            $data=[
+                'user'=>Auth::user(),
+                'milestone'=>$milestone
+            ];
+
+            $res=['success'=>true,'message'=>'Milestone successfully created and offer sent','errors'=>[],'data'=>$data];
+            DB::commit();
+             return response()->json($res);
+        } catch (Exception $e) {
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
     }
 
     /**

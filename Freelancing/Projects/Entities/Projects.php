@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Freelancing\ProjectConfig\Entities\ProjectConfig;
 use Freelancing\Projects\Entities\ProjectProposals;
+use Freelancing\Projects\Entities\ProjectMilestones;
 use App\Models\User;
 class Projects extends Model
 {
@@ -14,7 +15,7 @@ class Projects extends Model
     protected $table='freelancing_projects';
     protected $fillable = ['user_id','project_name','project_pic','type_of_work','servive','pricing_type','price','expert_type','industry','job_type','category','qualification','topic_area','experience','activity_type','project_duration','skill_level','job_title','description','deliverables','skills','area_experties','sub_area_experties','certifications','licenses_permits','additional_information_files','web_links','invited_freelancers','agree_to_terms','agree_to_get_offers','status'];
     
-    public $with=['user','type_of_work','servive','expert_type','industry', 'job_type', 'category', 'qualification', 'topic_area', 'experience', 'activity_type', 'project_duration', 'skill_level', 'purposals'];
+    public $with=['user','type_of_work','servive','expert_type','industry', 'job_type', 'category', 'qualification', 'topic_area', 'experience', 'activity_type', 'project_duration', 'skill_level', 'purposals', 'milestones'];
 
     public $appends=['all_deliverables', 'all_skills', 'all_area_experties', 'all_sub_area_experties', 'all_certifications', 'all_licenses_permits', 'all_invited_freelancers'];
 
@@ -64,7 +65,9 @@ class Projects extends Model
         return json_decode($value);
     }
 
-
+    public function getHiredFreelancerAttribute($value){
+        return json_decode($value);
+    }
 
 
     public function user()
@@ -180,6 +183,11 @@ class Projects extends Model
     public function purposals()
     {
        return $this->hasMany(ProjectProposals::class, 'project_id', 'id');
+    }
+
+    public function milestones()
+    {
+       return $this->hasMany(ProjectMilestones::class, 'project_id', 'id');
     }
 
 }

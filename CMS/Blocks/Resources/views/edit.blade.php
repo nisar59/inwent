@@ -1,70 +1,85 @@
-@extends('layouts.template')
-@section('content')
-<!-- Page Wrapper -->
-<div class="page-wrapper">
-    <div class="content container-fluid">
-        
-        <!-- Page Header -->
-        <div class="page-header">
-            <div class="row align-items-center">
-                <div class="col">
-                    <h3 class="page-title">Page</h3>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{url('pages')}}">Pages</a></li>
-                        <li class="breadcrumb-item active">Edit</li>
-                    </ul>
-                </div>
+<style>
+.tox-tinymce-aux {
+    z-index: 999999!important;
+}
+.tox .tox-menu{
+    background-color: white !important;
+}
+</style>
+<!-- sample modal content -->
+<div id="PageContentModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                    @php
+                    $block_name=ucfirst($data->block_name);
+                    @endphp
+                <h5 class="modal-title" id="myModalLabel1">{{str_replace('_', ' ',$block_name)}}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-        <!-- /Page Header -->
-        <div class="row">
-            <div class="col-sm-12">
-                <form action="{{url('pages/update/'.$pages->id)}}" method="POST" class="card">
-                    @csrf
-                    <div class="card-header p-3">
-                        <h5 class="card-title">Edit Page</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="">Title</label>
-                                <input type="text" name="title" id="title" class="form-control" value="{{$pages->title}}"  placeholder="Enter Title">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="">Slug</label>
-                                <input type="text" name="slug" id="slug" class="form-control" value="{{$pages->slug}}"  placeholder="Enter Slug">
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <label for="">Meta Title</label>
-                                <input type="text" name="meta_title" value="{{$pages->meta_title}}" class="form-control"  placeholder="Enter Title">
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <label for="">Meta Description</label>
-                                <textarea name="meta_description" class="form-control"  id="" cols="68" placeholder="Enter Description" rows="10">{{$pages->meta_description}}</textarea>
-                            </div>
+            <form action="{{url('admin/pages/blocks/update/'.$data->id)}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        @php
+                        $block_data=json_decode($data->data);
+                        @endphp
+                        @if(count($block['data'])>0)
+                        @foreach($block['data'] as $key=> $content)
+                        @php
+                        $label=str_replace('_',' ',$key);
+                        $blck_name=$content['name'];
+                        @endphp
+                        <div class="col-md-12">
+                            <label for="">{{ucfirst($label)}}</label>
+
+                            @if($content['type']=='table')
+
+                            @php
+                            $tble_data=\DB::table($blck_name)->where('status',1)->get();
+                            @endphp
+
+                            <select name="{{$blck_name}}" class="form-control" id="">
+                                <option value="">Select</option>
+                                @foreach($tble_data as $tbl)
+                                    <option value="{{$tbl->id}}" @if($block_data->$blck_name==$tbl->id) selected @endif>{{$tbl->name}}</option>
+                                @endforeach
+
+                            </select>
+
+                            @else
+
+                            <input type="{{$content['type']}}" class="form-control @if(isset($content['class'])) {{$content['class']}} @endif" name="{{$blck_name}}" placeholder="{{ucfirst($label)}}"
+                            @if($content['type']!="file" && isset($block_data->$blck_name)) value="{{$block_data->$blck_name}}" @endif
+                            >
+                            @if($content['type']=="file" && isset($block_data->$blck_name)){{$block_data->$blck_name}} @endif
+
+                            @endif
+
                         </div>
+                        @endforeach
+
+                        @else
+                        <p class="text-center">Customization is not required</p>
+                        @endif
                     </div>
-                    <div class="card-footer text-end">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-            
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit"
+                    class="btn btn-primary waves-effect waves-light">Save
+                    changes</button>
+                </div>
+            </form>
         </div>
+        <!-- /.modal-content -->
     </div>
+    <!-- /.modal-dialog -->
 </div>
-<!-- /Page Wrapper -->
-@endsection
-@section('js')
+<!-- /.modal -->
+
 <script type="text/javascript">
-$(document).ready(function() {
-$("#title").keyup(function() {
-var Text = $(this).val();
-Text = Text.toLowerCase();
-Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
-$("#slug").val(Text);
-});
-});
+InitEditor();
 </script>
-@endsection

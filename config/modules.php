@@ -15,9 +15,9 @@ return [
     */
 
     //'namespace' => 'CMS',
-    'namespace' => 'Common',
+    //'namespace' => 'Common',
     //'namespace' => 'Network',
-    //'namespace' => 'Freelancing',
+    'namespace' => 'Freelancing',
     //'namespace' => 'CrowdFunding',
 
     /*
@@ -76,9 +76,9 @@ return [
         */
 
         //'modules' => base_path('CMS'),
-        'modules' => base_path('Common'),
+        //'modules' => base_path('Common'),
         //'modules' => base_path('Network'),
-        //'modules' => base_path('Freelancing'),
+        'modules' => base_path('Freelancing'),
         //'modules' => base_path('CrowdFunding'),
 
         /*
