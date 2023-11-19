@@ -10,7 +10,7 @@ class KnowledgeBaseCategories extends Model
     use HasFactory;
 
     protected $fillable = ['title'];
-    protected $table='knowledge-base-categories';
+    protected $table='knowledge_base_categories';
     
     protected static function newFactory()
     {
