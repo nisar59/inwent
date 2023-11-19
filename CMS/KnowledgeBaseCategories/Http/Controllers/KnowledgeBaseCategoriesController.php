@@ -19,7 +19,7 @@ class KnowledgeBaseCategoriesController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $knowledge_base_categories=KnowledgeBaseCategories::select('*')->orderBy('id','ASC')->get();
+        $knowledge_base_categories=KnowledgeBaseCategories::orderBy('id','ASC')->get();
            return DataTables::of($knowledge_base_categories)
            ->addColumn('action',function ($row){
                $action='';

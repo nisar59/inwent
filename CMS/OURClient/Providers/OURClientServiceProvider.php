@@ -1,16 +1,16 @@
 <?php
 
-namespace CMS\OURClient\Providers;
+namespace CMS\OurClient\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class OURClientServiceProvider extends ServiceProvider
+class OurClientServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'OURClient';
+    protected $moduleName = 'OurClient';
 
     /**
      * @var string $moduleNameLower

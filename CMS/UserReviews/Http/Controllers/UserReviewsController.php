@@ -19,7 +19,7 @@ class UserReviewsController extends Controller
     public function index()
     {
          if (request()->ajax()) {
-        $userreviews=UserReviews::select('*')->orderBy('id','ASC')->get();
+        $userreviews=UserReviews::orderBy('id','ASC')->get();
            return DataTables::of($userreviews)
            ->addColumn('action',function ($row){
                $action='';

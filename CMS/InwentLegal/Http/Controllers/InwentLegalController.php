@@ -20,7 +20,7 @@ class InwentLegalController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $inwant_legal=InwentLegal::select('*')->orderBy('id','ASC')->get();
+        $inwant_legal=InwentLegal::orderBy('id','ASC')->get();
            return DataTables::of($inwant_legal)
            ->addColumn('action',function ($row){
                $action='';

@@ -10,7 +10,7 @@
                     <h3 class="page-title">Footer Menu</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{url('main-menu')}}">Footer Menu</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('footer-menu')}}">Footer Menu</a></li>
                         <li class="breadcrumb-item active">Create</li>
                     </ul>
                 </div>

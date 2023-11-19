@@ -19,7 +19,7 @@ class ActionBannerController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $banner=ActionBanner::select('*')->orderBy('id','ASC')->get();
+        $banner=ActionBanner::orderBy('id','ASC')->get();
            return DataTables::of($banner)
            ->addColumn('action',function ($row){
                $action='';
@@ -142,7 +142,7 @@ class ActionBannerController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
     }

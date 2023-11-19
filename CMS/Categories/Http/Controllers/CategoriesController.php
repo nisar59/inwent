@@ -19,7 +19,7 @@ class CategoriesController extends Controller
     public function index()
     {
          if (request()->ajax()) {
-        $categories=Categories::select('*')->orderBy('id','ASC')->get();
+        $categories=Categories::orderBy('id','ASC')->get();
            return DataTables::of($categories)
            ->addColumn('action',function ($row){
                $action='';

@@ -15,11 +15,6 @@
                         <li class="breadcrumb-item active">Users</li>
                     </ul>
                 </div>
-                <div class="col-auto">
-                    <a href="{{url('users/create')}}" class="btn btn-success btn-sm">
-                        <i class="fas fa-plus"></i>
-                    </a>
-                </div>
             </div>
         </div>
         <!-- /Page Header -->
@@ -34,7 +29,6 @@
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Status</th>
-                                        <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,14 +76,8 @@ $(document).ready(function() {
                 class:'text-center',
                 orderable:false,
                 searchable:false
-            },
-             {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                class: "d-flex justify-content-center w-auto",
-                searchable: false
-            }, ],
+            }, 
+            ],
         });
     }
     DataTableInit();

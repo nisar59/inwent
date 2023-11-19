@@ -20,18 +20,15 @@
     "SliderImages": true,
     "ProjectConfig": true,
     "Banner": true,
-
     "Projects": true,
     "Messages": true,
-
     "ActionBanner": true,
-    "OURClient": true,
     "Categories": true,
     "UserReviews": true,
     "Blog": true,
     "InwentLegal": true,
     "Blocks": true,
     "KnowledgeBaseCategories": true,
-    "KnowledgeBase": true
-
+    "KnowledgeBase": true,
+    "OurClient": true
 }

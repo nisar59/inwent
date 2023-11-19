@@ -8,7 +8,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">Professional Skills</h3>
+                    <h3 class="page-title">Professional Skill</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{url('professional-skills')}}">Professional Skills</a></li>
@@ -23,7 +23,7 @@
                 <form action="{{url('professional-skills/update/'.$professionalskills->id)}}" method="POST" class="card">
                     @csrf
                     <div class="card-header p-3">
-                        <h5 class="card-title">Edit Professional Skills</h5>
+                        <h5 class="card-title">Edit Professional Skill</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">

@@ -1,16 +1,16 @@
 <?php
 
-namespace CMS\OURClient\Http\Controllers;
+namespace CMS\OurClient\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use CMS\OURClient\Entities\OURClient;
+use CMS\OurClient\Entities\OurClient;
 use Throwable;
 use DataTables;
 use Auth;
 use DB;
-class OURClientController extends Controller
+class OurClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class OURClientController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $ourclinet=OURClient::select('*')->orderBy('id','ASC')->get();
+        $ourclinet=OurClient::orderBy('id','ASC')->get();
            return DataTables::of($ourclinet)
            ->addColumn('action',function ($row){
                $action='';
@@ -60,7 +60,7 @@ class OURClientController extends Controller
      */
     public function store(Request $req)
     {
-        $req->validate([
+          $req->validate([
             'images'=>'required',
             'images.*'=>'image|mimes:jpeg,png,jpg,gif,svg,|max:3048',
         ]);
@@ -75,7 +75,7 @@ class OURClientController extends Controller
              }
         }
         DB::commit();
-         return redirect('our-client')->with('success','Client Images successfully created');
+         return redirect('our-client')->with('success','Client successfully created');
         }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -104,7 +104,7 @@ class OURClientController extends Controller
     {
         return view('ourclient::edit');
     }
-    /**
+     /**
      * Update status.
      * @param int $id
      * @return Renderable
@@ -113,7 +113,7 @@ class OURClientController extends Controller
     {
         DB::beginTransaction();
         try{
-        $ourclient=OURClient::find($id);
+        $ourclient=OurClient::find($id);
 
         if($ourclient->status==1){
             $ourclient->status=0;
@@ -123,7 +123,7 @@ class OURClientController extends Controller
         }
         $ourclient->save();
         DB::commit();
-         return redirect('our-client')->with('success','Client status successfully updated');
+         return redirect('our-client')->with('success','Client Image status successfully updated');
          
          } catch(Exception $e){
             DB::rollback();
@@ -133,6 +133,7 @@ class OURClientController extends Controller
             return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
          }
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -154,7 +155,7 @@ class OURClientController extends Controller
     {
         DB::beginTransaction();
         try{
-        OURClient::find($id)->delete();
+        OurClient::find($id)->delete();
         DB::commit();
          return redirect('our-client')->with('success','Client successfully deleted');
          } catch(Exception $e){
