@@ -29,6 +29,5 @@
     "InwentLegal": true,
     "Blocks": true,
     "KnowledgeBaseCategories": true,
-    "KnowledgeBase": true,
-    "OurClient": true
+    "KnowledgeBase": true
 }
