@@ -21,7 +21,7 @@ class FooterMenuController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $footer_menu=FooterMenu::select('*')->orderBy('id','ASC')->get();
+        $footer_menu=FooterMenu::orderBy('id','ASC')->get();
            return DataTables::of($footer_menu)
            ->addColumn('action',function ($row){
                $action='';
@@ -50,6 +50,10 @@ class FooterMenuController extends Controller
                $target.='<span>Parent</span>';                
            }
                return $target;
+           })
+           ->addColumn('cms_footer_menu_heading_id',function ($row)
+           {
+               return $row->fetch_footermenuheading_name->heading;
            })
            ->rawColumns(['action','url_type','target'])
            ->make(true);

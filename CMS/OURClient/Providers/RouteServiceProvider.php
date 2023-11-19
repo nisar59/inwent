@@ -1,6 +1,6 @@
 <?php
 
-namespace CMS\OURClient\Providers;
+namespace CMS\OurClient\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $moduleNamespace = 'CMS\OURClient\Http\Controllers';
+    protected $moduleNamespace = 'CMS\OurClient\Http\Controllers';
 
     /**
      * Called before routes are registered.
@@ -49,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('OURClient', '/Routes/web.php'));
+            ->group(module_path('OurClient', '/Routes/web.php'));
     }
 
     /**
@@ -64,6 +64,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('OURClient', '/Routes/api.php'));
+            ->group(module_path('OurClient', '/Routes/api.php'));
     }
 }

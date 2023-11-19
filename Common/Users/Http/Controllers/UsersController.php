@@ -21,17 +21,7 @@ class UsersController extends Controller
         if (request()->ajax()) {
         $users=User::all();
            return DataTables::of($users)
-           ->addColumn('action',function ($row){
-               $action='';
-            if(Auth::user()->can('users')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('users/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
-           }
-           if(Auth::user()->can('users')){
-               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('users/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
-           }
-
-               return $action;
-           }) ->addColumn('status',function ($row){
+           ->addColumn('status',function ($row){
                $action='';
                if($row->status==0){
                    $action.='<a class="btn btn-success btn-sm m-1" href="'.url('users/status/'.$row->id).'">Active</a>';
@@ -40,7 +30,7 @@ class UsersController extends Controller
                 }
                return $action;
            })
-           ->rawColumns(['action','status'])
+           ->rawColumns(['status'])
            ->make(true);
         }
         return view('users::index');
@@ -132,6 +122,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
     }
 }

@@ -8,10 +8,10 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">Page</h3>
+                    <h3 class="page-title">Admins</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{url('pages')}}">Pages</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('admins')}}">Admins</a></li>
                         <li class="breadcrumb-item active">Create</li>
                     </ul>
                 </div>
@@ -20,28 +20,33 @@
         <!-- /Page Header -->
         <div class="row">
             <div class="col-sm-12">
-                <form action="{{url('pages/store')}}" method="POST" class="card">
+                <form action="{{url('admins/store')}}" method="POST" class="card">
                     @csrf
                     <div class="card-header p-3">
-                        <h5 class="card-title">Add Page</h5>
+                        <h5 class="card-title">Add Admin</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label for="">Title</label>
-                                <input type="text" name="title" id="title" class="form-control"  placeholder="Enter Title">
+                                <label for="">Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Name">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="">Slug</label>
-                                <input type="text" name="slug" id="slug" class="form-control"  placeholder="Enter Slug">
+                                <label for="">Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="Email">
                             </div>
-                            <div class="col-md-12 form-group">
-                                <label for="">Meta Title</label>
-                                <input type="text" name="meta_title" class="form-control"  placeholder="Enter Title">
+                            <div class="col-md-6 form-group">
+                                <label for="">Password</label>
+                                <input type="text" name="password" class="form-control" placeholder="Password">
                             </div>
-                            <div class="col-md-12 form-group">
-                                <label for="">Meta Description</label>
-                                <textarea name="meta_description" class="form-control"  id="" cols="68" placeholder="Enter Description" rows="10"></textarea>
+                            <div class="col-md-6 form-group">
+                                <label for="">Role</label>
+                                <select name="role" class="form-control">
+                                    <option value="">Select a Role</option>
+                                    @foreach($roles as $role)
+                                    <option value="{{$role->name}}">{{$role->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -59,12 +64,6 @@
 @section('js')
 <script type="text/javascript">
 $(document).ready(function() {
-$("#title").keyup(function() {
-var Text = $(this).val();
-Text = Text.toLowerCase();
-Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
-$("#slug").val(Text);
-});
 });
 </script>
 @endsection

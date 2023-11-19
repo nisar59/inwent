@@ -20,7 +20,7 @@ class KnowledgeBaseController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $knowledge_base=KnowledgeBase::select('*')->orderBy('id','ASC')->get();
+        $knowledge_base=KnowledgeBase::orderBy('id','ASC')->get();
            return DataTables::of($knowledge_base)
            ->addColumn('action',function ($row){
                $action='';

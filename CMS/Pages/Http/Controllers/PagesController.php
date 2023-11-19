@@ -19,7 +19,7 @@ class PagesController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $pages=Pages::select('*')->orderBy('id','ASC')->get();
+        $pages=Pages::orderBy('id','ASC')->get();
            return DataTables::of($pages)
            ->addColumn('action',function ($row){
                $action='';

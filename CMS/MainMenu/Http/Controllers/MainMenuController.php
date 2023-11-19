@@ -20,7 +20,7 @@ class MainMenuController extends Controller
     public function index()
     {
          if (request()->ajax()) {
-        $main_menu=MainMenu::select('*')->orderBy('id','ASC')->get();
+        $main_menu=MainMenu::orderBy('id','ASC')->get();
            return DataTables::of($main_menu)
            ->addColumn('action',function ($row){
                $action='';

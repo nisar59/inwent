@@ -19,7 +19,7 @@ class SliderImagesController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $slider=SliderImages::select('*')->orderBy('id','ASC')->get();
+        $slider=SliderImages::orderBy('id','ASC')->get();
            return DataTables::of($slider)
            ->addColumn('action',function ($row){
                $action='';

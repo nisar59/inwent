@@ -19,7 +19,7 @@ class BannerController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $banner=Banner::select('*')->orderBy('id','ASC')->get();
+        $banner=Banner::orderBy('id','ASC')->get();
            return DataTables::of($banner)
            ->addColumn('action',function ($row){
                $action='';

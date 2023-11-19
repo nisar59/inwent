@@ -34,7 +34,7 @@ $prefix=request()->route()->getPrefix();
 						<li><a class="@if($prefix=='/sliders') active @endif" href="{{url('sliders')}}">Sliders</a></li>
 						<li><a class="@if($prefix=='/banner') active @endif" href="{{url('banner')}}">Banner</a></li>
 						<li><a class="@if($prefix=='/action-banner') active @endif" href="{{url('action-banner')}}">Action Banner</a></li>
-						<li><a class="@if($prefix=='/our-client') active @endif" href="{{url('our-client')}}">OUR Client</a></li>
+						<li><a class="@if($prefix=='/our-client') active @endif" href="{{url('our-client')}}">Our Client</a></li>
 						<li><a class="@if($prefix=='/categories') active @endif" href="{{url('categories')}}">Categories</a></li>
 						<li><a class="@if($prefix=='/user-reviews') active @endif" href="{{url('user-reviews')}}">User Reviews</a></li>
 						<li><a class="@if($prefix=='/inwent-legal') active @endif" href="{{url('inwent-legal')}}">Inwent Legal</a></li>

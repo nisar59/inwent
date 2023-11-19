@@ -19,7 +19,7 @@ class ProfessionalToolsController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $professionaltools=ProfessionalTools::select('*')->orderBy('id','ASC')->get();
+        $professionaltools=ProfessionalTools::orderBy('id','ASC')->get();
            return DataTables::of($professionaltools)
            ->addColumn('action',function ($row){
                $action='';
@@ -79,7 +79,7 @@ class ProfessionalToolsController extends Controller
         try{
             ProfessionalTools::create($req->except('_token'));
             DB::commit();
-            return redirect('professional-tools')->with('success','Professional Tools successfully created');
+            return redirect('professional-tools')->with('success','Professional Tool successfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -116,7 +116,7 @@ class ProfessionalToolsController extends Controller
         }
         $professionaltools->save();
         DB::commit();
-         return redirect('professional-tools')->with('success','Professional Tools status successfully updated');
+         return redirect('professional-tools')->with('success','Professional Tool status successfully updated');
          
          } catch(Exception $e){
             DB::rollback();
@@ -154,7 +154,7 @@ class ProfessionalToolsController extends Controller
         try{
             ProfessionalTools::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('professional-tools')->with('success','Professional Tools successfully Updated');
+            return redirect('professional-tools')->with('success','Professional Tool successfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -177,7 +177,7 @@ class ProfessionalToolsController extends Controller
         try{
         ProfessionalTools::find($id)->delete();
         DB::commit();
-         return redirect('professional-tools')->with('success','Professional Tools successfully deleted');
+         return redirect('professional-tools')->with('success','Professional Tool successfully deleted');
          } catch(Exception $e){
             DB::rollback();
             return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());

@@ -19,7 +19,7 @@ class BlogController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $blog=Blog::select('*')->orderBy('id','ASC')->get();
+        $blog=Blog::orderBy('id','ASC')->get();
            return DataTables::of($blog)
            ->addColumn('action',function ($row){
                $action='';
