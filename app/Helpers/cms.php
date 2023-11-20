@@ -8,7 +8,7 @@ return(object) $blocks =[
     'sample' => 'our_clients.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
-      'our_clients'=>['name'=>'our_clients','type'=>'records'],
+      'our_clients'=>['name'=>'our_clients','type'=>'records', 'entity'=>'CMS\OurClient\Entities\OurClient'],
       'action'=>['name'=>'action','type'=>'button'],
       'action_text'=>['name'=>'action_text','type'=>'text'],
       'action_url'=>['name'=>'action_url','type'=>'text'],

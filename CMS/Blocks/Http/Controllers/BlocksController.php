@@ -162,6 +162,7 @@ class BlocksController extends Controller
           foreach ($blocks['data'] as $key => $blck) {
             $block_name=$blck['name'];
             $block_type=$blck['type'];
+            $entity=isset($blck['entity']) ? $blck['entity'] : null;
 
             if($block_type=="file"){
                     if($req->$block_name!=null){
@@ -217,6 +218,26 @@ class BlocksController extends Controller
 
 
             }
+
+
+
+
+
+            elseif($block_type=="records"){
+                $lmt=is_int((int)$req->$block_name) ? (int)$req->$block_name : 10;
+
+                $rec=[];
+                if($entity!=null && $lmt!=0){
+                    $rec=$entity::orderBy('id', 'desc')->limit($lmt)->get()->toArray();
+                }
+
+                $data[$block_name]=$req->$block_name;
+                $data['records']=$rec;
+
+
+            }
+
+
 
 
 

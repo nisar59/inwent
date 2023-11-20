@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Common\Countries\Entities\Countries;
 use Common\States\Entities\States;
 use Common\Cities\Entities\Cities;
+use CMS\Pages\Entities\Pages;
 use Auth;
 use DB;
 use Throwable;
@@ -69,5 +70,44 @@ class CommonController extends Controller
                 return response()->json($res);
         } 
     }
+
+
+
+
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function setup()
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {   
+
+            $setup=Settings();
+            $pages=Pages::all();
+            $data=[               
+                'setup'=>$setup,
+                'pages'=>$pages,
+            ];
+
+            $res=['success'=>true,'message'=>'setup successfully fetched','errors'=>[],'data'=>$data];
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+
+
+
+
+
+
 
 }

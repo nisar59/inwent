@@ -1,5 +1,6 @@
 <?php
 use Common\Countries\Entities\Countries;
+use Common\Settings\Entities\Settings;
 use Common\Cities\Entities\Cities;
 
 
@@ -75,4 +76,9 @@ function ButtonTypes()
 		'btn btn-link'=>'Link',
 	];
 	return $Colortypes;
+}
+
+function Settings()
+{
+	return Settings::first();
 }

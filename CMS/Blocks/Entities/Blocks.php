@@ -11,7 +11,7 @@ class Blocks extends Model
 
     protected $fillable = ['page_id','block_name','file_name','data','sort_by'];
     protected $table='page_blocks';
-    
+
     protected static function newFactory()
     {
         return \CMS\Blocks\Database\factories\BlocksFactory::new();
