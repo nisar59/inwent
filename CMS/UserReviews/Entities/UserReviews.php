@@ -10,7 +10,7 @@ class UserReviews extends Model
     use HasFactory;
 
     protected $fillable = ['name','designation','image','review'];
-    protected $table='user-reviews';
+    protected $table='user_reviews';
     
     protected static function newFactory()
     {

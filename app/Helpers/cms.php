@@ -308,8 +308,8 @@ return(object) $blocks =[
 
   //News & Articles
   'news_articles' => [
-    'name' => 'new_articles',
-    'sample' => 'new_articles.png',
+    'name' => 'news_articles',
+    'sample' => 'news_articles.png',
     'data' => [
       'heading_one'=>['name'=>'heading_one','type'=>'text'],
       'action_one'=>['name'=>'action_one','type'=>'button'],

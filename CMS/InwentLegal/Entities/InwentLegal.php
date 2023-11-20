@@ -10,7 +10,7 @@ class InwentLegal extends Model
     use HasFactory;
 
     protected $fillable = ['title','slug','effective_date','summary_of_changes','description'];
-    protected $table='inwent-legal';
+    protected $table='inwent_legal';
     protected static function newFactory()
     {
         return \CMS\InwentLegal\Database\factories\InwentLegalFactory::new();
