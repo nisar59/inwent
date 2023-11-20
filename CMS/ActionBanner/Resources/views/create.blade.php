@@ -39,28 +39,29 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="">Description</label>
-                                <textarea name="description" class="form-control"  id="" cols="68" placeholder="Enter Description" rows="10"></textarea>
+                                <input type="text" name="description" class="form-control" placeholder="Enter Description">
                             </div>
-                            <div class="col-md-11 form-group">
-                                <label for="">Text</label>
-                                <input type="text" name="text" class="form-control"  placeholder="Enter Text">
+
+                            <div class="col-12 mt-2 row m-0">
+                                <div class="d-flex col-12 justify-content-between p-0">
+                                   <h6 class="fw-bold">Stats</h6>
+                                <button class="btn btn-success button_two" type="button"><i class="fas fa-plus"></i></button>
+                                </div>                            
+
+                                <div class="col-12" id="wrapper_two"></div>
+                                <span class="col-12 border mt-1 mb-1"></span>
                             </div>
-                            <div class="col-md-1">
-                                <button class="btn btn-success add_button" style="margin-top: 24px;" type="button"><i class="fas fa-plus"></i></button>
+
+                            <div class="col-12 row m-0">
+                                <div class="d-flex col-12 justify-content-between p-0">
+                                     <h6 class="fw-bold">Actions</h6>
+                                    <button class="btn btn-success add_button" type="button"><i class="fas fa-plus"></i></button>
+                                </div>                            
+
+                                <div class="col-12" id="field_wrapper"></div>
                             </div>
-                            <div class="col-12" id="field_wrapper">
-                                
-                            </div>
-                            <div class="col-md-11 form-group">
-                                <label for="">Stats</label>
-                                <input type="text" name="stats" class="form-control"  placeholder="Enter Stats">
-                            </div>
-                            <div class="col-md-1">
-                                <button class="btn btn-success button_two" style="margin-top: 24px;" type="button"><i class="fas fa-plus"></i></button>
-                            </div>
-                            <div class="col-12" id="wrapper_two">
-                                
-                            </div>
+
+
                         </div>
                     </div>
                     <div class="card-footer text-end">
@@ -79,31 +80,44 @@ $(document).ready(function(){
 var addButton = $('.add_button');
 var wrapper = $('#field_wrapper');
 $(addButton).click(function(){
+
 var indx=0;
 if($("#field_wrapper .row").length>0){
 var row=$("#field_wrapper .row").last();
 indx=row.data('index')+1;
 }
-var fieldHTML = `<div class="row" data-index="`+indx+`"><div class="col-md-5">
-    <label for="">URL</label>
-    <input type="text" class="form-control" name="text_actions[`+indx+`][url]" placeholder="Enter URL">
+var fieldHTML = `<div class="row" data-index="`+indx+`">
+<div class="col-md-4">
+    <label for="">Action URL</label>
+    <input type="text" class="form-control" name="actions[`+indx+`][url]" placeholder="Enter action url">
 </div>
-<div class="col-md-6">
+
+<div class="col-md-4">
+    <label for="">Action Text</label>
+    <input type="text" class="form-control" name="actions[`+indx+`][text]" placeholder="Enter action text">
+</div>
+
+<div class="col-md-3">
     <label for="">Button Type</label>
-    <select name="text_actions[`+indx+`][btn_type]" class="form-control">
+    <select name="actions[`+indx+`][type]" class="form-control">
         <option>Select Button</option>
         @foreach(ButtonTypes() as $key=> $colr)
         <option value="{{$key}}">{{$colr}}</option>
         @endforeach
     </select>
-</div><div class="col-md-1">
-<button class="btn btn-danger remove_button" style="margin-top: 24px;" type="button"><i class="fa fa-trash "></i></button>
+</div>
+<div class="col-md-1">
+<label for="">Action</label>
+<button class="btn btn-danger remove_button" type="button"><i class="fa fa-trash "></i></button>
 </div></div> `;
 $(wrapper).append(fieldHTML);
 });
 $(wrapper).on('click', '.remove_button', function(e){
 $(this).closest('.row').remove();
 });
+
+
+
 /// Add Stats///
 var btn_two = $('.button_two');
 var w_two = $('#wrapper_two');
@@ -113,15 +127,17 @@ if($("#field_wrapper .row").length>0){
 var row=$("#field_wrapper .row").last();
 indx=row.data('index')+1;
 }
-var fieldHTML = `<div class="row" data-index="`+indx+`"><div class="col-md-5">
+var fieldHTML = `<div class="row" data-index="`+indx+`">
+<div class="col-md-5">
 <label for="">Title</label>
-<input type="text" class="form-control" name="stats_actions[`+indx+`][title]" placeholder="Enter Title">
+<input type="text" class="form-control" name="stats[`+indx+`][title]" placeholder="Enter Title">
 </div>
 <div class="col-md-6">
 <label for="">Description</label>
-<textarea name="stats_actions[`+indx+`][description]" class="form-control"  id="" cols="68" placeholder="Enter Description" rows="10"></textarea>
+<input name="stats[`+indx+`][description]" class="form-control" placeholder="Enter Description">
 </div><div class="col-md-1">
-<button class="btn btn-danger remove_btn" style="margin-top: 24px;" type="button"><i class="fa fa-trash "></i></button>
+<label for="">Action</label>
+<button class="btn btn-danger remove_btn" type="button"><i class="fa fa-trash "></i></button>
 </div></div> `;
 $(w_two).append(fieldHTML);
 });
@@ -129,5 +145,7 @@ $(w_two).on('click', '.remove_btn', function(e){
 $(this).closest('.row').remove();
 });
 });
+
+
 </script>
 @endsection

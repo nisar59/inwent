@@ -25,12 +25,12 @@ $prefix=request()->route()->getPrefix();
 					</ul>
 				</li>
 
-				<li class="submenu @if($prefix=='/pages' OR $prefix=='/main-menu'OR $prefix=='/footer-menu-headings' OR $prefix=='/sliders' OR $prefix=='/banner' OR $prefix=='/action-banner' OR $prefix=='/our-client'OR $prefix=='/categories' OR $prefix=='/user-reviews' OR $prefix=='/inwent-legal' OR $prefix=='/blog' OR $prefix=='/knowledge-base-categories') active @endif">
+				<li class="submenu @if($prefix=='/pages' OR $prefix=='/main-menu' OR $prefix=='/footer-menu-headings' OR $prefix=='/footer-menu' OR $prefix=='/sliders' OR $prefix=='/banner' OR $prefix=='/action-banner' OR $prefix=='/our-client'OR $prefix=='/categories' OR $prefix=='/user-reviews' OR $prefix=='/inwent-legal' OR $prefix=='/blog' OR $prefix=='/knowledge-base-categories') active @endif">
 					<a href="javascript:void(0)"><i class="fa fa-database"></i> <span>CMS</span> <span class="menu-arrow"></span></a>
 					<ul>
 						<li><a class="@if($prefix=='/pages') active @endif" href="{{url('pages')}}">Pages</a></li>
 						<li><a class="@if($prefix=='/main-menu') active @endif" href="{{url('main-menu')}}">Main Menu</a></li>
-						<li><a class="@if($prefix=='/footer-menu-headings') active @endif" href="{{url('footer-menu-headings')}}">Footer Menu Headings</a></li>
+						<li><a class="@if($prefix=='/footer-menu-headings' OR $prefix=='/footer-menu') active @endif" href="{{url('footer-menu-headings')}}">Footer Menu</a></li>
 						<li><a class="@if($prefix=='/sliders') active @endif" href="{{url('sliders')}}">Sliders</a></li>
 						<li><a class="@if($prefix=='/banner') active @endif" href="{{url('banner')}}">Banner</a></li>
 						<li><a class="@if($prefix=='/action-banner') active @endif" href="{{url('action-banner')}}">Action Banner</a></li>

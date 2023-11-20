@@ -31,7 +31,7 @@ class ActionBannerController extends Controller
                 })
            ->addColumn('status',function ($row){
                $action='';
-               if($row->status==0){
+               if($row->status==1){
                    $action.='<a class="btn btn-success btn-sm m-1" href="'.url('action-banner/status/'.$row->id).'">Active</a>';
                 }else{
                    $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('action-banner/status/'.$row->id).'">Deactive</a>';
@@ -65,16 +65,14 @@ class ActionBannerController extends Controller
             'sub_title'=>'required',
             'image'=>'required',
             'description'=>'required',
-            'text'=>'required',
-            'stats'=>'required',
         ]);
           DB::beginTransaction();
          try{
-            $path='cms/actionbanner';
+            $path='cms/action-banner';
             $inputs=$req->except('_token');
             $inputs['image']=FileUpload($req->image,$path);
-            $inputs['text_actions']=json_encode($req->text_actions);
-            $inputs['stats_actions']=json_encode($req->stats_actions);
+            $inputs['stats']=json_encode($req->stats);
+            $inputs['actions']=json_encode($req->actions);
             ActionBanner::create($inputs);
             DB::commit();
             return redirect('action-banner')->with('success','Action Banner sccessfully created');

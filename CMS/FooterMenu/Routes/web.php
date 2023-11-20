@@ -12,8 +12,35 @@
 */
 
 
+Route::group(['prefix'=>'footer-menu-headings', 'middleware'=>['permission:footer-menu.view']],function() {
+    Route::get('/', 'FooterMenuController@headingIndex');
+});
+
+
+Route::group(['prefix'=>'footer-menu-headings', 'middleware'=>['permission:footer-menu.create']],function() {
+    Route::get('/create', 'FooterMenuController@headingCreate');
+    Route::post('/store', 'FooterMenuController@headingStore');
+});
+
+Route::group(['prefix'=>'footer-menu-headings', 'middleware'=>['permission:footer-menu.edit']],function() {
+    Route::get('/edit/{id}', 'FooterMenuController@headingEdit');
+    Route::POST('/update/{id}', 'FooterMenuController@headingUpdate');
+    Route::get('/status/{id}', 'FooterMenuController@headingStatus');
+});
+Route::group(['prefix'=>'footer-menu-headings', 'middleware'=>['permission:footer-menu.delete']],function() {
+    Route::get('/destroy/{id}', 'FooterMenuController@headingDestroy');
+});
+
+
+
+
+
+/*///////////////////////////////////////////////////// Menu ///////////////////////////////////////////*/
+
+
+
 Route::group(['prefix'=>'footer-menu', 'middleware'=>['permission:footer-menu.view']],function() {
-    Route::get('/', 'FooterMenuController@index');
+    Route::get('/{id}', 'FooterMenuController@index');
 });
 
 

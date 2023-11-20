@@ -1,6 +1,6 @@
 <?php
 
-namespace CMS\SliderImages\Entities;
+namespace CMS\Sliders\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +14,6 @@ class SliderImages extends Model
     
     protected static function newFactory()
     {
-        return \CMS\SliderImages\Database\factories\SliderImagesFactory::new();
+        return \CMS\Sliders\Database\factories\SliderImagesFactory::new();
     }
 }

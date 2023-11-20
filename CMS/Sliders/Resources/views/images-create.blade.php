@@ -18,20 +18,23 @@
         <!-- /Page Header -->
         <div class="row">
             <div class="col-sm-12">
-                <form action="{{url('slider-images/store')}}" method="POST" class="card" enctype="multipart/form-data">
+                <form action="{{url('sliders/images/store')}}" method="POST" class="card" enctype="multipart/form-data">
                     @csrf
                     <div class="card-header p-3">
                         <h5 class="card-title">Add Slider Images</h5>
                     </div>
                     <div class="card-body">
                         <input type="text" hidden name="slider_id" value="{{request()->route('id')}}">
-                        <div class="row field_wrapper">
-                            <div class="col-md-11">
-                                <label for="">Image</label>
-                                <input type="file" class="form-control" name="images[]" placeholder="Enter Text">
-                            </div>
-                            <div class="col-md-1">
-                                <button class="btn btn-success add_button" style="margin-top: 24px;" type="button"><i class="fas fa-plus "></i></button>
+                        <div class="field_wrapper">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <label for="">Image</label>
+                                    <input type="file" class="form-control" name="images[]" placeholder="Enter Text">
+                                </div>
+                                <div class="col-md-1">
+                                    <label for="">Action</label>
+                                    <button class="btn btn-success add_button" type="button"><i class="fas fa-plus "></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -51,24 +54,22 @@
     var maxField = 10;
     var addButton = $('.add_button');
     var wrapper = $('.field_wrapper');
-    var fieldHTML = `<div><div class="row" id="removeall"><div class="col-md-10">
+
+    var fieldHTML = `<div class="row" id="removeall"><div class="col-md-11">
         <label for="">Image</label>
         <input type="file" class="form-control" name="images[]" placeholder="Enter Text">
     </div>
-    <div class="col-md-2">
-        <button class="btn btn-danger remove_button" style="margin-top: 24px;" type="button"><i class="fa fa-trash "></i></button>
-    </div></div></div>`;
-    var x = 1;
+    <div class="col-md-1">
+        <label for="">Action</label>
+        <button class="btn btn-danger remove_button" type="button"><i class="fa fa-trash "></i></button>
+    </div></div>`;
+
+
     $(addButton).click(function(){
-    if(x < maxField){
-    x++;
-    $(wrapper).append(fieldHTML);
-    }
+        $(wrapper).append(fieldHTML);
     });
     $(wrapper).on('click', '.remove_button', function(e){
-    /*$(this).parent('#removeall').remove();*/
-    $(this).closest('#removeall').remove();
-    x--;
+        $(this).closest('#removeall').remove();
     });
     });
     </script>

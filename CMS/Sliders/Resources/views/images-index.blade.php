@@ -16,7 +16,7 @@
                     </ul>
                 </div>
                 <div class="col-auto">
-                    <a href="{{url('slider-images/create')}}" class="btn btn-success btn-sm">
+                    <a href="{{url('sliders/images/create', request()->route('id'))}}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i>
                     </a>
                 </div>
@@ -59,7 +59,7 @@ $(document).ready(function() {
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{url('slider-images')}}",
+                url: "{{url('sliders/images', request()->route('id'))}}",
                 data: data,
             },
             buttons: [],

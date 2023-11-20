@@ -30,3 +30,19 @@ Route::group(['prefix'=>'sliders', 'middleware'=>['permission:sliders.edit']],fu
 Route::group(['prefix'=>'sliders', 'middleware'=>['permission:sliders.delete']],function() {
     Route::get('/destroy/{id}', 'SlidersController@destroy');
 });
+
+/*/////////////////////////////// Images ///////////////////////////////////////////////////////////*/
+
+Route::group(['prefix'=>'sliders/images', 'middleware'=>['permission:sliders.view']],function() {
+    Route::get('/{id}', 'SlidersController@sliderImages');
+});
+
+
+Route::group(['prefix'=>'sliders/images', 'middleware'=>['permission:sliders.create']],function() {
+    Route::get('/create/{id}', 'SlidersController@sliderImagesCreate');
+    Route::post('/store', 'SlidersController@sliderImagesStore');
+});
+
+Route::group(['prefix'=>'sliders/images', 'middleware'=>['permission:sliders.delete']],function() {
+    Route::get('/destroy/{id}', 'SlidersController@sliderImagesDestroy');
+});

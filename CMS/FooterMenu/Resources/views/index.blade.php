@@ -16,7 +16,7 @@
                     </ul>
                 </div>
                 <div class="col-auto">
-                    <a href="{{url('footer-menu/create')}}" class="btn btn-success btn-sm">
+                    <a href="{{url('footer-menu/create',request()->route('id'))}}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i>
                     </a>
                 </div>
@@ -63,7 +63,7 @@ $(document).ready(function() {
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{url('footer-menu')}}",
+                url: "{{url('footer-menu', request()->route('id'))}}",
                 data: data,
             },
             buttons: [],

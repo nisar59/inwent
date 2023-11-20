@@ -5,6 +5,9 @@ namespace CMS\Pages\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use CMS\ActionBanner\Entities\ActionBanner;
+use CMS\Sliders\Entities\Sliders;
+use CMS\Banner\Entities\Banner;
 use CMS\Pages\Entities\Pages;
 use Throwable;
 use DataTables;
@@ -46,7 +49,11 @@ class PagesController extends Controller
      */
     public function create()
     {
-        return view('pages::create');
+        $sliders=Sliders::where('status', 1)->get();
+        $banners=Banner::where('status', 1)->get();
+        $action_banners=ActionBanner::where('status', 1)->get();
+
+        return view('pages::create', compact('sliders', 'banners','action_banners'));
     }
 
     /**
@@ -57,6 +64,8 @@ class PagesController extends Controller
     public function store(Request $req)
     {
         $req->validate([
+            'slider_banner_type'=>'required',
+            'slider_banner_id'=>'required',
             'title'=>'required',
             'slug'=>'required',
             'meta_title'=>'required',
@@ -95,8 +104,11 @@ class PagesController extends Controller
      */
     public function edit($id)
     {
-        $pages=Pages::find($id);
-        return view('pages::edit',compact('pages'));
+        $page=Pages::find($id);
+        $sliders=Sliders::where('status', 1)->get();
+        $banners=Banner::where('status', 1)->get();
+        $action_banners=ActionBanner::where('status', 1)->get();
+        return view('pages::edit',compact('page', 'sliders', 'banners', 'action_banners'));
     }
 
     /**
@@ -107,12 +119,15 @@ class PagesController extends Controller
      */
     public function update(Request $req, $id)
     {
-         $req->validate([
+        $req->validate([
+            'slider_banner_type'=>'required',
+            'slider_banner_id'=>'required',
             'title'=>'required',
             'slug'=>'required',
             'meta_title'=>'required',
             'meta_description'=>'required',
         ]);
+        
         DB::beginTransaction();
         try{
             Pages::find($id)->update($req->except('_token'));

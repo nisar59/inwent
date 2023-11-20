@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ActionBanner extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['title','sub_title','image','description','text','text_actions','stats','stats_actions'];
+    
     protected $table='action_banner';
+
+    protected $fillable = ['title','sub_title','image','description','stats','actions'];
     
     protected static function newFactory()
     {

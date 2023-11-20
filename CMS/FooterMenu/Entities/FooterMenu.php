@@ -4,7 +4,7 @@ namespace CMS\FooterMenu\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use CMS\FooterMenuHeadings\Entities\FooterMenuHeadings;
+use CMS\FooterMenu\Entities\FooterMenuHeadings;
 
 class FooterMenu extends Model
 {
@@ -17,7 +17,7 @@ class FooterMenu extends Model
     {
         return \CMS\FooterMenu\Database\factories\FooterMenuFactory::new();
     }
-     public function fetch_footermenuheading_name()
+     public function menuheading()
     {
     	return $this->belongsTo(FooterMenuHeadings::class,'cms_footer_menu_heading_id','id');
     }
