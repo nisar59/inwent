@@ -1,4 +1,4 @@
-@extends('layouts.template')
+ @extends('layouts.template')
 @section('content')
 
 @section('css')
@@ -41,11 +41,12 @@
         <div class="row">
             <div class="col-6 col-md-6">
                 <div class="card card-primary">
-                    <div class="card-header bg-white">
-                        <h4>Page Sections</h4>
+                    <div class="card-header bg-white p-3">
+                        <h4 class="card-title">Page Sections</h4>
                     </div>
                     <div class="card-body">
-                        <ol class="p-0" id="page-sections" style="height:20vh">
+                        <ol class="p-0" id="page-sections" style="height:100vh">
+                            @if($page->blocks->count()>0)
                             @foreach($page->blocks as $pb)
                             @php
                             $block_name=ucfirst($pb->block_name);
@@ -58,16 +59,18 @@
                                 <input type="hidden" name="sections[]" class="section" value="{{$pb->block_name}}">
                             </li>
                             @endforeach
+                            @else
+                                <p id="empty-block" class="text-center">There is no block in this page, drag blocks from right container and drop here to add in this page.</p>
+                            @endif
                         </ol>
                     </div>
                 </div>
             </div>
             <div class="col-6 col-md-6">
                 <div class="card card-primary">
-                    <div class="card-header bg-white pb-0 mb-0">
-                        <h4>Sections</h4>
+                    <div class="card-header bg-white p-3">
+                        <h4 class="card-title">Sections</h4>
                         <p class="m-0">Drag the section to the left side you want to show on the page.</p>
-                        <hr class="mb-0">
                     </div>
                     <div class="card-body">
                         
@@ -121,7 +124,8 @@ $("#page-sections").sortable({
     group: 'shared', // To clone: set pull to 'clone'
     animation: 150,
     onAdd: function( event ) {
-            AddSectionData(event);
+        $("#empty-block").remove();
+        AddSectionData(event);
     }
 });
 

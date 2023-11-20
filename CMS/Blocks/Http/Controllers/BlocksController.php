@@ -247,6 +247,21 @@ class BlocksController extends Controller
      */
     public function destroy($id)
     {
-        //
+     
+        DB::beginTransaction();
+        try{
+          $block=Blocks::find($id);
+          $block->delete();
+          DB::commit();
+          return redirect()->back()->with('success', "Block Successfully delete");
+      }catch(Exception $e){
+          return redirect()->back()->with('error', "Something went wrong with this error: ".$e->getMessage());
+
+      }catch(Throwable $e){
+          return redirect()->back()->with('error', "Something went wrong with this error: ".$e->getMessage());
+      }
+           
+
+
     }
 }
