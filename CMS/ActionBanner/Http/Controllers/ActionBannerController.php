@@ -105,11 +105,11 @@ class ActionBannerController extends Controller
         try{
         $act_banner=ActionBanner::find($id);
 
-        if($act_banner->status==1){
-            $act_banner->status=0;
+        if($act_banner->status==0){
+            $act_banner->status=1;
         }
         else{
-            $act_banner->status=1;
+            $act_banner->status=0;
         }
         $act_banner->save();
         DB::commit();

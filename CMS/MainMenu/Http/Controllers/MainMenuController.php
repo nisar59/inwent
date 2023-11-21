@@ -52,7 +52,7 @@ class MainMenuController extends Controller
            })
              ->addColumn('status',function ($row){
                $action='';
-               if($row->status==0){
+               if($row->status==1){
                    $action.='<a class="btn btn-success btn-sm m-1" href="'.url('main-menu/status/'.$row->id).'">Active</a>';
                 }else{
                    $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('main-menu/status/'.$row->id).'">Deactive</a>';
@@ -122,11 +122,11 @@ class MainMenuController extends Controller
         try{
         $footer_menu=MainMenu::find($id);
 
-        if($footer_menu->status==1){
-            $footer_menu->status=0;
+        if($footer_menu->status==0){
+            $footer_menu->status=1;
         }
         else{
-            $footer_menu->status=1;
+            $footer_menu->status=0;
         }
         $footer_menu->save();
         DB::commit();

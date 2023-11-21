@@ -43,9 +43,9 @@ class ProfessionalToolsController extends Controller
            ->addColumn('status',function ($row){
                $status='';
                if($row->status==1){
-               $status.='<a class="btn btn-success btn-sm m-1" href="'.url('professionaltools/status/'.$row->id).'">Active</a>';
+               $status.='<a class="btn btn-success btn-sm m-1" href="'.url('professional-skills/status/'.$row->id).'">Active</a>';
                 }else{
-               $status.='<a class="btn btn-danger btn-sm m-1" href="'.url('professionaltools/status/'.$row->id).'">Deactive</a>';                
+               $status.='<a class="btn btn-danger btn-sm m-1" href="'.url('professional-skills/status/'.$row->id).'">Deactive</a>';                
            }
                return $status;
            })
@@ -108,11 +108,11 @@ class ProfessionalToolsController extends Controller
         try{
         $professionaltools=ProfessionalTools::find($id);
 
-        if($professionaltools->status==1){
-            $professionaltools->status=0;
+        if($professionaltools->status==0){
+            $professionaltools->status=1;
         }
         else{
-            $professionaltools->status=1;
+            $professionaltools->status=0;
         }
         $professionaltools->save();
         DB::commit();
