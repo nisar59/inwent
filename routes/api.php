@@ -31,3 +31,8 @@ Route::group(['prefix'=>'setup', 'middleware'=>'api'],function()
   Route::get('cities', 'API\CommonController@cities');
 });
 
+
+Route::group(['prefix'=>'pages', 'middleware'=>'api'],function()
+{
+  Route::get('{slug}', 'API\CommonController@page');
+});

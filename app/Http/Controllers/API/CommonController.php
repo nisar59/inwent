@@ -85,10 +85,8 @@ class CommonController extends Controller
         try {   
 
             $setup=Settings();
-            $pages=Pages::all();
             $data=[               
                 'setup'=>$setup,
-                'pages'=>$pages,
             ];
 
             $res=['success'=>true,'message'=>'setup successfully fetched','errors'=>[],'data'=>$data];
@@ -105,6 +103,37 @@ class CommonController extends Controller
 
 
 
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function page($slug)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {   
+
+            $page=Pages::where('slug','LIKE','%'.$slug.'%')->first();
+
+            $data=[               
+                'page'=>$page,
+            ];
+            if($page!=null){
+                $res=['success'=>true,'message'=>'page successfully fetched','errors'=>[],'data'=>$data];
+            }else{
+                $res=['success'=>true,'message'=>'page not found','errors'=>[],'data'=>null];
+            }  
+
+             return response()->json($res);
+            
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
 
 
 
