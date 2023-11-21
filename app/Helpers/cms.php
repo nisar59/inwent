@@ -81,7 +81,7 @@ return(object) $blocks =[
     'sample' => 'user_reviews.png',
     'data' => [
       'heading'=>['name'=>'heading','type'=>'text'],
-      'user_reviews'=>['name'=>'user_reviews','type'=>'records'],
+      'user_reviews'=>['name'=>'user_reviews','type'=>'records' , 'entity'=>'CMS\UserReviews\Entities\UserReviews;'],
 
     ],
   ],

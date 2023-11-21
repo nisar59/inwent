@@ -19,7 +19,7 @@ class ProjectConfigController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-        $project_config=ProjectConfig::select('*')->orderBy('id','ASC')->get();
+        $project_config=ProjectConfig::orderBy('id','ASC')->get();
            return DataTables::of($project_config)
            ->addColumn('action',function ($row){
                $action='';
@@ -33,7 +33,7 @@ class ProjectConfigController extends Controller
            })   
            ->addColumn('status',function ($row){
                $action='';
-               if($row->status==0){
+               if($row->status==1){
                    $action.='<a class="btn btn-success btn-sm m-1" href="'.url('project-config/status/'.$row->id).'">Active</a>';
                 }else{
                    $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('project-config/status/'.$row->id).'">Deactive</a>';
@@ -101,11 +101,11 @@ class ProjectConfigController extends Controller
         try{
         $pro_config=ProjectConfig::find($id);
 
-        if($pro_config->status==1){
-            $pro_config->status=0;
+        if($pro_config->status==0){
+            $pro_config->status=1;
         }
         else{
-            $pro_config->status=1;
+            $pro_config->status=0;
         }
         $pro_config->save();
         DB::commit();

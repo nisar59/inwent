@@ -31,7 +31,7 @@ class BannerController extends Controller
                 })
            ->addColumn('status',function ($row){
                $action='';
-               if($row->status==0){
+               if($row->status==1){
                    $action.='<a class="btn btn-success btn-sm m-1" href="'.url('banner/status/'.$row->id).'">Active</a>';
                 }else{
                    $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('banner/status/'.$row->id).'">Deactive</a>';
@@ -62,9 +62,6 @@ class BannerController extends Controller
     {
         $req->validate([
             'title'=>'required',
-            'btn_text'=>'required',
-            'btn_url'=>'required',
-            'btn_type'=>'required',
             'banner_image'=>'required',
         ]);
         DB::beginTransaction();
@@ -114,11 +111,11 @@ class BannerController extends Controller
         try{
         $banner=Banner::find($id);
 
-        if($banner->status==1){
-            $banner->status=0;
+        if($banner->status==0){
+            $banner->status=1;
         }
         else{
-            $banner->status=1;
+            $banner->status=0;
         }
         $banner->save();
         DB::commit();

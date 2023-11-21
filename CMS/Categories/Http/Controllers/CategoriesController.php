@@ -29,7 +29,7 @@ class CategoriesController extends Controller
                return $action;
            }) ->addColumn('status',function ($row){
                $action='';
-               if($row->status==0){
+               if($row->status==1){
                    $action.='<a class="btn btn-success btn-sm m-1" href="'.url('categories/status/'.$row->id).'">Active</a>';
                 }else{
                    $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('categories/status/'.$row->id).'">Deactive</a>';
@@ -108,11 +108,11 @@ class CategoriesController extends Controller
         try{
         $category=Categories::find($id);
 
-        if($category->status==1){
-            $category->status=0;
+        if($category->status==0){
+            $category->status=1;
         }
         else{
-            $category->status=1;
+            $category->status=0;
         }
         $category->save();
         DB::commit();

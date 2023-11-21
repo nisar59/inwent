@@ -36,7 +36,7 @@ class UserReviewsController extends Controller
                 })
            ->addColumn('status',function ($row){
                $action='';
-               if($row->status==0){
+               if($row->status==1){
                    $action.='<a class="btn btn-success btn-sm m-1" href="'.url('user-reviews/status/'.$row->id).'">Active</a>';
                 }else{
                    $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('user-reviews/status/'.$row->id).'">Deactive</a>';
@@ -110,11 +110,11 @@ class UserReviewsController extends Controller
         try{
         $status=UserReviews::find($id);
 
-        if($status->status==1){
-            $status->status=0;
+        if($status->status==0){
+            $status->status=1;
         }
         else{
-            $status->status=1;
+            $status->status=0;
         }
         $status->save();
         DB::commit();

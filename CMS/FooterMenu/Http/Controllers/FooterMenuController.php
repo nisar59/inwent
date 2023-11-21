@@ -22,7 +22,7 @@ class FooterMenuController extends Controller
     public function headingIndex()
     {
         if (request()->ajax()) {
-        $footer_menu=FooterMenuHeadings::select('*')->orderBy('id','ASC')->get();
+        $footer_menu=FooterMenuHeadings::orderBy('id','ASC')->get();
            return DataTables::of($footer_menu)
            ->addColumn('action',function ($row){
                $action='';
@@ -41,7 +41,7 @@ class FooterMenuController extends Controller
            })
             ->addColumn('status',function ($row){
                $action='';
-               if($row->status==0){
+               if($row->status==1){
                    $action.='<a class="btn btn-success btn-sm m-1" href="'.url('footer-menu-headings/status/'.$row->id).'">Active</a>';
                 }else{
                    $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('footer-menu-headings/status/'.$row->id).'">Deactive</a>';
@@ -99,11 +99,11 @@ class FooterMenuController extends Controller
         try{
         $footer_menu=FooterMenuHeadings::find($id);
 
-        if($footer_menu->status==1){
-            $footer_menu->status=0;
+        if($footer_menu->status==0){
+            $footer_menu->status=1;
         }
         else{
-            $footer_menu->status=1;
+            $footer_menu->status=0;
         }
         $footer_menu->save();
         DB::commit();

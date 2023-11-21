@@ -23,7 +23,7 @@ class UsersController extends Controller
            return DataTables::of($users)
            ->addColumn('status',function ($row){
                $action='';
-               if($row->status==0){
+               if($row->status==1){
                    $action.='<a class="btn btn-success btn-sm m-1" href="'.url('users/status/'.$row->id).'">Active</a>';
                 }else{
                    $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('users/status/'.$row->id).'">Deactive</a>';
@@ -75,11 +75,11 @@ class UsersController extends Controller
         try{
         $users=User::find($id);
 
-        if($users->status==1){
-            $users->status=0;
+        if($users->status==0){
+            $users->status=1;
         }
         else{
-            $users->status=1;
+            $users->status=0;
         }
         $users->save();
         DB::commit();

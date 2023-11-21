@@ -33,7 +33,7 @@ class BlogController extends Controller
                return $action;
            }) ->addColumn('status',function ($row){
                $action='';
-               if($row->status==0){
+               if($row->status==1){
                    $action.='<a class="btn btn-success btn-sm m-1" href="'.url('blog/status/'.$row->id).'">Active</a>';
                 }else{
                    $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('blog/status/'.$row->id).'">Deactive</a>';
@@ -114,11 +114,11 @@ class BlogController extends Controller
         try{
         $blog=Blog::find($id);
 
-        if($blog->status==1){
-            $blog->status=0;
+        if($blog->status==0){
+            $blog->status=1;
         }
         else{
-            $blog->status=1;
+            $blog->status=0;
         }
         $blog->save();
         DB::commit();

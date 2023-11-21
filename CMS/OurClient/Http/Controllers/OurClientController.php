@@ -31,7 +31,7 @@ class OurClientController extends Controller
                 })
            ->addColumn('status',function ($row){
                $action='';
-               if($row->status==0){
+               if($row->status==1){
                    $action.='<a class="btn btn-success btn-xs btn-sm m-1" href="'.url('our-client/status/'.$row->id).'">Active</a>';
                 }else{
                    $action.='<a class="btn btn-danger btn-xs btn-sm m-1" href="'.url('our-client/status/'.$row->id).'">Deactive</a>';
@@ -115,11 +115,11 @@ class OurClientController extends Controller
         try{
         $ourclient=OurClient::find($id);
 
-        if($ourclient->status==1){
-            $ourclient->status=0;
+        if($ourclient->status==0){
+            $ourclient->status=1;
         }
         else{
-            $ourclient->status=1;
+            $ourclient->status=0;
         }
         $ourclient->save();
         DB::commit();
