@@ -31,6 +31,7 @@
                             <table class="table w-100 table-sm table-bordered datatables">
                                 <thead class="bg-primary text-white">
                                     <tr>
+                                        <th class="text-center">Name</th>
                                         <th class="text-center">Title</th>
                                         <th class="text-center">Image</th>
                                         <th class="text-center">Status</th>
@@ -66,6 +67,11 @@ $(document).ready(function() {
             },
             buttons: [],
             columns: [
+            {
+                data: 'name',
+                name: 'name',
+                class:'text-center'
+            },
             {
                 data: 'title',
                 name: 'title',

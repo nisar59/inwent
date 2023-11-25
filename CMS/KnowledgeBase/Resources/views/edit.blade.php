@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <label>Description</label>
-                                <textarea name="description" id="mytextarea">{{$knowledge_base->description}}</textarea>
+                                <textarea name="description" class="editor form-control">{{$knowledge_base->description}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -59,8 +59,7 @@
 @endsection
 @section('js')
 <script>
-tinymce.init({
-selector: '#mytextarea'
-});
+
+
 </script>
 @endsection

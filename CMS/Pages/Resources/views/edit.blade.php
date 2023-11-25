@@ -45,6 +45,7 @@
                               <div class="form-group">
                                 <label for="">Slider</label>
                                 <select name="slider_banner_id" class="form-control">
+                                <option value="">Select Slider</option>
                                   @foreach($sliders as $slider)
                                   <option value="{{$slider->id}}" @if($slider->id==$page->slider_banner_id) selected @endif>{{$slider->title}}</option>
                                   @endforeach
@@ -54,16 +55,18 @@
                               @elseif($page->slider_banner_type=="banner")
                               <div class="form-group"><label for="">Banner</label>
                               <select name="slider_banner_id" class="form-control">
+                                <option value="">Select Banner</option>
                                 @foreach($banners as $banner)
-                                <option value="{{$banner->id}}" @if($banner->id==$page->slider_banner_id) selected @endif>{{$banner->title}}</option>
+                                <option value="{{$banner->id}}" @if($banner->id==$page->slider_banner_id) selected @endif>{{ $banner->name }}</option>
                                 @endforeach
                               </select></div>
 
                               @elseif($page->slider_banner_type=="action-banner")
                               <div class="form-group"><label for="">Banner</label>
                               <select name="slider_banner_id" class="form-control">
+                                <option value="">Select Banner</option>
                                 @foreach($action_banners as $actbnr)
-                                <option value="{{$actbnr->id}}" @if($actbnr->id==$page->slider_banner_id) selected @endif>{{$actbnr->title}}</option>
+                                <option value="{{$actbnr->id}}" @if($actbnr->id==$page->slider_banner_id) selected @endif>{!! $actbnr->title !!}</option>
                                 @endforeach
                               </select></div>
 
@@ -120,6 +123,7 @@ var type=$(this).val();
 var slider_html=`<div class="form-group">
                 <label for="">Slider</label>
                 <select name="slider_banner_id" class="form-control">
+                <option value="">Select Slider</option>
                   @foreach($sliders as $slider)
                   <option value="{{$slider->id}}" @if($slider->id==$page->slider_banner_id) selected @endif>{{$slider->title}}</option>
                   @endforeach
@@ -128,16 +132,18 @@ var slider_html=`<div class="form-group">
 
 var banner_html=`<div class="form-group"><label for="">Banner</label>
 <select name="slider_banner_id" class="form-control">
+<option value="">Select Banner</option>
   @foreach($banners as $banner)
-  <option value="{{$banner->id}}" @if($banner->id==$page->slider_banner_id) selected @endif>{{$banner->title}}</option>
+  <option value="{{$banner->id}}" @if($banner->id==$page->slider_banner_id) selected @endif>{{$banner->name}}</option>
   @endforeach
 </select></div>`;
 
 
 var action_banner_html=`<div class="form-group"><label for="">Action Banner</label>
 <select name="slider_banner_id" class="form-control">
+<option value="">Select Banner</option>
   @foreach($action_banners as $acbnr)
-  <option value="{{$acbnr->id}}" @if($acbnr->id==$page->slider_banner_id) selected @endif>{{$acbnr->title}}</option>
+  <option value="{{$acbnr->id}}" @if($acbnr->id==$page->slider_banner_id) selected @endif>{!!$acbnr->title!!}</option>
   @endforeach
 </select></div>`;
 

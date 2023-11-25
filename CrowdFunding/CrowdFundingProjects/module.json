@@ -1,0 +1,11 @@
+{
+    "name": "CrowdFundingProjects",
+    "alias": "crowdfundingprojects",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CrowdFunding\\CrowdFundingProjects\\Providers\\CrowdFundingProjectsServiceProvider"
+    ],
+    "files": []
+}

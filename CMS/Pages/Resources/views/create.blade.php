@@ -87,6 +87,7 @@ var type=$(this).val();
 var slider_html=`<div class="form-group">
                 <label for="">Slider</label>
                 <select name="slider_banner_id" class="form-control">
+                <option value="">Select Slider</option>
                   @foreach($sliders as $slider)
                   <option value="{{$slider->id}}">{{$slider->title}}</option>
                   @endforeach
@@ -96,13 +97,15 @@ var slider_html=`<div class="form-group">
 var banner_html=`<div class="form-group"><label for="">Banner</label>
 <select name="slider_banner_id" class="form-control">
   @foreach($banners as $banner)
-  <option value="{{$banner->id}}">{{$banner->title}}</option>
+  <option value="">Select Banner</option>
+  <option value="{{$banner->id}}">{{$banner->name}}</option>
   @endforeach
 </select></div>`;
 
 
 var action_banner_html=`<div class="form-group"><label for="">Action Banner</label>
 <select name="slider_banner_id" class="form-control">
+<option value="">Select Banner</option>
   @foreach($action_banners as $acbnr)
   <option value="{{$acbnr->id}}">{{$acbnr->title}}</option>
   @endforeach

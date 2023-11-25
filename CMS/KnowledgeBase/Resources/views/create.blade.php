@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <label>Description</label>
-                                <textarea name="description" id="mytextarea"></textarea>
+                                <textarea name="description" class="editor form-control"></textarea>
                             </div>
                         </div>
                     </div>
@@ -59,8 +59,8 @@
 @endsection
 @section('js')
 <script>
-tinymce.init({
-selector: '#mytextarea'
-});
+
+
+
 </script>
 @endsection

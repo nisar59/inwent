@@ -51,12 +51,13 @@ function Types()
 function BannerTitleColors()
 {
 	$colors=[
-		'#000000'=>'Black',
-		'#6aa84f'=>'Green',
-		'#93c47d'=>'Light Green',
-		'#073763'=>'Blue',
-		'#6e41e1'=>'Purple',
-		'#8e7cc3'=>'Light Purple',
+		'#000'=>'Black',
+		'#dfdff680'=>'Silver',
+		'#003EAE'=>'Blue',
+		'#6B1EBB'=>'Purple',
+		'#14A800'=>'Green',
+		'#00BEA6'=>'Light Green',
+		'#6E6D7A'=>'Grey'
 	];
 
 	return $colors;
@@ -65,15 +66,12 @@ function BannerTitleColors()
 function ButtonTypes()
 {
 	$Colortypes=[
-		'btn btn-primary'=>'Primary',
-		'btn btn-secondary'=>'Secondary',
-		'btn btn-success'=>'Success',
-		'btn btn-danger'=>'Danger',
-		'btn btn-warning'=>'Warning',
-		'btn btn-info'=>'Info',
-		'btn btn-light'=>'Light',
-		'btn btn-dark'=>'Dark',
-		'btn btn-link'=>'Link',
+		'inwt-btn-grey'=>'Grey Button',
+		'inwt-btn-blue'=>'Blue Button',
+		'inwt-btn-purple'=>'Purple Button',
+		'inwt-btn-green'=>'Green Button',
+		'inwt-btn-lightgreen'=>'Light Green Button',
+		'inwt-btn-silver'=>'Silver Button',
 	];
 	return $Colortypes;
 }

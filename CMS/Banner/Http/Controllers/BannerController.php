@@ -26,6 +26,10 @@ class BannerController extends Controller
                $action.='<a class="btn btn-danger btn-sm" href="'.url('banner/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
                return $action;
            })
+           ->editColumn('title',function($row)
+           {
+              return $row->title;
+           })
            ->addColumn('banner_image', function ($row) {
                     return '<img src="'.StorageFile($row->banner_image).'" height="50" width="50">';
                 })
@@ -38,7 +42,7 @@ class BannerController extends Controller
                 }
                return $action;
            })
-           ->rawColumns(['action','banner_image','status'])
+           ->rawColumns(['action','title','banner_image','status'])
            ->make(true);
         }
         return view('banner::index');
@@ -61,7 +65,7 @@ class BannerController extends Controller
     public function store(Request $req)
     {
         $req->validate([
-            'title'=>'required',
+            'name'=>'required',
             'banner_image'=>'required',
         ]);
         DB::beginTransaction();

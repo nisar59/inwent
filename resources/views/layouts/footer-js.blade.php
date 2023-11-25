@@ -9,7 +9,8 @@
 <script src="{{asset('assets/plugins/datatables/datatables-1.13.6/js/dataTables.bootstrap5.min.js')}}"></script>
 <script src="{{asset('assets/plugins/izitoast/js/iziToast.min.js')}}"></script>
 <script src="{{asset('assets/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
-<script src="{{asset('assets/plugins/tinymce/tinymce2.min.js')}}"></script>
+<script src="{{asset('assets/plugins/tinymce/tinymce.min.js')}}"></script>
+<script src="{{asset('assets/plugins/tinymce/form-editor.init.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- ///////////////////////sortable/////////////////////////////////////////// -->
 <script src="{{asset('assets/plugins/jquery-ui/ui/Sortable.min.js')}}"></script>
@@ -17,6 +18,7 @@
 <script src="{{asset('assets/js/script.js')}}"></script>
 <script src="{{asset('assets/js/functions.js')}}"></script>
 <script type="text/javascript">
+  InitEditor();
   $(document).on('click', '.verify-prompt', function(e) {
               e.preventDefault();
               Swal.fire({

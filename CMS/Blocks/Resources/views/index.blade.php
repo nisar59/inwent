@@ -177,7 +177,9 @@ function ModifySectionData(id) {
         error:function(res) {
             error('Something went wrong, please refresh page and try again');
         }
-    })
+    });
+
+
 }
 
 

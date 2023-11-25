@@ -253,9 +253,11 @@ class SlidersController extends Controller
     {
         DB::beginTransaction();
         try{
-        SliderImages::find($id)->delete();
+        $slider=SliderImages::find($id);
+        $slider_id=$slider->slider_id;
+        $slider->delete();
         DB::commit();
-         return redirect('slider-images')->with('success','Slider Image successfully deleted');
+         return redirect('sliders/images/'.$slider_id)->with('success','Slider Image successfully deleted');
          } catch(Exception $e){
             DB::rollback();
             return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());

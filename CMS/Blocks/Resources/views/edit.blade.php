@@ -226,6 +226,12 @@
 
 <script type="text/javascript">
 
+InitEditor();
+
+document.addEventListener('focusin', (e) => {
+     if (e.target.closest(".tox-tinymce-aux, .moxman-window, .tam-assetmanager-root") !== null) {
+     e.stopImmediatePropagation();
+}});
 
 
   $(document).on('click', '.add-list', function() {
@@ -255,7 +261,6 @@
   });
 
 $(document).on('click', '.remove-list', function() {
-
    $(this).closest('.row .listing-row').remove();
 });
 </script>

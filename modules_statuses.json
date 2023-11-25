@@ -28,5 +28,6 @@
     "Blocks": true,
     "KnowledgeBaseCategories": true,
     "KnowledgeBase": true,
-    "OurClient": true
+    "OurClient": true,
+    "CrowdFundingProjects": true
 }
