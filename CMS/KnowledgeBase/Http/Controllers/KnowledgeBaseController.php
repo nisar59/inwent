@@ -57,7 +57,7 @@ class KnowledgeBaseController extends Controller
      */
     public function create()
     {
-        $knowledge_base_cate=KnowledgeBaseCategories::where('status',0)->get();
+        $knowledge_base_cate=KnowledgeBaseCategories::where('status',1)->get();
         return view('knowledgebase::create',compact('knowledge_base_cate'));
     }
 
