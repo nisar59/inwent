@@ -61,6 +61,7 @@ class ActionBannerController extends Controller
     public function store(Request $req)
     {
          $req->validate([
+            'name'=>'required',
             'title'=>'required',
             'sub_title'=>'required',
             'image'=>'required',

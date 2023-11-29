@@ -107,7 +107,7 @@ var action_banner_html=`<div class="form-group"><label for="">Action Banner</lab
 <select name="slider_banner_id" class="form-control">
 <option value="">Select Banner</option>
   @foreach($action_banners as $acbnr)
-  <option value="{{$acbnr->id}}">{{$acbnr->title}}</option>
+  <option value="{{$acbnr->id}}">{{$acbnr->name}}</option>
   @endforeach
 </select></div>`;
 

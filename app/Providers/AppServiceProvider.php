@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
         VerifyEmail::toMailUsing(function ($notifiable){
             
             $expire_in=Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60));
@@ -33,14 +34,14 @@ class AppServiceProvider extends ServiceProvider
             $verifyUrl = URL::temporarySignedRoute(
                 'verification.verify',$expire_in,
                 [
-                    'id' => $notifiable->getKey(),
-                    'hash' => InwntEncrypt($notifiable->getEmailForVerification()),
+                    'id' =>base64_encode($notifiable->getKey()),
+                    'hash' => base64_encode($notifiable->getEmailForVerification()),
                 ]
             );
 
             $segmat=isset(explode('?', $verifyUrl)[1]) ? '?'.explode('?', $verifyUrl)[1] : '';
 
-            $url='http://inwent.ca/auth/email/verify/'.InwntEncrypt($notifiable->getKey()).$segmat;
+            $url=WebsiteURL().'/inwt/auth/email/verify/'.base64_encode($notifiable->getKey()).$segmat;
 
             return (new MailMessage)
                 ->markdown('vendor.notifications.email')

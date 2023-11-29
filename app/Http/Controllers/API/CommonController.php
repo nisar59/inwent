@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Common\Countries\Entities\Countries;
 use Common\States\Entities\States;
 use Common\Cities\Entities\Cities;
+use CMS\MainMenu\Entities\MainMenu;
+use CMS\FooterMenu\Entities\FooterMenuHeadings;
 use CMS\Pages\Entities\Pages;
 use Auth;
 use DB;
@@ -85,8 +87,17 @@ class CommonController extends Controller
         try {   
 
             $setup=Settings();
+            $main_menu=MainMenu::where('status', 1)->get();
+            $footer_menu=FooterMenuHeadings::where('status', 1)->get();
+
+            if($setup==null){
+                $res=['success'=>false,'message'=>'setup not successfully fetched','errors'=>[],'data'=>null];
+                return response()->json($res);   
+            }
             $data=[               
                 'setup'=>$setup,
+                'main_menu'=>$main_menu,
+                'footer_menu'=>$footer_menu,
             ];
 
             $res=['success'=>true,'message'=>'setup successfully fetched','errors'=>[],'data'=>$data];
@@ -120,7 +131,7 @@ class CommonController extends Controller
             if($page!=null){
                 $res=['success'=>true,'message'=>'page successfully fetched','errors'=>[],'data'=>$data];
             }else{
-                $res=['success'=>true,'message'=>'page not found','errors'=>[],'data'=>null];
+                $res=['success'=>false,'message'=>'page not found','errors'=>[],'data'=>null];
             }  
 
              return response()->json($res);

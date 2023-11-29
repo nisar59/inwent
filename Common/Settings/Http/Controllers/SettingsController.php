@@ -43,11 +43,14 @@ class SettingsController extends Controller
         DB::beginTransaction();
         try {
             $settings=Settings::first();
-            $inputs=$req->except('_token','website_logo','website_logo_small','website_favicon','portal_logo','portal_logo_small','portal_favicon');
+            $inputs=$req->except('_token','website_logo','website_logo_small','website_favicon','website_footer_logo','portal_logo','portal_logo_small','portal_favicon');
 
             $website_logo=FileUpload($req->website_logo, 'settings');
             $website_logo_small=FileUpload($req->website_logo_small, 'settings');
-            $website_favicon=FileUpload($req->website_favicon, 'settings');
+            $website_favicon=FileUpload($req->website_favicon, 'settings');            
+            $website_footer_logo=FileUpload($req->website_footer_logo, 'settings');
+            $website_auth_logo=FileUpload($req->website_auth_logo, 'settings');
+
             $portal_logo=FileUpload($req->portal_logo, 'settings');
             $portal_logo_small=FileUpload($req->portal_logo_small, 'settings');
             $portal_favicon=FileUpload($req->portal_favicon, 'settings');
@@ -59,10 +62,18 @@ class SettingsController extends Controller
             if($website_logo_small!=null){
                 $inputs['website_logo_small']=$website_logo_small;
             }
-
             if($website_favicon!=null){
                 $inputs['website_favicon']=$website_favicon;
             }
+
+            if($website_footer_logo!=null){
+                $inputs['website_footer_logo']=$website_footer_logo;
+            }
+
+            if($website_auth_logo!=null){
+                $inputs['website_auth_logo']=$website_auth_logo;
+            }
+            
             if($portal_logo!=null){
                 $inputs['portal_logo']=$portal_logo;
             }

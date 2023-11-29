@@ -80,3 +80,13 @@ function Settings()
 {
 	return Settings::first();
 }
+
+function WebsiteURL()
+{
+	$url=Settings()->website_url;
+	if(str_ends_with($url, '/')){
+		$url=rtrim($url, '/');
+	}
+
+	return $url;
+}

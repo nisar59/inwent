@@ -9,7 +9,7 @@ class Settings extends Model
 {
     use HasFactory;
     protected $table='settings';
-    protected $fillable = ['website_name','portal_name','website_logo','website_logo_small','website_favicon','portal_logo','portal_logo_small','portal_favicon'];
+    protected $fillable = ['website_url','website_name','portal_name','website_logo','website_logo_small','website_favicon','website_footer_logo','website_auth_logo','portal_logo','portal_logo_small','portal_favicon'];
 
 
     public function getWebsiteLogoAttribute()
@@ -30,6 +30,20 @@ class Settings extends Model
     {
         if($this->attributes['website_favicon']!=null){
             return StorageFile($this->attributes['website_favicon']);
+        }
+    }
+
+    public function getWebsiteFooterLogoAttribute()
+    {
+        if($this->attributes['website_footer_logo']!=null){
+            return StorageFile($this->attributes['website_footer_logo']);
+        }
+    }
+
+    public function getWebsiteAuthLogoAttribute()
+    {
+        if($this->attributes['website_auth_logo']!=null){
+            return StorageFile($this->attributes['website_auth_logo']);
         }
     }
 

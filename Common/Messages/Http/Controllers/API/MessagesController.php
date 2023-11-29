@@ -26,7 +26,15 @@ class MessagesController extends Controller
         try {          
             $user_id=InwntDecrypt(Auth::id()); 
 
-            $threads=Threads::where(['sender_id'=>$user_id, 'module'=>$module])->orWhere(['receiver_id'=>$user_id, 'module'=>$module])->get();
+            $sender=Threads::where(['sender_id'=>$user_id, 'module'=>$module])->pluck('id')->toArray();
+
+            $receiver=Threads::where(['receiver_id'=>$user_id, 'module'=>$module])->pluck('id')->toArray();
+
+            $threads_ids=array_merge($sender, $receiver);
+            $distinct=array_unique($threads_ids);
+
+            $threads=Threads::whereIn('id', $distinct)->get();
+
             $data=[
                 'threads'=>$threads
             ];
@@ -182,8 +190,8 @@ class MessagesController extends Controller
 
             $res=Larafirebase::withTitle(Auth::user()->name)
             ->withBody($req->content)
-            ->withImage('https://firebase.google.com/images/social.png')
-            ->withIcon('https://seeklogo.com/images/F/firebase-logo-402F407EE0-seeklogo.com.png')
+            ->withImage(Settings()->website_logo)
+            ->withIcon(Settings()->website_logo)
             ->withSound('default')
             ->withClickAction(url('home'))
             ->withPriority('high')

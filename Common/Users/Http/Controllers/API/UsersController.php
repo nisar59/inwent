@@ -130,7 +130,7 @@ class UsersController extends Controller
                 $basic_profile=BasicProfile::where(['user_id'=>$user->id])->first();
 
                 $data=[
-                    'user'=>Auth::user(),
+                    'user'=>$user,
                     'basic_profile'=>$basic_profile
                 ];
 

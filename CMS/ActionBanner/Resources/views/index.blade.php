@@ -31,10 +31,8 @@
                             <table class="table w-100 table-sm table-bordered datatables">
                                 <thead class="bg-primary text-white">
                                     <tr>
-                                        <th class="text-center">Title</th>
-                                        <th class="text-center">Sub Title</th>
+                                        <th class="text-center">Name</th>
                                         <th class="text-center">Image</th>
-                                        <th class="text-center">Description</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
@@ -69,27 +67,13 @@ $(document).ready(function() {
             buttons: [],
             columns: [
             {
-                data: 'title',
-                name: 'title',
+                data: 'name',
+                name: 'name',
                 class:'text-center'
-            },
-            {
-                data: 'sub_title',
-                name: 'sub_title',
-                class:'text-center',
-                orderable:false,
-                searchable:false
             },
             {
                 data: 'image',
                 name: 'image',
-                class:'text-center',
-                orderable:false,
-                searchable:false
-            },
-            {
-                data: 'description',
-                name: 'description',
                 class:'text-center',
                 orderable:false,
                 searchable:false

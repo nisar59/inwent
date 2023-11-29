@@ -25,13 +25,17 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
+                                <label for="">Name</label>
+                                <input type="text" name="name" class="form-control"  placeholder="Enter Title">
+                            </div>                          
+                            <div class="col-md-12">
                                 <label for="">Title</label>
-                                <input type="text" name="title" class="form-control"  placeholder="Enter Title">
+                                <input type="text" name="title" class="form-control editor"  placeholder="Enter Title">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="">Sub Title</label>
-                                <input type="text" name="sub_title" class="form-control"  placeholder="Enter Title">
+                                <input type="text" name="sub_title" class="form-control editor"  placeholder="Enter Title">
                             </div>
                             <div class="col-md-6">
                                 <label for="">Image</label>

@@ -11,7 +11,7 @@ class ActionBanner extends Model
     
     protected $table='action_banner';
 
-    protected $fillable = ['title','sub_title','image','description','stats','actions'];
+    protected $fillable = ['name','title','sub_title','image','description','stats','actions'];
     
     protected static function newFactory()
     {

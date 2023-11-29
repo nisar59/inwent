@@ -60,6 +60,11 @@
                                             @csrf
                                             <div class="settings-form row">
                                                 <div class="col-md-12 form-group">
+                                                    <label>Website URL <span class="star-red">*</span></label>
+                                                    <input type="text" value="{{$settings->website_url}}" name="website_url" class="form-control" placeholder="Enter Website URL">
+                                                </div>
+
+                                                <div class="col-md-12 form-group">
                                                     <label>Website Name <span class="star-red">*</span></label>
                                                     <input type="text" value="{{$settings->website_name}}" name="website_name" class="form-control" placeholder="Enter Website Name">
                                                 </div>
@@ -67,7 +72,7 @@
                                                 <div class="form-group col-md-8 mt-3">
                                                     <label>Website Logo <span class="star-red">*</span></label>
                                                         <input type="file" accept="image/*" name="website_logo"  onchange="$('#website_logo_preview').attr('src', window.URL.createObjectURL(event.target.files[0]));" class=" form-control">
-                                                    <h6 class="settings-size">Recommended image size is <span>150px x 150px</span></h6>
+                                                    <h6 class="settings-size">Recommended image size is <span>157px x 49px</span></h6>
                                                 </div>
                                                 <div class="col-md-4 form-group mt-3">
                                                     <div class="upload-images m-0 w-100">
@@ -82,7 +87,7 @@
                                                 <div class="form-group col-md-8 mt-3">
                                                     <label class="settings-label">Website Small Logo <span class="star-red">*</span></label>
                                                         <input type="file" accept="image/*" name="website_logo_small" onchange="$('#website_logo_small_preview').attr('src', window.URL.createObjectURL(event.target.files[0]));" class="form-control">
-                                                    <h6 class="settings-size">Recommended image size is <span>150px x 150px</span></h6>
+                                                    <h6 class="settings-size">Recommended image size is <span>146px x 33px</span></h6>
                                                 </div>
                                                 <div class="col-md-4 form-group mt-3">
                                                     <div class="upload-images m-0 w-100">
@@ -110,6 +115,41 @@
                                                         </a>
                                                     </div>
                                                 </div>
+
+
+
+                                                <div class="form-group col-md-8 mt-3">
+                                                    <label class="settings-label">Website Footer Logo <span class="star-red">*</span></label>
+                                                        <input type="file" accept="image/*" name="website_footer_logo" onchange="$('#website_footer_logo_preview').attr('src', window.URL.createObjectURL(event.target.files[0]));" class="form-control">
+                                                    <h6 class="settings-size">Recommended image size is <span>256px x 72px</span></h6>
+                                                </div>
+                                                <div class="col-md-4 form-group mt-3">
+                                                    <div class="upload-images m-0 w-100">
+                                                        <img src="{{$settings->website_footer_logo}}" id="website_footer_logo_preview" alt="Image">
+                                                        <a href="javascript:void(0);" class="btn-icon logo-hide-btn">
+                                                            <i class="feather-x-circle"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="form-group col-md-8 mt-3">
+                                                    <label class="settings-label">Website Auth Logo <span class="star-red">*</span></label>
+                                                        <input type="file" accept="image/*" name="website_auth_logo" onchange="$('#website_auth_logo_preview').attr('src', window.URL.createObjectURL(event.target.files[0]));" class="form-control">
+                                                    <h6 class="settings-size">Recommended image size is <span>880px x 251px</span></h6>
+                                                </div>
+                                                <div class="col-md-4 form-group mt-3">
+                                                    <div class="upload-images m-0 w-100">
+                                                        <img src="{{$settings->website_auth_logo}}" id="website_auth_logo_preview" alt="Image">
+                                                        <a href="javascript:void(0);" class="btn-icon logo-hide-btn">
+                                                            <i class="feather-x-circle"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+
+
 
                                                 <div class="form-group col-md-12 text-end">
                                                     <div class="settings-btns">

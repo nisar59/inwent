@@ -71,9 +71,9 @@ class AuthController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
 
-            $user = User::findOrFail(InwntDecrypt($id));
+            $user = User::findOrFail(base64_decode($id));
 
-            if ($user!=null && $user->link_expire_time>now() && $user->email==InwntDecrypt($req->hash)) {
+            if ($user!=null && $user->link_expire_time>now() && $user->email==base64_decode($req->hash)) {
                 $user->markEmailAsVerified();
                 $res=['success'=>true,'message'=>'Your email has been successfully verified', 'errors'=>[],'data'=>null];
             }else{
@@ -144,6 +144,11 @@ class AuthController extends Controller
             elseif(!$token = Auth::attempt($req->all()))
             {
                 $res=['success'=>false,'message'=>'Unauthorized, email or password is wrong','errors'=>[],'data'=>null];
+            }
+            elseif(!Auth::user()->hasVerifiedEmail()){
+                Auth::user()->sendEmailVerificationNotification();
+                 Auth::logout();
+                $res=['success'=>false,'message'=>'Authentication failed, Your account is not verified, check your email account and verify your email before proceeding','errors'=>[],'data'=>null]; 
             }
             elseif(Auth::user()->status==0){
                 $this->logout();
