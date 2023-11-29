@@ -188,7 +188,7 @@ class MessagesController extends Controller
 
             $fcms=User::where('id', $req->receiver_id)->pluck('fcm_token')->toArray();
 
-            $res=Larafirebase::withTitle(Auth::user()->name)
+            $response=Larafirebase::withTitle(Auth::user()->name)
             ->withBody($req->content)
             ->withImage(Settings()->website_logo)
             ->withIcon(Settings()->website_logo)
@@ -202,7 +202,7 @@ class MessagesController extends Controller
             ->sendNotification($fcms);
 
 
-            $res=['success'=>true,'message'=>'Message successfully sent','errors'=>[],'data'=>null];
+            $res=['success'=>true,'message'=>'Message successfully sent','errors'=>[],'data'=>$response];
 
             DB::commit();
              return response()->json($res);
