@@ -12,22 +12,22 @@
 */
 
 Route::group(['prefix'=>'our-client', 'middleware'=>['permission:our-client.view']],function() {
-    Route::get('/', 'OURClientController@index');
+    Route::get('/', 'OurClientController@index');
 });
 
 
 Route::group(['prefix'=>'our-client', 'middleware'=>['permission:our-client.create']],function() {
-    Route::get('/create', 'OURClientController@create');
-    Route::post('/store', 'OURClientController@store');
+    Route::get('/create', 'OurClientController@create');
+    Route::post('/store', 'OurClientController@store');
 });
 
 Route::group(['prefix'=>'our-client', 'middleware'=>['permission:our-client.edit']],function() {
-    Route::get('/edit/{id}', 'OURClientController@edit');
-    Route::POST('/update/{id}', 'OURClientController@update');
-    Route::get('/status/{id}', 'OURClientController@status');
+    Route::get('/edit/{id}', 'OurClientController@edit');
+    Route::POST('/update/{id}', 'OurClientController@update');
+    Route::get('/status/{id}', 'OurClientController@status');
 
 });
 
 Route::group(['prefix'=>'our-client', 'middleware'=>['permission:our-client.delete']],function() {
-    Route::get('/destroy/{id}', 'OURClientController@destroy');
+    Route::get('/destroy/{id}', 'OurClientController@destroy');
 });
