@@ -5,6 +5,8 @@ namespace Common\Users\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Common\Users\Entities\BasicProfile;
+use Common\Users\Entities\ProfessionalProfile;
 use App\Models\User;
 use Throwable;
 use DataTables;
@@ -18,19 +20,51 @@ class UsersController extends Controller
      */
     public function index()
     {
-        if (request()->ajax()) {
-        $users=User::all();
+        $req=request();
+        if ($req->ajax()) {
+
+            $strt   = $req->start;
+            $length = $req->length;
+
+            $users=User::query();
+
+            if ($req->name != null) {
+                $users->where('name','LIKE','%'.$req->name.'%');
+              }
+            if ($req->email != null) {
+                $users->where('email', $req->email);
+              }    
+            if ($req->status != null) {
+                $users->where('status', $req->status);
+              }
+
+            $total = $users->count();
+            $users   = $users->offset($strt)->limit($length)->get();
+
+
+
            return DataTables::of($users)
-           ->addColumn('status',function ($row){
+                ->setOffset($strt)
+                ->with([
+                  "recordsTotal"    => $total,
+                  "recordsFiltered" => $total,
+                ])
+           ->addColumn('action',function ($row){
                $action='';
-               if($row->status==1){
-                   $action.='<a class="btn btn-success btn-sm m-1" href="'.url('users/status/'.$row->id).'">Active</a>';
-                }else{
-                   $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('users/status/'.$row->id).'">Deactive</a>';
-                }
+                $action.='<a class="btn btn-info btn-sm m-1 text-white" href="'.url('users/show/'.$row->id).'"><i class="fas fa-eye"></i></a>';
                return $action;
            })
-           ->rawColumns(['status'])
+
+            ->editColumn('status',function ($row){
+               $status='';
+               if($row->status==1){
+                   $status.='<a class="btn btn-success btn-sm m-1" href="'.url('users/status/'.$row->id).'">Active</a>';
+                }else{
+                   $status.='<a class="btn btn-danger btn-sm m-1" href="'.url('users/status/'.$row->id).'">Blocked</a>';
+                }
+               return $status;
+           })
+           ->rawColumns(['status', 'action'])
            ->make(true);
         }
         return view('users::index');
@@ -62,7 +96,13 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        return view('users::show');
+        $user=User::with('basicProfile')->find($id);
+        $basic_profile=BasicProfile::where('user_id', $user->id)->first();
+        $professional_profile=ProfessionalProfile::with('projects', 'publications', 'patents', 'conferences', 'articles' ,'experience', 'education', 'courses', 'certificates', 'volunteerings', 'awards', 'languages', 'breaks', 'compliances')->where('user_id', $user->id)->first();
+        if($user==null){
+            return redirect()->back()->with('error', 'User not found');
+        }
+        return view('users::show', compact('user', 'basic_profile', 'professional_profile'));
     }
     /**
      * Update status.

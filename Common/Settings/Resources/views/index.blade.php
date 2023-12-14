@@ -23,9 +23,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="#general-settings" data-bs-toggle="tab">General Settings</a>
                         </li>
-                        <li class="nav-item">
+<!--                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#localization">Localization</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#payment-settings">Payment Settings</a>
                         </li>
@@ -234,7 +234,7 @@
                             </div>
                         </div>
                     </div>
-                    <div role="tabpanel" id="localization" class="tab-pane fade">
+<!--                     <div role="tabpanel" id="localization" class="tab-pane fade">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card">
@@ -293,7 +293,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div role="tabpanel" id="payment-settings" class="tab-pane fade">
                             <div class="row">
                                 <div class="col-md-6">
@@ -301,52 +301,55 @@
                                         <div class="card-body pt-0">
                                             <div class="card-header d-flex justify-content-between align-items-center">
                                                 <h5 class="card-title">Paypal</h5>
-                                                <div class="status-toggle d-flex justify-content-between align-items-center">
-                                                    <input type="checkbox" id="status_1" class="check">
-                                                    <label for="status_1" class="checktoggle">checkbox</label>
-                                                </div>
                                             </div>
-                                            <form>
+                                            <form method="POST" action="{{url('settings')}}">
+                                                @csrf
                                                 <div class="settings-form">
                                                     <div class="form-group">
                                                         <p class="pay-cont">Paypal Option</p>
                                                         <label class="custom_radio me-4">
-                                                            <input type="radio" name="budget" value="Yes" checked="">
+                                                            <input type="radio" class="paypal-mode" name="paypal_mode" value="0" @if($settings->paypal_mode!=1 && $settings->paypal_mode!='1') checked @endif>
                                                             <span class="checkmark"></span> Sandbox
                                                         </label>
                                                         <label class="custom_radio">
-                                                            <input type="radio" name="budget" value="Yes">
+                                                            <input type="radio" class="paypal-mode" name="paypal_mode" value="1" @if($settings->paypal_mode==1 || $settings->paypal_mode=='1') checked @endif>
                                                             <span class="checkmark"></span> Live
                                                         </label>
                                                     </div>
-                                                    <div class="form-group form-placeholder">
-                                                        <label>Braintree Tokenization key <span class="star-red">*</span></label>
-                                                        <input type="text" class="form-control" placeholder="sandbox_pgjcppvs_pd6gznv7zbrx9hb8">
+                                                    <div id="sandbox">
+                                                        <div class="form-group form-placeholder">
+                                                            <label>Paypal Sandbox Client ID<span class="star-red">*</span></label>
+                                                            <input type="text" value="{{$settings->paypal_sandbox_client_id}}" name="paypal_sandbox_client_id" class="form-control" placeholder="Paypal Sandbox Client ID">
+                                                        </div>
+                                                        <div class="form-group form-placeholder">
+                                                            <label>Paypal Sandbox Client Secret<span class="star-red">*</span></label>
+                                                            <input type="text" value="{{$settings->paypal_sandbox_client_secret}}" name="paypal_sandbox_client_secret" class="form-control" placeholder="Paypal Sandbox Client Secret">
+                                                        </div>
+                                                        <div class="form-group form-placeholder">
+                                                            <label>Paypal Sandbox APP ID<span class="star-red">*</span></label>
+                                                            <input type="text" value="{{$settings->paypal_sandbox_app_id}}" name="paypal_sandbox_app_id" class="form-control" placeholder="Paypal Sandbox APP ID">
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group form-placeholder">
-                                                        <label>Braintree Merchant ID <span class="star-red">*</span></label>
-                                                        <input type="text" class="form-control" placeholder="pd6gznv7zbrx9hb8">
+
+                                                   <div id="live">
+                                                        <div class="form-group form-placeholder">
+                                                            <label>Paypal Live Client ID<span class="star-red">*</span></label>
+                                                            <input type="text" value="{{$settings->paypal_live_client_id}}" name="paypal_live_client_id" class="form-control" placeholder="Paypal Live Client ID">
+                                                        </div>
+                                                        <div class="form-group form-placeholder">
+                                                            <label>Paypal Live Client Secret<span class="star-red">*</span></label>
+                                                            <input type="text" value="{{$settings->paypal_live_client_secret}}" name="paypal_live_client_secret" class="form-control" placeholder="Paypal Live Client Secret">
+                                                        </div>
+                                                        <div class="form-group form-placeholder">
+                                                            <label>Paypal Live APP ID<span class="star-red">*</span></label>
+                                                            <input type="text" value="{{$settings->paypal_live_app_id}}" name="paypal_live_app_id" class="form-control" placeholder="Paypal Live APP ID">
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group form-placeholder">
-                                                        <label>Braintree Public key <span class="star-red">*</span></label>
-                                                        <input type="text" class="form-control" placeholder="h8bydrz7gcjkp7d4">
-                                                    </div>
-                                                    <div class="form-group form-placeholder">
-                                                        <label>Braintree Private key <span class="star-red">*</span></label>
-                                                        <input type="text" class="form-control" placeholder="sandbox_pgjcppvs_pd6gznv7zbrx9hb8">
-                                                    </div>
-                                                    <div class="form-group form-placeholder">
-                                                        <label>Paypal APP ID <span class="star-red">*</span></label>
-                                                        <input type="text" class="form-control" placeholder="pd6gznv7zbrx9hb8">
-                                                    </div>
-                                                    <div class="form-group form-placeholder">
-                                                        <label>Paypal Secret Key <span class="star-red">*</span></label>
-                                                        <input type="text" class="form-control" placeholder="h8bydrz7gcjkp7d4">
-                                                    </div>
+
                                                     <div class="form-group mb-0">
                                                         <div class="settings-btns">
                                                             <button type="submit" class="btn btn-orange">Save</button>
-                                                            <button type="submit" class="btn btn-grey">Cancel</button>
+                                                            <a href="{{url('/')}}" class="btn btn-grey">Cancel</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -876,4 +879,27 @@
     </div>
 </div>
 <!-- /Page Wrapper -->
+@endsection
+
+@section('js')
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        function paypalMode() {
+            var mode=$(".paypal-mode:checked").val();
+           if(mode!=1 && mode!='1'){
+            $("#sandbox").show();
+            $("#live").hide();
+           }else{
+            $("#live").show();
+            $("#sandbox").hide();
+           }
+        }
+        paypalMode();
+    $(document).on('change', '.paypal-mode', function() {
+        paypalMode();
+    });
+
+    });
+</script>
 @endsection

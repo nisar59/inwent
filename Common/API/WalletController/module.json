@@ -1,0 +1,11 @@
+{
+    "name": "API/WalletController",
+    "alias": "api/walletcontroller",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Common\\API/WalletController\\Providers\\API/WalletControllerServiceProvider"
+    ],
+    "files": []
+}

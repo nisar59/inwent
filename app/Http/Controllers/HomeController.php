@@ -23,6 +23,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $module=session('module');
+        if($module==null){
+            $module='inwent';
+        }
+        
+        $html=view('dashboards.inwent')->render();
+
+        return view('home', compact('html'));
     }
+
+
+
+    
 }

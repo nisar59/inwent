@@ -11,7 +11,7 @@ class ProfessionalProfileProjects extends Model
 
     protected $fillable = ['user_id', 'professional_profile_id','project_title','project_tage_line','project_cover_image','project_link','project_tags','project_description','workplace_name','country_id','city_id'];
     protected $table='professional_profile_projects';
-    
+    protected $appends=['country_name'];
     protected static function newFactory()
     {
         return \Common\Users\Database\factories\ProfessionalProfileProjectsFactory::new();
@@ -22,5 +22,10 @@ class ProfessionalProfileProjects extends Model
     {
         return $value;
        return StorageFile($value);
+    }
+
+    public function getCountryNameAttribute()
+    {
+        return CountryName($this->country_id);
     }
 }

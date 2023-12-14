@@ -14,6 +14,7 @@
 
 Route::group(['prefix'=>'users', 'middleware'=>['permission:users.view']],function() {
     Route::get('/', 'UsersController@index');
+    Route::get('show/{id}', 'UsersController@show');
 });
 
 

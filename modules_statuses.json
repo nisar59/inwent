@@ -29,5 +29,6 @@
     "KnowledgeBaseCategories": true,
     "KnowledgeBase": true,
     "OurClient": true,
-    "CrowdFundingProjects": true
+    "CrowdFundingProjects": true,
+    "Wallet": true
 }

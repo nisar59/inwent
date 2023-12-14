@@ -12,18 +12,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+// Route::get('/', function () {
 
-    // $data=DB::select('Show columns From crowd_funding_equity_campaign');
-    // $form='';
-    // foreach ($data as $key => $value) {
-    //    if($value->Field!="id" && $value->Field!="created_at" && $value->Field!="updated_at"){
-    //     $form.=$value->Field.":"."new FormControl('', Validators.compose([Validators.required])),\n";
-    //    }
-    // }
-    // dd($form);
-    return view('welcome');
-});
+//     // $data=DB::select('Show columns From crowd_funding_equity_campaign');
+//     // $form='';
+//     // foreach ($data as $key => $value) {
+//     //    if($value->Field!="id" && $value->Field!="created_at" && $value->Field!="updated_at"){
+//     //     $form.=$value->Field.":"."new FormControl('', Validators.compose([Validators.required])),\n";
+//     //    }
+//     // }
+//     // dd($form);
+//     return view('welcome');
+// });
 
 Auth::routes(['register' => false]);
+
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('home', 'HomeController@index')->name('home');
+
+
+
+Route::get('module/{slug}',function($slug){
+    session(['module'=>$slug]);
+    return redirect('/');
+
+});

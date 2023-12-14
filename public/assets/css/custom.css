@@ -88,7 +88,7 @@
 .account-page .main-wrapper .account-page-container .toggle-password{
 	position: absolute;
 	right: calc(3% + 10px);
-    top: 58%;
+    top: 72%;
     z-index: 1111;
     cursor: pointer;
     width: 20px;

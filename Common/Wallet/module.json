@@ -1,0 +1,11 @@
+{
+    "name": "Wallet",
+    "alias": "wallet",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Common\\Wallet\\Providers\\WalletServiceProvider"
+    ],
+    "files": []
+}

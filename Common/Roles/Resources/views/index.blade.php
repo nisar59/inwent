@@ -28,11 +28,11 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table w-100 table-sm table-bordered datatables">
-                                <thead class="bg-primary text-white">
+                            <table class="table table-center table-hover mb-0 dataTable no-footer datatables" id="DataTables_Table_0">
+                                <thead>
                                     <tr>
-                                        <th class="text-center">Role Name</th>
-                                        <th class="text-center">Actions</th>
+                                        <th class="text-start">Role Name</th>
+                                        <th class="text-end">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,12 +68,13 @@ $(document).ready(function() {
             buttons: [],
             columns: [{
                 data: 'name',
-                name: 'name'
+                name: 'name',
+                orderable: false,
             }, {
                 data: 'action',
                 name: 'action',
                 orderable: false,
-                class: "d-flex justify-content-center w-auto",
+                class: "d-flex justify-content-end w-auto",
                 searchable: false
             }, ],
         });

@@ -5,8 +5,11 @@
 <script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('assets/plugins/moment/moment.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
-<script src="{{asset('assets/plugins/datatables/datatables-1.13.6/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('assets/plugins/datatables/datatables-1.13.6/js/dataTables.bootstrap5.min.js')}}"></script>
+
+<script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
+
+
 <script src="{{asset('assets/plugins/izitoast/js/iziToast.min.js')}}"></script>
 <script src="{{asset('assets/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 <script src="{{asset('assets/plugins/tinymce/tinymce.min.js')}}"></script>

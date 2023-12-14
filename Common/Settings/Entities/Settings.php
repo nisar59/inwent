@@ -9,7 +9,7 @@ class Settings extends Model
 {
     use HasFactory;
     protected $table='settings';
-    protected $fillable = ['website_url','website_name','portal_name','website_logo','website_logo_small','website_favicon','website_footer_logo','website_auth_logo','portal_logo','portal_logo_small','portal_favicon'];
+    protected $fillable = ['website_url','website_name','portal_name','website_logo','website_logo_small','website_favicon','website_footer_logo','website_auth_logo','portal_logo','portal_logo_small','portal_favicon', 'paypal_mode','paypal_sandbox_client_id','paypal_sandbox_client_secret','paypal_sandbox_app_id','paypal_live_client_id','paypal_live_client_secret','paypal_live_app_id'];
 
 
     public function getWebsiteLogoAttribute()

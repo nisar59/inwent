@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="{{asset('assets/css/feather.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap-datetimepicker.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/plugins/datatables/datatables.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/plugins/datatables/datatables-1.13.6/css/dataTables.bootstrap5.min.css')}}">
+
+
 
     <link rel="stylesheet" href="{{asset('assets/plugins/izitoast/css/iziToast.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/plugins/sweetalert2/sweetalert2.min.css')}}">

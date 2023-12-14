@@ -3,11 +3,11 @@
 	
 	<!-- Logo -->
 	<div class="header-left">
-		<a href="index.html" class="logo">
-			<img src="{{asset('assets/img/white-logo.png')}}" alt="Logo">
+		<a href="/" class="logo">
+			<img src="{{Settings()->portal_logo}}" alt="Logo">
 		</a>
-		<a href="index.html" class="logo logo-small">
-			<img src="{{asset('assets/img/logo-small.png')}}" alt="Logo" width="30" height="30">
+		<a href="/" class="logo logo-small">
+			<img src="{{Settings()->portal_logo_small}}" alt="Logo" width="30" height="30">
 		</a>
 		<!-- Sidebar Toggle -->
 		<a href="javascript:void(0);" id="toggle_btn">
@@ -30,10 +30,41 @@
 			<button class="btn" type="submit"><i class="feather-search"></i></button>
 		</form>
 	</div>
+	<div class="top-nav-search">
+
+	</div>
 	<!-- /Search -->
 	
 	<!-- Header Menu -->
 	<ul class="nav user-menu">
+		<div class="nav-item dropdown mt-2">
+			<a href="#" style="color:#003eae" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+				<i class="h4 feather-grid"></i>
+			</a>
+			<div class="dropdown-menu notifications">
+				<div class="topnav-dropdown-header">
+					<span class="notification-title">Apps</span>
+				</div>
+				<div class="noti-content">
+					<div class="row m-0 p-2 justify-content-evenly">
+					@php($i=0)
+					@foreach(APPS() as $key=>$app)
+						
+						<a href="{{url('module',$key)}}" style="background-color: {{$app['bg']}} ;" class="@if($i==0) col-8 @else col-5 @endif @if($app['bg']!='') text-light @endif text-center p-2 mb-2 shadow rounded">
+							<i class="h4 {{$app['icon']}}"></i>
+							<p class="h5 fw-bold">{{$app['title']}}</p>
+						</a>
+
+
+						@php($i=$i+1)
+					@endforeach
+					</div>
+				</div>
+				<div class="topnav-dropdown-footer">
+					
+				</div>
+			</div>
+		</div>
 		<!-- Notifications -->
 		<li class="nav-item dropdown">
 			<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
