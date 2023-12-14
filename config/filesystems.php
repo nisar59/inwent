@@ -56,33 +56,33 @@ return [
             'throw' => false,
         ],
 
-       'ftp' => [
+       // 'ftp' => [
+       //      'driver' => 'ftp',
+       //      'host' => env('FTP_HOST', '127.0.0.1'),
+       //      'username' => env('FTP_USERNAME', 'maharnisar'),
+       //      'password' => env('FTP_PASSWORD', '123456789'),
+       //      'root' => env('FTP_ROOT',), // for example: /public_html/images
+       //      'ftp_url'=>env('FTP_URL', 'http://localhost/filezila/'),
+       //      // Optional FTP Settings...
+       //      // 'port' => env('FTP_PORT', 21),
+       //      // 'passive' => true,
+       //      // 'ssl' => true,
+       //      // 'timeout' => 30,
+       //  ],
+
+        'ftp' => [
             'driver' => 'ftp',
-            'host' => env('FTP_HOST', '127.0.0.1'),
-            'username' => env('FTP_USERNAME', 'maharnisar'),
-            'password' => env('FTP_PASSWORD', '123456789'),
-            'root' => env('FTP_ROOT',), // for example: /public_html/images
-            'ftp_url'=>env('FTP_URL', 'http://localhost/filezila/'),
+            'host' => env('FTP_HOST', 'ftp.inwent.ca'),
+            'username' => env('FTP_USERNAME', 'media@media.inwent.ca'),
+            'password' => env('FTP_PASSWORD', 'eQqSbwNyjYLcc7wgrHcB'),
+            'root' => env('FTP_ROOT'), // for example: /public_html/images
+            'ftp_url'=>env('FTP_URL', 'http://media.inwent.ca/'),
             // Optional FTP Settings...
             // 'port' => env('FTP_PORT', 21),
             // 'passive' => true,
             // 'ssl' => true,
             // 'timeout' => 30,
-        ],
-
-        // 'ftp' => [
-        //     'driver' => 'ftp',
-        //     'host' => env('FTP_HOST', 'ftp.inwent.ca'),
-        //     'username' => env('FTP_USERNAME', 'media@media.inwent.ca'),
-        //     'password' => env('FTP_PASSWORD', 'eQqSbwNyjYLcc7wgrHcB'),
-        //     'root' => env('FTP_ROOT'), // for example: /public_html/images
-        //     'ftp_url'=>env('FTP_URL', 'http://media.inwent.ca/'),
-        //     // Optional FTP Settings...
-        //     // 'port' => env('FTP_PORT', 21),
-        //     // 'passive' => true,
-        //     // 'ssl' => true,
-        //     // 'timeout' => 30,
-        // ],        
+        ],        
 
     ],
 
