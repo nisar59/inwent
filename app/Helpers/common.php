@@ -3,7 +3,8 @@ use Common\Countries\Entities\Countries;
 use Common\Settings\Entities\Settings;
 use Common\Cities\Entities\Cities;
 use Common\Languages\Entities\Languages;
-
+use App\Models\Notifications;
+use App\Models\UserRatings;
 
 function CountryName($id)
 {
@@ -135,144 +136,20 @@ function paypalConfig()
 
 
 
-function APPS()
-{
-	$apps=[
-		'inwent'=>[
-
-				'title'=>'Inwent',
-				'icon'=>'fas fa-home',
-				'bg'=>'#7400B8',
-				'permissions'=>[],
-				'menu'=>[
-					['title'=>'Roles & Permissions','icon'=>'fas fa-user-shield','url'=>'roles', 'prefix'=>'/roles', 'permissions'=>''],
-					['title'=>'Admins','icon'=>'fas fa-id-card','url'=>'admins','prefix'=>'/admins', 'permissions'=>''],
-					['title'=>'Users','icon'=>'fas fa-users','url'=>'users','prefix'=>'/users', 'permissions'=>''],
-				],
-		],
+function GenerateNotification($notification){
+	return Notifications::create($notification);
+}
 
 
+function GetUserNotifications($user_id){
+	$data=[];
 
-		'settings'=>[
-				'title'=>'Settings',
-				'icon'=>'fas fa-cog',
-				'bg'=>'#5E60CE',
-				'permissions'=>[],
-				'menu'=>[
-					['title'=>'General Settings', 'icon'=>'fas fa-cog', 'url'=>'settings','prefix'=>'/settings'],
-					['title'=>'Payments Settings', 'icon'=>'fab fa-paypal', 'url'=>'settings','prefix'=>'/settings', 'permissions'=>''],
-					['title'=>'Email Settings', 'icon'=>'fas fa-envelope', 'url'=>'settings','prefix'=>'/settings', 'permissions'=>''],
-					['title'=>'Social Media Login', 'icon'=>'fas fa-user-lock', 'url'=>'settings','prefix'=>'/settings', 'permissions'=>''],
-					['title'=>'Social Links', 'icon'=>'fas fa-share-alt', 'url'=>'settings','prefix'=>'/settings', 'permissions'=>''],
-				]
-		],
+	$data['notifications']= Notifications::where(['is_read'=>0,'notification_for'=>0, 'user_to'=>$user_id])->get();
+	$data['rating_invitations']= UserRatings::where(['status'=>0,'user_to'=>$user_id])->count();
 
+	return $data;
+}
 
-
-		'cms'=>[
-				'title'=>'CMS',
-				'icon'=>'fas fa-th-large',
-				'bg'=>'#5390D9',
-				'permissions'=>[],
-				'menu'=>[
-					['title'=>'Pages', 'icon'=>'fab fa-elementor', 'url'=>'pages', 'prefix'=>'/pages', 'permissions'=>''],
-
-					['title'=>'Main Menu', 'icon'=>'fas fa-bars', 'url'=>'main-menu', 'prefix'=>'/main-menu', 'permissions'=>''],
-
-					['title'=>'Footer Menu', 'icon'=>'fas fa-chevron-circle-down', 'url'=>'footer-menu-headings', 'prefix'=>'/footer-menu-headings', 'permissions'=>''],
-
-					['title'=>'Sliders', 'icon'=>'fas fa-sliders-h', 'url'=>'sliders', 'prefix'=>'/sliders', 'permissions'=>''],
-
-					['title'=>'Banners', 'icon'=>'fas fa-ticket-alt', 'url'=>'banner', 'prefix'=>'/banner', 'permissions'=>''],
-
-					['title'=>'Action Banners', 'icon'=>'fas fa-money-check', 'url'=>'action-banner', 'prefix'=>'/action-banner', 'permissions'=>''],
-
-					['title'=>'Our Clients', 'icon'=>'fas fa-restroom', 'url'=>'our-client', 'prefix'=>'/our-client', 'permissions'=>''],
-
-					['title'=>'Categories', 'icon'=>'fas fa-database', 'url'=>'categories', 'prefix'=>'/categories', 'permissions'=>''],
-
-					['title'=>'User Reviews', 'icon'=>'fas fa-pen-alt', 'url'=>'user-reviews', 'prefix'=>'/user-reviews', 'permissions'=>''],
-
-					['title'=>'Inwent Legal', 'icon'=>'fas fa-bible', 'url'=>'inwent-legal', 'prefix'=>'/inwent-legal', 'permissions'=>''],
-
-					['title'=>'Blogs', 'icon'=>'fas fa-newspaper', 'url'=>'blog', 'prefix'=>'/blog', 'permissions'=>''],
-
-					['title'=>'Knowledge Base Categories', 'icon'=>'fas fa-list', 'url'=>'knowledge-base-categories', 'prefix'=>'/knowledge-base-categories', 'permissions'=>''],
-
-					['title'=>'Knowledge Base', 'icon'=>'fas fa-book-open', 'url'=>'knowledge-base', 'prefix'=>'/knowledge-base', 'permissions'=>''],
-				]
-		],
-
-
-
-		'network'=>[
-				'title'=>'Network',
-				'icon'=>'fas fa-bezier-curve',
-				'bg'=>'#4EA8DE',
-				'permissions'=>[],
-				'menu'=>[
-					['title'=>'General Settings', 'icon'=>'fas fa-gear', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Payments Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Email Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Social Media Login', 'icon'=>'fas fa-user-lock', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Social Links', 'icon'=>'fas fa-square-share-nodes', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-				]
-		],
-
-
-
-
-		'freelancing'=>[
-				'title'=>'Freelancing',
-				'icon'=>'fas fa-chalkboard-teacher',
-				'bg'=>'#48BFE3',
-				'permissions'=>[],
-				'menu'=>[
-					['title'=>'General Settings', 'icon'=>'fas fa-gear', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Payments Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Email Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Social Media Login', 'icon'=>'fas fa-user-lock', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Social Links', 'icon'=>'fas fa-square-share-nodes', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-				]
-		],
-
-
-
-
-
-		'crowd_funding'=>[
-				'title'=>'Crowd Funding',
-				'icon'=>'fas fa-hand-holding-usd',
-				'bg'=>'#56CFE1',
-				'permissions'=>[],
-				'menu'=>[
-					['title'=>'General Settings', 'icon'=>'fas fa-gear', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Payments Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Email Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Social Media Login', 'icon'=>'fas fa-user-lock', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-					['title'=>'Social Links', 'icon'=>'fas fa-square-share-nodes', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-				]
-		],
-
-
-
-
-		'wallet'=>[
-				'title'=>'Wallet',
-				'icon'=>'fas fa-wallet',
-				'bg'=>'#80FFDB',
-				'menu'=>[
-					['title'=>'General Settings', 'icon'=>'fas fa-gear', 'url'=>'', 'prefix'=>''],
-					['title'=>'Payments Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>''],
-					['title'=>'Email Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>''],
-					['title'=>'Social Media Login', 'icon'=>'fas fa-user-lock', 'url'=>'', 'prefix'=>''],
-					['title'=>'Social Links', 'icon'=>'fas fa-square-share-nodes', 'url'=>'', 'prefix'=>''],
-				]
-		],
-
-
-	];
-
-
-	return $apps;
+function GetAdminNotifications(){
+	return Notifications::where(['is_read'=>0,'notification_for'=>0])->get();
 }

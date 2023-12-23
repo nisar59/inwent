@@ -8,15 +8,15 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">Blog</h3>
+                    <h3 class="page-title">Blogs</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                         
-                        <li class="breadcrumb-item active">Blog</li>
+                        <li class="breadcrumb-item active">Blogs</li>
                     </ul>
                 </div>
                 <div class="col-auto">
-                    <a href="{{url('blog/create')}}" class="btn btn-success btn-sm">
+                    <a href="{{url('blogs/create', request()->id)}}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i>
                     </a>
                 </div>
@@ -29,13 +29,12 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table w-100 table-sm table-bordered datatables">
-                                <thead class="bg-primary text-white">
+                                <thead>
                                     <tr>
-                                        <th class="text-center">Title</th>
-                                        <th class="text-center">Slug</th>
-                                        <th class="text-center">Description</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center">Actions</th>
+                                        <th>Title</th>
+                                        <th>Slug</th>
+                                        <th>Status</th>
+                                        <th class="text-end">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,7 +61,7 @@ $(document).ready(function() {
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{url('blog')}}",
+                url: "{{url('blogs', request()->id)}}",
                 data: data,
             },
             buttons: [],
@@ -70,26 +69,16 @@ $(document).ready(function() {
             {
                 data: 'title',
                 name: 'title',
-                class:'text-center'
             },
             {
                 data: 'slug',
                 name: 'slug',
-                class:'text-center',
-                orderable:false,
-                searchable:false
-            },
-            {
-                data: 'description',
-                name: 'description',
-                class:'text-center',
                 orderable:false,
                 searchable:false
             },
             {
                 data: 'status',
                 name: 'status',
-                class:'text-center',
                 orderable:false,
                 searchable:false
             },
@@ -97,7 +86,7 @@ $(document).ready(function() {
                 data: 'action',
                 name: 'action',
                 orderable: false,
-                class: "text-center",
+                class: "d-flex justify-content-end",
                 searchable: false
             }, ],
         });

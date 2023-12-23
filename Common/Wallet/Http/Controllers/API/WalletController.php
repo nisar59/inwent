@@ -213,6 +213,7 @@ class WalletController extends Controller
             AdminWalletTransactions::create([
                 'admin_wallet_id'=>$admin_wallet->id,
                 'user_wallet_transaction_id'=>$user_trans->id,
+                'transaction_type'=>0,
                 'amount'=>$user_trans->amount,
                 'transaction_id'=>$response['id'],
                 'status'=>0,

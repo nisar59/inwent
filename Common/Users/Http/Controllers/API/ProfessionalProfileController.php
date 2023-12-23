@@ -6,6 +6,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Common\Countries\Entities\Countries;
+use Common\Users\Entities\BasicProfile;
+use Common\Users\Entities\BusinessProfile;
 use Common\Users\Entities\ProfessionalProfile;
 use Common\Users\Entities\ProfessionalProfileAwards;
 use Common\Users\Entities\ProfessionalProfileArticles;
@@ -23,8 +25,9 @@ use Common\Users\Entities\ProfessionalProfilePublications;
 use Common\Users\Entities\ProfessionalProfileCompliance;
 use Common\ProfessionalSkills\Entities\ProfessionalSkills;
 use Common\ProfessionalTools\Entities\ProfessionalTools;
-use Common\Draft\Entities\Draft;
 use Common\Languages\Entities\Languages;
+use Common\Draft\Entities\Draft;
+use App\Models\User;
 use Throwable;
 use Auth;
 use DB;
@@ -84,6 +87,39 @@ class ProfessionalProfileController extends Controller
         }       
     }
 
+
+
+    public function professionalProfileBySlug($slug)
+    {
+
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+            $user=User::where('slug', $slug)->first(); 
+
+            if($user==null){
+            $res=['success'=>true,'message'=>'User not found','errors'=>[],'data'=>null];
+
+            }else{
+                $basic_profile=BasicProfile::where(['user_id'=>$user->id])->first();
+
+                $data=[
+                    'user'=>$user,
+                    'basic_profile'=>$basic_profile
+                ];
+
+                $res=['success'=>true,'message'=>'Basic profile successfully fetched','errors'=>[],'data'=>$data];
+            }
+
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }       
+    }
 
 
     /**

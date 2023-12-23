@@ -1,0 +1,11 @@
+{
+    "name": "BlogCategories",
+    "alias": "blogcategories",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "CMS\\BlogCategories\\Providers\\BlogCategoriesServiceProvider"
+    ],
+    "files": []
+}

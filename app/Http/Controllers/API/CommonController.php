@@ -9,7 +9,9 @@ use Common\States\Entities\States;
 use Common\Cities\Entities\Cities;
 use CMS\MainMenu\Entities\MainMenu;
 use CMS\FooterMenu\Entities\FooterMenuHeadings;
+use CMS\BlogCategories\Entities\BlogCategories;
 use CMS\Pages\Entities\Pages;
+use CMS\Blog\Entities\Blog;
 use Auth;
 use DB;
 use Throwable;
@@ -133,6 +135,142 @@ class CommonController extends Controller
             }else{
                 $res=['success'=>false,'message'=>'page not found','errors'=>[],'data'=>null];
             }  
+
+             return response()->json($res);
+            
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+
+
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function blogs()
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {   
+
+            $blogs=Blog::where('status', 1)->orderBy('id', 'DESC')->get();
+            $blogs_categories=BlogCategories::where('status', 1)->orderBy('id', 'DESC')->get();
+            $data=[               
+                'blogs'=>$blogs,
+                'blogs_categories'=>$blogs_categories
+            ];
+
+                $res=['success'=>true,'message'=>'blogs & blogs categories successfully fetched','errors'=>[],'data'=>$data]; 
+
+             return response()->json($res);
+            
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function blogsByCategory($slug)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {   
+
+            $cate=BlogCategories::where('slug','LIKE','%'.$slug.'%')->first();
+
+            if($cate!=null){
+                $blogs=Blog::where('category_id', $cate->id)->where('status', 1)->orderBy('id', 'DESC')->get();
+            }else{
+                $blogs=Blog::where('status', 1)->orderBy('id', 'DESC')->get();
+            }
+
+            $blogs_categories=BlogCategories::where('status', 1)->orderBy('id', 'DESC')->get();
+            $data=[               
+                'blogs'=>$blogs,
+                'blogs_categories'=>$blogs_categories
+            ];
+
+                $res=['success'=>true,'message'=>'blogs & blogs categories successfully fetched','errors'=>[],'data'=>$data]; 
+
+             return response()->json($res);
+            
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+
+
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function blogDetail($slug)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {   
+
+            $blogs=Blog::where('status', 1)->orderBy('id', 'DESC')->limit(5)->get();
+            $blog=Blog::where('slug','LIKE','%'.$slug.'%')->first();
+            $blogs_categories=BlogCategories::where('status', 1)->orderBy('id', 'DESC')->get();
+
+            $data=[ 
+                'blogs'=>$blogs,           
+                'blog'=>$blog,           
+                'blogs_categories'=>$blogs_categories,
+            ];
+
+            if($blog!=null){
+                $res=['success'=>true,'message'=>'Blog successfully fetched','errors'=>[],'data'=>$data];
+            }else{
+                $res=['success'=>false,'message'=>'page not found','errors'=>[],'data'=>null];
+            }  
+
+             return response()->json($res);
+            
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+
+
+    public function getNotifications()
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {   
+           $user_id=InwntDecrypt(Auth::id()); 
+
+            $data=GetUserNotifications($user_id);
+
+            $res=['success'=>true,'message'=>'notifications successfully fetched','errors'=>[],'data'=>$data]; 
 
              return response()->json($res);
             

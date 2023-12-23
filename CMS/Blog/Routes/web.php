@@ -12,23 +12,23 @@
 */
 
 
-Route::group(['prefix'=>'blog', 'middleware'=>['permission:blog.view']],function() {
-    Route::get('/', 'BlogController@index');
+Route::group(['prefix'=>'blogs', 'middleware'=>['permission:blogs.view']],function() {
+    Route::get('/{id}', 'BlogController@index');
 });
 
 
-Route::group(['prefix'=>'blog', 'middleware'=>['permission:blog.create']],function() {
-    Route::get('/create', 'BlogController@create');
-    Route::post('/store', 'BlogController@store');
+Route::group(['prefix'=>'blogs', 'middleware'=>['permission:blogs.create']],function() {
+    Route::get('/create/{id}', 'BlogController@create');
+    Route::post('/store/{id}', 'BlogController@store');
 });
 
-Route::group(['prefix'=>'blog', 'middleware'=>['permission:blog.edit']],function() {
+Route::group(['prefix'=>'blogs', 'middleware'=>['permission:blogs.edit']],function() {
     Route::get('/edit/{id}', 'BlogController@edit');
     Route::POST('/update/{id}', 'BlogController@update');
     Route::get('/status/{id}', 'BlogController@status');
 });
 
-Route::group(['prefix'=>'blog', 'middleware'=>['permission:blog.delete']],function() {
+Route::group(['prefix'=>'blogs', 'middleware'=>['permission:blogs.delete']],function() {
     Route::get('/destroy/{id}', 'BlogController@destroy');
 });
 

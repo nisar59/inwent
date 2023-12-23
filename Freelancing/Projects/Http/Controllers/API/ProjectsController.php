@@ -242,16 +242,18 @@ class ProjectsController extends Controller
                 'user_to'=>$req->user_to,
                 'milstone_price'=>$req->milstone_price,
                 'expected_closing_date'=>$req->expected_closing_date,
+                'name'=>$req->name,
                 'description'=>$req->description,
                 'agree_to_terms'=>$req->agree_to_terms,
             ]);
             $project=Projects::find($req->project_id);
 
-            $hired_freelancer=$roject->hired_freelancer;
+            $hired_freelancer=$project->hired_freelancer;
 
             $hired_freelancer[]=$req->user_to;
             $project->hired_freelancer=$hired_freelancer;
-
+            $project->status=1;
+            
             $project->save();
             
             $data=[

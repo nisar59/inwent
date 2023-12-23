@@ -19,4 +19,8 @@ Route::group(['prefix'=>'network', 'middleware'=>['jwt.verify']],function(){
     Route::post('connects/accept-reject', 'API\ConnectsController@update');
     Route::get('connects/delete/{id}', 'API\ConnectsController@destroy');
     Route::post('search', 'API\ConnectsController@search');
+    Route::get('rating-connects/', 'API\ConnectsController@ratingConnects');
+    Route::post('invite-connect/', 'API\ConnectsController@inviteConnect');
+    Route::get('rating-invitations/', 'API\ConnectsController@ratingInvitations');
+    Route::post('rating-invitation/accept-reject', 'API\ConnectsController@ratingInvitationUpdate');
 });

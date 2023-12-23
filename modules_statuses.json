@@ -30,5 +30,6 @@
     "KnowledgeBase": true,
     "OurClient": true,
     "CrowdFundingProjects": true,
-    "Wallet": true
+    "Wallet": true,
+    "BlogCategories": true
 }

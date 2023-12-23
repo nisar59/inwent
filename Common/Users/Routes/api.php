@@ -24,6 +24,7 @@ Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function(){
 
 
     Route::get('professional-profile', 'API\ProfessionalProfileController@professionalProfile');
+    Route::get('professional-profile/{slug}', 'API\ProfessionalProfileController@professionalProfileBySlug');
 
     Route::post('professional-profile', 'API\ProfessionalProfileController@professionalProfileUpdate');
 

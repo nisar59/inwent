@@ -20,13 +20,21 @@
         <!-- /Page Header -->
         <div class="row">
             <div class="col-sm-12">
-                <form action="{{url('blog/store')}}" method="POST" class="card">
+                <form action="{{url('blogs/store', request()->id)}}" method="POST" class="card" enctype="multipart/form-data">
                     @csrf
                     <div class="card-header p-3">
                         <h5 class="card-title">Add Blog</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="">Page Banner (1680x304)</label>
+                                <input type="file" name="page_banner" class="form-control">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="">Thumbnail (1200x800)</label>
+                                <input type="file" name="thumbnail" class="form-control">
+                            </div>
                             <div class="col-md-6 form-group">
                                 <label for="">Title</label>
                                 <input type="text" name="title" id="title" class="form-control"  placeholder="Enter title">
@@ -36,8 +44,13 @@
                                 <input type="text" name="slug" id="slug" class="form-control"  placeholder="Enter Slug">
                             </div>
                             <div class="col-md-12 form-group">
+                                <label>Short Description</label>
+                                <textarea name="short_description" class="form-control"></textarea>
+                            </div>
+                              
+                            <div class="col-md-12 form-group">
                                 <label>Description</label>
-                                <textarea name="description" id="mytextarea"></textarea>
+                                <textarea name="description" class="editor form-control"></textarea>
                             </div>
                         </div>
                     </div>
@@ -60,11 +73,6 @@ Text = Text.toLowerCase();
 Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
 $("#slug").val(Text);
 });
-
-
-tinymce.init({
-        selector: '#mytextarea'
-      });
 
 </script>
 @endsection
