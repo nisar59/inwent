@@ -98,7 +98,8 @@ class UsersController extends Controller
     {
         $user=User::with('basicProfile')->find($id);
         $basic_profile=BasicProfile::where('user_id', $user->id)->first();
-        $professional_profile=ProfessionalProfile::with('projects', 'publications', 'patents', 'conferences', 'articles' ,'experience', 'education', 'courses', 'certificates', 'volunteerings', 'awards', 'languages', 'breaks', 'compliances')->where('user_id', $user->id)->first();
+       $professional_profile=ProfessionalProfile::with('projects', 'publications', 'patents', 'conferences', 'articles' ,'experience', 'education', 'courses', 'certificates', 'volunteerings', 'awards', 'languages', 'breaks', 'compliances')->where('user_id', $user->id)->first();
+
         if($user==null){
             return redirect()->back()->with('error', 'User not found');
         }

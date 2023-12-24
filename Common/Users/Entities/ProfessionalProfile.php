@@ -18,6 +18,9 @@ use Common\Users\Entities\ProfessionalProfilePatentDetails;
 use Common\Users\Entities\ProfessionalProfileProjects;
 use Common\Users\Entities\ProfessionalProfilePublications;
 use Common\Users\Entities\ProfessionalProfileCompliance;
+use Common\ProfessionalSkills\Entities\ProfessionalSkills;
+use Common\ProfessionalTools\Entities\ProfessionalTools;
+
 
 class ProfessionalProfile extends Model
 {
@@ -25,7 +28,8 @@ class ProfessionalProfile extends Model
 
     protected $table='professional_profile';
     protected $fillable = ['user_id','profile_status','skills_tags','skills_other_tags','tools_tags','tools_other_tags','agree_to_terms','agree_to_get_offers'];
-    
+    protected $appends=['skills', 'other_skills', 'tools', 'other_tools'];
+
     protected static function newFactory()
     {
         return \Common\Users\Database\factories\ProfessionalProfileFactory::new();
@@ -124,5 +128,47 @@ class ProfessionalProfile extends Model
        return $this->hasMany(ProfessionalProfileCompliance::class,'professional_profile_id', 'id');
     }
 
+    public function getSkillsAttribute()
+    {
+      $sub_ids=$this->skills_tags;
+      if($sub_ids==null || $sub_ids==""){
+         $sub_ids=[];
+      }
+      return ProfessionalSkills::whereIn('id', $sub_ids)->get();
+    }
+
+
+    public function getOtherSkillsAttribute()
+    {
+         $sub_ids=$this->skills_other_tags;
+
+         if($sub_ids==null || $sub_ids==""){
+            $sub_ids=[];
+         }
+
+      return ProfessionalSkills::whereIn('id', $sub_ids)->get();
+    }
+
+
+
+
+    public function getToolsAttribute()
+    {
+         $sub_ids=$this->tools_tags;
+         if($sub_ids==null || $sub_ids==""){
+            $sub_ids=[];
+         }
+         return ProfessionalTools::whereIn('id', $sub_ids)->get();
+    }
+
+
+    public function getOtherToolsAttribute()
+    {
+         $sub_ids=$this->tools_other_tags;
+         if($sub_ids==null || $sub_ids==""){
+            $sub_ids=[];
+         }
+         return ProfessionalTools::whereIn('id', $sub_ids)->get();
+    }
 
 }

@@ -62,11 +62,12 @@
             </div>
             
             <div class="col-12">
-                <div class="card bg-white projects-card">
-                    <div class="card-body pt-0">
-                        <div class="card-header">
+                <div class="card bg-white projects-card">                      
+                     <div class="card-header m-3 p-1">
                             <h5 class="card-title">User Profiles</h5>
-                        </div>
+                     </div>
+                    <div class="card-body pt-0">
+
                         <div class="reviews-menu-links">
                             <ul role="tablist" class="nav nav-pills card-header-pills nav-justified">
                                 <li class="nav-item">
@@ -164,27 +165,123 @@
                                 @else
                             <div class="d-flex align-items-start">
                               <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <button class="nav-link active" id="v-pills-skills-other-skills-tab" data-bs-toggle="pill" data-bs-target="#v-pills-skills-other-skills" type="button" role="tab" aria-controls="v-pills-skills-other-skills" aria-selected="true">Skills & Other Skills</button>
-                                <button class="nav-link" id="v-pills-tools-other-tools-tab" data-bs-toggle="pill" data-bs-target="#v-pills-tools-other-tools" type="button" role="tab" aria-controls="v-pills-tools-other-tools" aria-selected="false">Tools & Other Tools</button>
-                                <button class="nav-link" id="v-pills-projects-tab" data-bs-toggle="pill" data-bs-target="#v-pills-projects" type="button" role="tab" aria-controls="v-pills-projects" aria-selected="false">Projects</button>
-                                <button class="nav-link" id="v-pills-publications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-publications" type="button" role="tab" aria-controls="v-pills-publications" aria-selected="false">Journal Publications</button>
-                                <button class="nav-link" id="v-pills-patents-tab" data-bs-toggle="pill" data-bs-target="#v-pills-patents" type="button" role="tab" aria-controls="v-pills-patents" aria-selected="false">Patents</button>
-                                <button class="nav-link" id="v-pills-conference-tab" data-bs-toggle="pill" data-bs-target="#v-pills-conference" type="button" role="tab" aria-controls="v-pills-conference" aria-selected="false">Conference</button>
-                                <button class="nav-link" id="v-pills-articles-tab" data-bs-toggle="pill" data-bs-target="#v-pills-articles" type="button" role="tab" aria-controls="v-pills-articles" aria-selected="false">Articles</button>
-                                <button class="nav-link" id="v-pills-experience-tab" data-bs-toggle="pill" data-bs-target="#v-pills-experience" type="button" role="tab" aria-controls="v-pills-experience" aria-selected="false">Experience</button>
-                                <button class="nav-link" id="v-pills-education-tab" data-bs-toggle="pill" data-bs-target="#v-pills-education" type="button" role="tab" aria-controls="v-pills-education" aria-selected="false">Education</button>
-                                <button class="nav-link" id="v-pills-courses-tab" data-bs-toggle="pill" data-bs-target="#v-pills-courses" type="button" role="tab" aria-controls="v-pills-courses" aria-selected="false">Courses</button>
-                                <button class="nav-link" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-certifications" type="button" role="tab" aria-controls="v-pills-certifications" aria-selected="false">Certification & Licenses</button>
-                                <button class="nav-link" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-volunteering" type="button" role="tab" aria-controls="v-pills-volunteering" aria-selected="false">Volunteering</button>
-                                <button class="nav-link" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-honours" type="button" role="tab" aria-controls="v-pills-honours" aria-selected="false">Honours & Awards</button>
-                                <button class="nav-link" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-languages" type="button" role="tab" aria-controls="v-pills-languages" aria-selected="false">Languages</button>
-                                <button class="nav-link" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-career-break" type="button" role="tab" aria-controls="v-pills-career-break" aria-selected="false">Career Break</button>
-                                <button class="nav-link" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-compliance" type="button" role="tab" aria-controls="v-pills-compliance" aria-selected="false">Compliance</button>
+                                <button class="nav-link text-truncate border mb-1 active" id="v-pills-skills-other-skills-tab" data-bs-toggle="pill" data-bs-target="#v-pills-skills-other-skills" type="button" role="tab" aria-controls="v-pills-skills-other-skills" aria-selected="true">Skills & Other Skills</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-tools-other-tools-tab" data-bs-toggle="pill" data-bs-target="#v-pills-tools-other-tools" type="button" role="tab" aria-controls="v-pills-tools-other-tools" aria-selected="false">Tools & Other Tools</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-projects-tab" data-bs-toggle="pill" data-bs-target="#v-pills-projects" type="button" role="tab" aria-controls="v-pills-projects" aria-selected="false">Projects</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-publications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-publications" type="button" role="tab" aria-controls="v-pills-publications" aria-selected="false">Journal Publications</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-patents-tab" data-bs-toggle="pill" data-bs-target="#v-pills-patents" type="button" role="tab" aria-controls="v-pills-patents" aria-selected="false">Patents</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-conference-tab" data-bs-toggle="pill" data-bs-target="#v-pills-conference" type="button" role="tab" aria-controls="v-pills-conference" aria-selected="false">Conference</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-articles-tab" data-bs-toggle="pill" data-bs-target="#v-pills-articles" type="button" role="tab" aria-controls="v-pills-articles" aria-selected="false">Articles</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-experience-tab" data-bs-toggle="pill" data-bs-target="#v-pills-experience" type="button" role="tab" aria-controls="v-pills-experience" aria-selected="false">Experience</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-education-tab" data-bs-toggle="pill" data-bs-target="#v-pills-education" type="button" role="tab" aria-controls="v-pills-education" aria-selected="false">Education</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-courses-tab" data-bs-toggle="pill" data-bs-target="#v-pills-courses" type="button" role="tab" aria-controls="v-pills-courses" aria-selected="false">Courses</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-certifications" type="button" role="tab" aria-controls="v-pills-certifications" aria-selected="false">Certification & Licenses</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-volunteering" type="button" role="tab" aria-controls="v-pills-volunteering" aria-selected="false">Volunteering</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-honours" type="button" role="tab" aria-controls="v-pills-honours" aria-selected="false">Honours & Awards</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-languages" type="button" role="tab" aria-controls="v-pills-languages" aria-selected="false">Languages</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-career-break" type="button" role="tab" aria-controls="v-pills-career-break" aria-selected="false">Career Break</button>
+                                <button class="nav-link text-truncate border mb-1" id="v-pills-certifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-compliance" type="button" role="tab" aria-controls="v-pills-compliance" aria-selected="false">Compliance</button>
 
                               </div>
-                              <div class="tab-content" id="v-pills-tabContent">
-                                <div class="tab-pane fade show active" id="v-pills-skills-other-skills" role="tabpanel" aria-labelledby="v-pills-skills-other-skills-tab">...</div>
-                                <div class="tab-pane fade" id="v-pills-tools-other-tools" role="tabpanel" aria-labelledby="v-pills-tools-other-tools-tab">...</div>
+                              <div class="tab-content w-100 pt-0" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-skills-other-skills" role="tabpanel" aria-labelledby="v-pills-skills-other-skills-tab">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card rounded-0 mb-1">
+                                                <div class="card-header p-2">
+                                                    <h5 class="card-title">Skills</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        @if($professional_profile->skills==null || $professional_profile->skills->count()<1)
+                                                        <div class="col-12">
+                                                            <p>No Skill found against this profile</p>
+                                                        </div>
+                                                        @else
+                                                            @foreach($professional_profile->skills as $skill)
+                                                                <div class="col text-truncate">
+                                                                    <span class="rounded bg-secondary ps-2 pe-2 text-white">{{$skill->title}}</span>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="card rounded-0 mb-1">
+                                                <div class="card-header p-2">
+                                                    <h5 class="card-title">Other Skills</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        @if($professional_profile->other_skills==null || $professional_profile->other_skills->count()<1)
+                                                        <div class="col-12">
+                                                            <p>No Skill found against this profile</p>
+                                                        </div>
+                                                        @else
+                                                            @foreach($professional_profile->other_skills as $oher_skill)
+                                                                <div class="col text-truncate">
+                                                                    <span class="rounded bg-secondary ps-2 pe-2 text-white">{{$oher_skill->title}}</span>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-tools-other-tools" role="tabpanel" aria-labelledby="v-pills-tools-other-tools-tab">
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card rounded-0 mb-1">
+                                                <div class="card-header p-2">
+                                                    <h5 class="card-title">Tools</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        @if($professional_profile->tools==null || $professional_profile->tools->count()<1)
+                                                        <div class="col-12">
+                                                            <p>No Skill found against this profile</p>
+                                                        </div>
+                                                        @else
+                                                            @foreach($professional_profile->tools as $tool)
+                                                                <div class="col text-truncate">
+                                                                    <span class="rounded bg-secondary ps-2 pe-2 text-white">{{$tool->title}}</span>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="card rounded-0 mb-1">
+                                                <div class="card-header p-2">
+                                                    <h5 class="card-title">Other Tools</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        @if($professional_profile->other_tools==null || $professional_profile->other_tools->count()<1)
+                                                        <div class="col-12">
+                                                            <p>No Skill found against this profile</p>
+                                                        </div>
+                                                        @else
+                                                            @foreach($professional_profile->other_tools as $oher_tool)
+                                                                <div class="col text-truncate">
+                                                                    <span class="rounded bg-secondary ps-2 pe-2 text-white">{{$oher_tool->title}}</span>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                                 <div class="tab-pane fade" id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab">...</div>
                                 <div class="tab-pane fade" id="v-pills-publications" role="tabpanel" aria-labelledby="v-pills-publications-tab">...</div>
                                 <div class="tab-pane fade" id="v-pills-patents" role="tabpanel" aria-labelledby="v-pills-patents-tab">...</div>
