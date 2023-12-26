@@ -1,0 +1,11 @@
+{
+    "name": "SponsoredPosts",
+    "alias": "sponsoredposts",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Network\\SponsoredPosts\\Providers\\SponsoredPostsServiceProvider"
+    ],
+    "files": []
+}

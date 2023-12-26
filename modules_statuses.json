@@ -31,5 +31,6 @@
     "OurClient": true,
     "CrowdFundingProjects": true,
     "Wallet": true,
-    "BlogCategories": true
+    "BlogCategories": true,
+    "SponsoredPosts": true
 }
