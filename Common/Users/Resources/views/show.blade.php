@@ -244,7 +244,7 @@
                                                     <div class="row">
                                                         @if($professional_profile->tools==null || $professional_profile->tools->count()<1)
                                                         <div class="col-12">
-                                                            <p>No Skill found against this profile</p>
+                                                            <p>No Tool found against this profile</p>
                                                         </div>
                                                         @else
                                                             @foreach($professional_profile->tools as $tool)
@@ -266,7 +266,7 @@
                                                     <div class="row">
                                                         @if($professional_profile->other_tools==null || $professional_profile->other_tools->count()<1)
                                                         <div class="col-12">
-                                                            <p>No Skill found against this profile</p>
+                                                            <p>No Tool found against this profile</p>
                                                         </div>
                                                         @else
                                                             @foreach($professional_profile->other_tools as $oher_tool)
@@ -282,7 +282,63 @@
                                     </div>
 
                                 </div>
-                                <div class="tab-pane fade" id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab">...</div>
+                                <div class="tab-pane fade" id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card rounded-0 mb-1">
+                                                <div class="card-header p-2">
+                                                    <h5 class="card-title">Projects</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                        @if($professional_profile->projects==null || $professional_profile->projects->count()<1)
+                                                            <p class="text-center">No Project found against this profile</p>
+                                                        @else
+                                                            @foreach($professional_profile->projects as $project)
+                                                                <div class="row mb-1 align-items-center">
+                                                                    <div class="col-10 d-flex flex-wrap">
+                                                                        <div class="w-100">
+                                                                            <h5 class="text-capitalize text-center text-bold">{{$project->project_title}}</h5>
+                                                                            <p>{{$project->project_description}}</p>
+                                                                        </div>
+                                                                        <div class="form-group me-3">
+                                                                            <label class="fw-bold" for="">Project Title</label>
+                                                                            <p >{{$project->project_title}}</p>
+                                                                        </div>
+                                                                        <div class="form-group me-3">
+                                                                            <label class="fw-bold" for="">Project Tage Line</label>
+                                                                            <p >{{$project->project_tage_line}}</p>
+                                                                        </div>
+
+                                                                        <div class="form-group me-3">
+                                                                            <label class="fw-bold" for="">Project Link </label>
+                                                                            <a class="nav-link" href="{{$project->project_link}}"><i class="fas fa-external-link-alt"></i> {{$project->project_link}}</a>
+                                                                        </div>
+
+                                                                        <div class="form-group me-3">
+                                                                            <label class="fw-bold" for="">Workspace Name</label>
+                                                                            <p >{{$project->workplace_name}}</p>
+                                                                        </div>
+                                                                        <div class="form-group me-3">
+                                                                            <label class="fw-bold" for="">County Name</label>
+                                                                            <p >{{$project->country_name}}</p>
+                                                                        </div>
+                                                                        <div class="form-group me-3">
+                                                                            <label class="fw-bold" for="">City Name</label>
+                                                                            <p >{{$project->city_name}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <img width="150px" height="150px" class="rounded border p-1 m-1" src="{{$project->project_cover_image}}" alt="">
+                                                                    </div>
+                                                                    <hr>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="tab-pane fade" id="v-pills-publications" role="tabpanel" aria-labelledby="v-pills-publications-tab">...</div>
                                 <div class="tab-pane fade" id="v-pills-patents" role="tabpanel" aria-labelledby="v-pills-patents-tab">...</div>
                                 <div class="tab-pane fade" id="v-pills-conference" role="tabpanel" aria-labelledby="v-pills-conference-tab">...</div>

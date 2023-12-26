@@ -5,6 +5,7 @@ namespace Network\Posts\Http\Controllers\API;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Network\SponsoredPosts\Entities\SponsoredPosts;
 use Network\Posts\Entities\Posts;
 use Network\Posts\Entities\Comments;
 use Network\Posts\Entities\Reactions;
@@ -23,8 +24,10 @@ class PostsController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
             $posts=Posts::with('user','media', 'reactions', 'comments')->latest()->get();
+            $sponsored_posts=SponsoredPosts::where('status', 1)->latest()->get();
             $data=[
-                'posts'=>$posts
+                'posts'=>$posts,
+                'sponsored_posts'=>$sponsored_posts
             ];
 
             $res=['success'=>true,'message'=>'Posts successfully fetched','errors'=>[],'data'=>$data];
