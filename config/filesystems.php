@@ -76,7 +76,7 @@ return [
             'username' => env('FTP_USERNAME', 'media@media.inwent.ca'),
             'password' => env('FTP_PASSWORD', 'eQqSbwNyjYLcc7wgrHcB'),
             'root' => env('FTP_ROOT'), // for example: /public_html/images
-            'ftp_url'=>env('FTP_URL', 'http://media.inwent.ca/'),
+            'ftp_url'=>env('FTP_URL', 'https://media.inwent.ca/'),
             // Optional FTP Settings...
             // 'port' => env('FTP_PORT', 21),
             // 'passive' => true,
