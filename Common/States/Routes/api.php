@@ -12,6 +12,3 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['prefix'=>'states', 'middleware'=>['jwt.verify']],function(){
-    Route::get('by-country/{id}', 'API\StatesController@statesByCountry');
-});

@@ -29,6 +29,15 @@ Route::group(['prefix'=>'setup', 'middleware'=>'api'],function(){
   Route::get('cities', 'API\CommonController@cities');
 });
 
+Route::group(['prefix'=>'states', 'middleware'=>['jwt.verify']],function(){
+    Route::get('by-country/{id}', 'API\CommonController@statesByCountry');
+});
+
+Route::group(['prefix'=>'cities', 'middleware'=>['jwt.verify']],function(){
+    Route::get('by-country/{id}', 'API\CommonController@citiesByCountry');
+    Route::get('by-state/{id}', 'API\CommonController@citiesByState');
+});
+
 
 Route::group(['prefix'=>'pages', 'middleware'=>'api'],function(){
   Route::get('{slug}', 'API\CommonController@page');

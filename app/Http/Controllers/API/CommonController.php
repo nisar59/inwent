@@ -48,22 +48,20 @@ class CommonController extends Controller
         } 
     }
 
-
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function cities()
+    public function statesByCountry($id)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
-        try {   
-
-            $cities=Cities::get( 'id', 'country_id', 'state_id', 'name');
-            $data=[               
-                'cities'=>$cities
+        try {          
+            $states=States::where('country_id', $id)->get();
+            $data=[
+                'states'=>$states
             ];
 
-            $res=['success'=>true,'message'=>'cities successfully fetched','errors'=>[],'data'=>$data];
+            $res=['success'=>true,'message'=>'States successfully fetched','errors'=>[],'data'=>$data];
              return response()->json($res);
         } catch (Exception $e) {
                 $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
@@ -75,7 +73,54 @@ class CommonController extends Controller
         } 
     }
 
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function citiesByCountry($id)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+            $cities=Cities::where('country_id', $id)->get();
+            $data=[
+                'cities'=>$cities
+            ];
 
+            $res=['success'=>true,'message'=>'Cities successfully fetched','errors'=>[],'data'=>$data];
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function citiesByState($id)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+            $cities=Cities::where('state_id', $id)->get();
+            $data=[
+                'cities'=>$cities
+            ];
+
+            $res=['success'=>true,'message'=>'Cities successfully fetched','errors'=>[],'data'=>$data];
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
 
 
 

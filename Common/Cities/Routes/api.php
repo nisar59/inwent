@@ -13,7 +13,3 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix'=>'cities', 'middleware'=>['jwt.verify']],function(){
-    Route::get('by-country/{id}', 'API\CitiesController@citiesByCountry');
-    Route::get('by-state/{id}', 'API\CitiesController@citiesByState');
-});
