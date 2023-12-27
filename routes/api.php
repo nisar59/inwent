@@ -23,19 +23,10 @@ Route::group(['prefix'=>'auth', 'middleware'=>'api'],function(){
 });
 
 
-Route::group(['prefix'=>'setup', 'middleware'=>'api'],function(){
+Route::group(['prefix'=>'setup', 'middleware'=>['jwt.verify']],function(){
   Route::get('/', 'API\CommonController@setup');
   Route::get('geo', 'API\CommonController@geo');
   Route::get('cities', 'API\CommonController@cities');
-});
-
-Route::group(['prefix'=>'states', 'middleware'=>['jwt.verify']],function(){
-    Route::get('by-country/{id}', 'API\CommonController@statesByCountry');
-});
-
-Route::group(['prefix'=>'cities', 'middleware'=>['jwt.verify']],function(){
-    Route::get('by-country/{id}', 'API\CommonController@citiesByCountry');
-    Route::get('by-state/{id}', 'API\CommonController@citiesByState');
 });
 
 
