@@ -101,7 +101,7 @@ class ProfessionalProfileController extends Controller
 
             }else{
                 $basic_profile=BasicProfile::where(['user_id'=>$user->id])->first();
-                $professional_profile=ProfessionalProfile::with('projects', 'publications', 'patents', 'conferences', 'articles' ,'experience', 'education', 'courses', 'certificates', 'volunteerings', 'awards', 'languages', 'breaks', 'compliances')->where(['user_id'=>$user_id])->first();  
+                $professional_profile=ProfessionalProfile::with('projects', 'publications', 'patents', 'conferences', 'articles' ,'experience', 'education', 'courses', 'certificates', 'volunteerings', 'awards', 'languages', 'breaks', 'compliances')->where(['user_id'=>$user->id])->first();  
                               
                 $data=[
                     'user'=>$user,
