@@ -33,5 +33,6 @@ Route::group(['prefix'=>'network', 'middleware'=>['jwt.verify']],function(){
 });
 
 Route::group(['prefix'=>'network', 'middleware'=>['jwt.verify']],function(){
+    Route::post('events/', 'API\PostsController@allEvents');
     Route::post('events/store', 'API\PostsController@eventStore');
 });

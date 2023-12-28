@@ -320,6 +320,34 @@ class PostsController extends Controller
     }
 
 
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function allEvents()
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+            $events=Events::latest()->get();
+            $data=[
+                'events'=>$events
+            ];
+
+            $res=['success'=>true,'message'=>'Events successfully fetched','errors'=>[],'data'=>$data];
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }
+    }
+
+
+
     public function eventStore(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
