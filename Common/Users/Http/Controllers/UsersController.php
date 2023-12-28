@@ -151,10 +151,23 @@ class UsersController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
-        //
-    }
+        DB::beginTransaction();
+        try{
+        $user=User::find($id);
+        $user->update($req->except('_token'));
+        DB::commit();
+         return redirect()->back()->with('success','User verification & verification badge successfully updated');
+         
+         } catch(Exception $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }catch(Throwable $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }    
+     }
 
     /**
      * Remove the specified resource from storage.

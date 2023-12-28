@@ -10,6 +10,7 @@ use Network\Posts\Entities\Posts;
 use Network\Posts\Entities\Comments;
 use Network\Posts\Entities\Reactions;
 use Network\Posts\Entities\Media;
+use Network\Posts\Entities\Events;
 use Throwable;
 use Auth;
 use DB;
@@ -317,5 +318,36 @@ class PostsController extends Controller
         }
  
     }
+
+
+    public function eventStore(Request $req)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        DB::beginTransaction();
+        try {          
+
+            $user_id=InwntDecrypt(Auth::id());
+
+            $inputs=$req->only('event_poster','event_start_date','event_end_date', 'event_description');
+            $inputs['user_id']=$user_id;
+
+            Events::create($inputs);
+
+            $res=['success'=>true,'message'=>'Event successfully created','errors'=>[],'data'=>null];
+            DB::commit();
+             return response()->json($res);
+        } catch (Exception $e) {
+            DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+            DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }
+    }
+
+
 
 }

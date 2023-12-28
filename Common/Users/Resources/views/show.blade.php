@@ -26,8 +26,20 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header p-3">
+                    <div class="card-header p-3 d-flex justify-content-between">
                         <h5 class="card-title">User Info</h5>
+                        <form method="post" action="{{url('users/update', $user->id)}}" class="form-group d-flex mb-0">
+                            @csrf
+                            <select name="is_verified" id="is_verified" class="form-control me-1">
+                                <option @if($user->is_verified==0) selected @endif value="0">Not Verified</option>
+                                <option @if($user->is_verified==1) selected @endif value="1">Verified</option>
+                            </select>
+                            <select name="verified_badge" disabled id="verified_badge" class="form-control">
+                                @foreach(VerifiedBadges() as $badge)
+                                <option @if($user->verified_badge==$badge) selected @endif value="{{$badge}}">{{$badge}}</option> 
+                                @endforeach                           
+                            </select>
+                        </form>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -374,6 +386,54 @@
 @section('js')
 <script type="text/javascript">
 $(document).ready(function() {
+    function is_verified() {
+       if($("#is_verified").val()==0){
+            $("#verified_badge").attr('disabled', true);
+       }else{
+            $("#verified_badge").attr('disabled', false);
+       }
+    }
+    is_verified();
+
+$(document).on('change', '#is_verified', function(e) {
+
+        var vlu=$(this).val();
+        var old_value=0;
+        if(vlu==0){
+            old_value=1;
+        }
+
+      Swal.fire({
+        title: 'Are you sure you want to update the verification status of the user',
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        icon: 'question',
+      }).then((result) => {
+        if(result.isConfirmed){
+            is_verified();
+            $(this).parent().submit();
+        }else{
+           $(this).val(old_value);
+        }
+    });
+
+});
+
+$(document).on('change', '#verified_badge', function() {
+      Swal.fire({
+        title: 'Are you sure you want to update the verification badge of the user',
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        icon: 'question',
+      }).then((result) => {
+        if(result.isConfirmed){
+            $(this).parent().submit();
+        }else{
+            location.reload();
+        }
+    });
+  });
+
 });
 </script>
 @endsection

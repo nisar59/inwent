@@ -26,7 +26,9 @@ class User extends Authenticatable implements MustVerifyEmail,JWTSubject
         'image',
         'status',
         'password',
-        'fcm_token'
+        'fcm_token',
+        'is_verified',
+        'verified_badge'
     ];
 
     /**

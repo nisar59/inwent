@@ -89,6 +89,13 @@ function ButtonTypes()
 	return $Colortypes;
 }
 
+function VerifiedBadges()
+{
+	$badge=['PROFESSIONAL', 'INWENTOR', 'RESEARCHER'];
+	return $badge;
+}
+
+
 function Settings()
 {
 	return Settings::first();
