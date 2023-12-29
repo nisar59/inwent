@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix'=>'network', 'middleware'=>['jwt.verify']],function(){
     Route::get('posts/', 'API\PostsController@index');
+    Route::get('posts/recent', 'API\PostsController@recent');
     Route::post('posts/store', 'API\PostsController@store');
     Route::post('posts/update/{id}', 'API\PostsController@update');
     Route::get('posts/delete/{id}', 'API\PostsController@destroy');
