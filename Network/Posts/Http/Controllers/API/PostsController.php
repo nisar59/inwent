@@ -356,7 +356,7 @@ class PostsController extends Controller
 
             $user_id=InwntDecrypt(Auth::id());
 
-            $inputs=$req->only('event_poster','event_start_date','event_end_date', 'event_description');
+            $inputs=$req->only('event_name','event_poster','event_start_date','event_end_date', 'event_description');
             $inputs['user_id']=$user_id;
 
             Events::create($inputs);
