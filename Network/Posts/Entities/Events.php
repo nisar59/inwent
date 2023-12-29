@@ -4,6 +4,7 @@ namespace Network\Posts\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 
 class Events extends Model
 {
@@ -14,5 +15,10 @@ class Events extends Model
     protected static function newFactory()
     {
         return \Network\Posts\Database\factories\EventsFactory::new();
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class,'id', 'user_id');
     }
 }
