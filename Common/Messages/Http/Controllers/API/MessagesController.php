@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Common\Messages\Entities\Threads;
 use Common\Messages\Entities\Messages;
+use Network\Connects\Entities\Connects;
 use App\Models\User;
 use Throwable;
 use Auth;
@@ -35,8 +36,21 @@ class MessagesController extends Controller
 
             $threads=Threads::whereIn('id', $distinct)->get();
 
+
+
+
+            $targets=Connects::where(['source_id'=> $user_id, 'status'=>1])->pluck('target_id')->toArray();
+            $sources=Connects::where(['target_id'=> $user_id, 'status'=>1])->pluck('source_id')->toArray();
+            $connects_ids=array_merge($targets, $sources);
+            $distinct_connections=array_unique($connects_ids);
+
+            $connects=User::with('basicProfile')->whereIn('id', $distinct_connections)->get();
+
+
+
             $data=[
-                'threads'=>$threads
+                'threads'=>$threads,
+                'connects'=>$connects,
             ];
 
             $res=['success'=>true,'message'=>'Thread successfully fetched','errors'=>[],'data'=>$data];
