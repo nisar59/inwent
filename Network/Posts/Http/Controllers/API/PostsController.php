@@ -54,11 +54,9 @@ class PostsController extends Controller
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
-            $posts=Posts::with('user','media', 'reactions', 'comments')->latest()->limit(5)->get();
-            $sponsored_posts=SponsoredPosts::where('status', 1)->latest()->get();
+            $posts=Posts::whereNot('post_description',null)->latest()->limit(5)->get();
             $data=[
                 'posts'=>$posts,
-                'sponsored_posts'=>$sponsored_posts
             ];
 
             $res=['success'=>true,'message'=>'Posts successfully fetched','errors'=>[],'data'=>$data];
