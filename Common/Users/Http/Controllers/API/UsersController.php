@@ -236,8 +236,7 @@ class UsersController extends Controller
 
             $user=Auth::user();
 
-            $current_password=Hash::make($req->current_password);
-
+            $current_password = Hash::check($req->current_password, auth()->user()->password);
 
 
             //$check=User::where();
