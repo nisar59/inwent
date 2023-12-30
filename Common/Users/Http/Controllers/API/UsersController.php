@@ -236,17 +236,19 @@ class UsersController extends Controller
 
             $user=Auth::user();
 
-            $current_password = Hash::check($req->current_password, auth()->user()->password);
+            if($req->new_password!=$req->confirm_password){
+                $res=['success'=>false,'message'=>'New password do not match with confirm password','errors'=>[],'data'=>null];
+            }elseif(!Hash::check($req->current_password, auth()->user()->password)){
+                $res=['success'=>false,'message'=>'Current password is wrong','errors'=>[],'data'=>null];
+            }else{
 
-
-            //$check=User::where();
-
-            $data=[
-                'user'=>Auth::user(),
-                'current_password'=>$current_password
-            ];
-
-            $res=['success'=>true,'message'=>'Profile Image successfully updated','errors'=>[],'data'=>$data];
+                $user->password=Hash::make($req->new_password);
+                $user->save();
+                $data=[
+                    'user'=>Auth::user(),
+                ];
+                $res=['success'=>true,'message'=>'You password successfully updated','errors'=>[],'data'=>$data];
+            }
             DB::commit();
              return response()->json($res);
         } catch (Exception $e) {
