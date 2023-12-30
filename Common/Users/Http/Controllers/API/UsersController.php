@@ -10,6 +10,7 @@ use Common\Users\Entities\BusinessProfile;
 use Common\Languages\Entities\Languages;
 use Common\Countries\Entities\Countries;
 use App\Models\User;
+use Hash;
 use Auth;
 use DB;
 use Throwable;
