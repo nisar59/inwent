@@ -147,7 +147,7 @@ class MessagesController extends Controller
             $target=Threads::where(['receiver_id'=>$user_id,'sender_id'=>$req->receiver_id,'module'=>$req->module
             ])->first();
 
-            if($sources==null && $target==null){
+            if($source==null && $target==null){
                 Threads::create([
                     'sender_id'=>$user_id,
                     'receiver_id'=>$req->receiver_id,
