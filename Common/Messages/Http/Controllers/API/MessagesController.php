@@ -141,21 +141,31 @@ class MessagesController extends Controller
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id()); 
+            $thread=null;
 
             $source=Threads::where(['sender_id'=>$user_id,'receiver_id'=>$req->receiver_id,'module'=>$req->module])->first();
 
             $target=Threads::where(['receiver_id'=>$user_id,'sender_id'=>$req->receiver_id,'module'=>$req->module
             ])->first();
 
-            if($source==null && $target==null){
-                Threads::create([
+            if($source!=null){
+                $thread=$source;
+            }elseif($target!=null){
+                $thread=$target;
+            }else{
+                $new=Threads::create([
                     'sender_id'=>$user_id,
                     'receiver_id'=>$req->receiver_id,
                     'module'=>$req->module
                 ]);
+            $thread=Threads::find($new->id);
             }
 
-            $res=['success'=>true,'message'=>'Thread successfully created','errors'=>[],'data'=>null];
+            $data=[
+                'thread'=>$thread
+            ];
+            
+            $res=['success'=>true,'message'=>'Thread successfully created','errors'=>[],'data'=>$data];
 
             DB::commit();
              return response()->json($res);
