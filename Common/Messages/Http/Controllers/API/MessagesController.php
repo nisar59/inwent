@@ -142,11 +142,18 @@ class MessagesController extends Controller
         try {          
             $user_id=InwntDecrypt(Auth::id()); 
 
-            Threads::create([
-                'sender_id'=>$user_id,
-                'receiver_id'=>$req->receiver_id,
-                'module'=>$req->module
-            ]);
+            $source=Threads::where(['sender_id'=>$user_id,'receiver_id'=>$req->receiver_id,'module'=>$req->module])->first();
+
+            $target=Threads::where(['receiver_id'=>$user_id,'sender_id'=>$req->receiver_id,'module'=>$req->module
+            ])->first();
+
+            if($sources==null && $target==null){
+                Threads::create([
+                    'sender_id'=>$user_id,
+                    'receiver_id'=>$req->receiver_id,
+                    'module'=>$req->module
+                ]);
+            }
 
             $res=['success'=>true,'message'=>'Thread successfully created','errors'=>[],'data'=>null];
 
