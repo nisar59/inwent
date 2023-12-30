@@ -18,6 +18,7 @@ Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function(){
     Route::get('basic-profile/{slug}', 'API\UsersController@basicProfileBySlug');
     Route::post('basic-profile', 'API\UsersController@basicProfileUpdate');
     Route::post('image-update', 'API\UsersController@UserImageUpdate');
+    Route::post('password-update', 'API\UsersController@UserPasswordUpdate');
     
     Route::get('business-profile', 'API\UsersController@businessProfile');
     Route::post('business-profile', 'API\UsersController@businessProfileUpdate');

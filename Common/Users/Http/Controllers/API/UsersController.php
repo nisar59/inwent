@@ -226,6 +226,43 @@ class UsersController extends Controller
 
 
 
+    public function UserPasswordUpdate(Request $req)
+    {
+
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        DB::beginTransaction();
+        try {          
+
+            $user=Auth::user();
+
+            $current_password=Hash::make($req->current_password);
+
+
+
+            //$check=User::where();
+
+            $data=[
+                'user'=>Auth::user(),
+                'current_password'=>$current_password
+            ];
+
+            $res=['success'=>true,'message'=>'Profile Image successfully updated','errors'=>[],'data'=>$data];
+            DB::commit();
+             return response()->json($res);
+        } catch (Exception $e) {
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }        
+
+    }
+
+
     public function businessProfile()
     {
 
