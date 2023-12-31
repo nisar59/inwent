@@ -23,7 +23,7 @@ Route::group(['prefix'=>'auth', 'middleware'=>'api'],function(){
 });
 
 
-Route::group(['prefix'=>'setup', 'middleware'=>['jwt.api']],function(){
+Route::group(['prefix'=>'setup', 'middleware'=>['api']],function(){
   Route::get('/', 'API\CommonController@setup');
   Route::get('geo', 'API\CommonController@geo');
   Route::get('cities', 'API\CommonController@cities');
