@@ -98,7 +98,7 @@ class PostsController extends Controller
             $inputs=$req->only('post_description');
             $inputs['user_id']=$user_id;
 
-            $slug=uniqid().Auth::user()->slug.'-network-post'.'-'.now()->timestamp;
+            $slug=uniqid().'-'.Auth::user()->slug.'-network-post'.'-'.now()->timestamp;
             $inputs['slug'] = Str::slug($slug);
 
 
