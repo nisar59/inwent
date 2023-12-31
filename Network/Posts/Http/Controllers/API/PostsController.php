@@ -13,6 +13,7 @@ use Network\Posts\Entities\Media;
 use Network\Posts\Entities\Events;
 use Throwable;
 use Auth;
+use Str;
 use DB;
 class PostsController extends Controller
 {
@@ -96,6 +97,10 @@ class PostsController extends Controller
 
             $inputs=$req->only('post_description');
             $inputs['user_id']=$user_id;
+
+            $slug=uniqid().Auth::user()->slug.'-network-post'.'-'.now()->timestamp;
+            $inputs['slug'] = Str::slug($slug);
+
 
             $post=Posts::create($inputs);
 

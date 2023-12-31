@@ -8,8 +8,6 @@ use Network\Posts\Entities\Media;
 use Network\Posts\Entities\Comments;
 use Network\Posts\Entities\Reactions;
 use App\Models\User;
-use Auth;
-use Str;
 class Posts extends Model
 {
     use HasFactory;
@@ -40,13 +38,6 @@ class Posts extends Model
     public function user()
     {
         return $this->hasOne(User::class,'id', 'user_id');
-    }
-
-    public function setSlugAttribute()
-    {
-        $slug=uniqid().Auth::user()->slug.'-network-post'.'-'.now()->timestamp;
-
-         $this->attributes['slug'] = Str::slug($slug);
     }
 
 }
