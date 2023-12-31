@@ -77,11 +77,8 @@ function APPS()
         'bg'=>'#4EA8DE',
         'permissions'=>[],
         'menu'=>[
-          ['title'=>'Posts', 'icon'=>'fas fa-gear', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
+          ['title'=>'Posts', 'icon'=>'fas fa-gear', 'url'=>'/posts', 'prefix'=>'posts', 'permissions'=>'posts'],
           ['title'=>'Sponsored Posts', 'icon'=>'fas fa-store', 'url'=>'/network/sponsored-posts', 'prefix'=>'/network/sponsored-posts', 'permissions'=>'sponsored-posts'],
-          ['title'=>'Email Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Social Media Login', 'icon'=>'fas fa-user-lock', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Social Links', 'icon'=>'fas fa-square-share-nodes', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
         ]
     ],
 
@@ -94,11 +91,9 @@ function APPS()
         'bg'=>'#48BFE3',
         'permissions'=>[],
         'menu'=>[
-          ['title'=>'General Settings', 'icon'=>'fas fa-gear', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Payments Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Email Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Social Media Login', 'icon'=>'fas fa-user-lock', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Social Links', 'icon'=>'fas fa-square-share-nodes', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
+          ['title'=>'Projects', 'icon'=>'fas fa-gear', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
+          ['title'=>'Completed Projects', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
+          ['title'=>'On Going Projects', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
         ]
     ],
 
@@ -112,11 +107,8 @@ function APPS()
         'bg'=>'#56CFE1',
         'permissions'=>[],
         'menu'=>[
-          ['title'=>'General Settings', 'icon'=>'fas fa-gear', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Payments Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Email Settings', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Social Media Login', 'icon'=>'fas fa-user-lock', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Social Links', 'icon'=>'fas fa-square-share-nodes', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
+          ['title'=>'Reward Projects', 'icon'=>'fas fa-gear', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
+          ['title'=>'Equity Projects', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
         ]
     ],
 
