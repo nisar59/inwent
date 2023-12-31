@@ -54,10 +54,10 @@ class PostsController extends Controller
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
-            $posts=Posts::with('user','media', 'reactions', 'comments')->where('slug', $slug)->first();
+            $post=Posts::with('user','media', 'reactions', 'comments')->where('slug', $slug)->first();
 
             $data=[
-                'posts'=>$posts,
+                'post'=>$post,
             ];
 
             $res=['success'=>true,'message'=>'Posts successfully fetched','errors'=>[],'data'=>$data];
