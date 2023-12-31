@@ -19,6 +19,7 @@ Route::group(['prefix'=>'network', 'middleware'=>['jwt.verify']],function(){
     Route::post('posts/store', 'API\PostsController@store');
     Route::post('posts/update/{id}', 'API\PostsController@update');
     Route::get('posts/delete/{id}', 'API\PostsController@destroy');
+    Route::get('posts/{slug}', 'API\PostsController@postBySlug');
 });
 
 

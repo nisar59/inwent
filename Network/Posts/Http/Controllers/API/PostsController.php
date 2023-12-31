@@ -46,6 +46,34 @@ class PostsController extends Controller
 
 
 
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function postBySlug($slug)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+            $posts=Posts::with('user','media', 'reactions', 'comments')->where('slug', $slug)->first();
+
+            $data=[
+                'posts'=>$posts,
+            ];
+
+            $res=['success'=>true,'message'=>'Posts successfully fetched','errors'=>[],'data'=>$data];
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }
+    }
+
+
+
 
     /**
      * Display a listing of the resource.
