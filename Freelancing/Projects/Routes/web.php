@@ -11,6 +11,27 @@
 |
 */
 
-Route::prefix('projects')->group(function() {
+
+
+Route::group(['prefix'=>'freelancing/projects', 'middleware'=>['permission:projects.view']],function() {
+    Route::get('/', 'ProjectsController@index');
+    Route::get('show/{id}', 'ProjectsController@show');
+});
+
+Route::group(['prefix'=>'freelancing/projects', 'middleware'=>['permission:projects.edit']],function() {
+    Route::get('/destroy/{id}', 'ProjectsController@destroy');
+    Route::get('/status/{id}', 'ProjectsController@status');
+
+});
+
+
+
+
+Route::group(['prefix'=>'freelancing/projects/compeleted', 'middleware'=>['permission:projects.view']],function() {
+    Route::get('/', 'ProjectsController@index');
+});
+
+
+Route::group(['prefix'=>'freelancing/projects/on-going', 'middleware'=>['permission:projects.view']],function() {
     Route::get('/', 'ProjectsController@index');
 });

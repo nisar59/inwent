@@ -13,7 +13,7 @@ class Posts extends Model
     use HasFactory;
 
     protected $table='network_posts';
-    protected $fillable = ['user_id','slug','post_description'];
+    protected $fillable = ['user_id','slug','post_description', 'status'];
     
     protected static function newFactory()
     {

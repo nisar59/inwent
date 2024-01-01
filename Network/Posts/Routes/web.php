@@ -11,6 +11,13 @@
 |
 */
 
-Route::prefix('posts')->group(function() {
+Route::group(['prefix'=>'network/posts', 'middleware'=>['permission:posts.view']],function() {
     Route::get('/', 'PostsController@index');
+    Route::get('show/{id}', 'PostsController@show');
+});
+
+Route::group(['prefix'=>'network/posts', 'middleware'=>['permission:posts.edit']],function() {
+    Route::POST('/update/{id}', 'PostsController@update');
+    Route::get('/status/{id}', 'PostsController@status');
+
 });

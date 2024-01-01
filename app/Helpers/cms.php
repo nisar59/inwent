@@ -77,7 +77,7 @@ function APPS()
         'bg'=>'#4EA8DE',
         'permissions'=>[],
         'menu'=>[
-          ['title'=>'Posts', 'icon'=>'fas fa-gear', 'url'=>'/posts', 'prefix'=>'posts', 'permissions'=>'posts'],
+          ['title'=>'Posts', 'icon'=>'fas fa-poll-h', 'url'=>'/network/posts', 'prefix'=>'/network/posts', 'permissions'=>'posts'],
           ['title'=>'Sponsored Posts', 'icon'=>'fas fa-store', 'url'=>'/network/sponsored-posts', 'prefix'=>'/network/sponsored-posts', 'permissions'=>'sponsored-posts'],
         ]
     ],
@@ -91,9 +91,9 @@ function APPS()
         'bg'=>'#48BFE3',
         'permissions'=>[],
         'menu'=>[
-          ['title'=>'Projects', 'icon'=>'fas fa-gear', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Completed Projects', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'On Going Projects', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
+          ['title'=>'Projects', 'icon'=>'fas fa-list-alt', 'url'=>'freelancing/projects', 'prefix'=>'/freelancing/projects', 'permissions'=>'projects'],
+          ['title'=>'Completed Projects', 'icon'=>'fas fa-tasks', 'url'=>'freelancing/projects/completed', 'prefix'=>'/freelancing/projects/completed', 'permissions'=>''],
+          ['title'=>'On Going Projects', 'icon'=>'fas fa-calendar-alt', 'url'=>'freelancing/projects/on-going', 'prefix'=>'/freelancing/projects/on-going', 'permissions'=>''],
         ]
     ],
 
@@ -107,8 +107,8 @@ function APPS()
         'bg'=>'#56CFE1',
         'permissions'=>[],
         'menu'=>[
-          ['title'=>'Reward Projects', 'icon'=>'fas fa-gear', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
-          ['title'=>'Equity Projects', 'icon'=>'fas fa-credit-card', 'url'=>'', 'prefix'=>'', 'permissions'=>''],
+          ['title'=>'Reward Projects', 'icon'=>'fas fa-hand-holding-usd', 'url'=>'crowd-funding/reward-projects', 'prefix'=>'/crowd-funding/reward-projects', 'permissions'=>'crowd-funding/projects'],
+          ['title'=>'Equity Projects', 'icon'=>'fas fa-euro-sign', 'url'=>'crowd-funding/equity-projects', 'prefix'=>'/crowd-funding/equity-projects', 'permissions'=>'/crowd-funding/equity-projects'],
         ]
     ],
 

@@ -25,7 +25,7 @@ class PostsController extends Controller
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
-            $posts=Posts::with('user','media', 'reactions', 'comments')->latest()->get();
+            $posts=Posts::with('user','media', 'reactions', 'comments')->where('status', 1)->latest()->get();
             $sponsored_posts=SponsoredPosts::where('status', 1)->latest()->get();
             $data=[
                 'posts'=>$posts,
@@ -128,6 +128,7 @@ class PostsController extends Controller
 
             $slug=uniqid().'-'.Auth::user()->slug.'-network-post'.'-'.now()->timestamp;
             $inputs['slug'] = Str::slug($slug);
+            $inputs['status']=1;
 
 
             $post=Posts::create($inputs);

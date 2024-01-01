@@ -4,6 +4,7 @@ namespace CrowdFunding\CrowdFundingProjects\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 
 class CrowdFundingProjects extends Model
 {
@@ -16,4 +17,10 @@ class CrowdFundingProjects extends Model
     {
         return \CrowdFunding\CrowdFundingProjects\Database\factories\CrowdFundingProjectsFactory::new();
     }
+
+    public function user()
+    {
+       return $this->hasOne(User::class, 'id', 'user_id');
+    }
+    
 }
