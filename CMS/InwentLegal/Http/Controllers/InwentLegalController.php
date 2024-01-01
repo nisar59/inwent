@@ -62,7 +62,6 @@ class InwentLegalController extends Controller
             'title'=>'required',
             'slug'=>'required',
             'effective_date'=>'required',
-            'summary_of_changes'=>'required',
             'description'=>'required',
         ]);
         DB::beginTransaction();
@@ -112,7 +111,6 @@ class InwentLegalController extends Controller
             'title'=>'required',
             'slug'=>'required',
             'effective_date'=>'required',
-            'summary_of_changes'=>'required',
             'description'=>'required',
         ]);
         DB::beginTransaction();
