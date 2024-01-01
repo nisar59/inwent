@@ -40,6 +40,11 @@ Route::group(['prefix'=>'blogs', 'middleware'=>'api'],function(){
   Route::get('/detail/{slug}', 'API\CommonController@blogDetail');
 });
 
+Route::group(['prefix'=>'inwent-legal', 'middleware'=>'api'],function(){
+  Route::get('/', 'API\CommonController@legal');  
+});
+
+
 Route::group(['prefix'=>'notifications', 'middleware'=>['jwt.verify']],function(){
   Route::get('/', 'API\CommonController@getNotifications');
 });

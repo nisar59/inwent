@@ -10,6 +10,7 @@ use Common\Cities\Entities\Cities;
 use CMS\MainMenu\Entities\MainMenu;
 use CMS\FooterMenu\Entities\FooterMenuHeadings;
 use CMS\BlogCategories\Entities\BlogCategories;
+use CMS\InwentLegal\Entities\InwentLegal;
 use CMS\Pages\Entities\Pages;
 use CMS\Blog\Entities\Blog;
 use Auth;
@@ -231,6 +232,35 @@ class CommonController extends Controller
         } 
     }
 
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function legal()
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {   
+
+            $legals=InwentLegal::where('status', 1)->get();
+
+            $data=[               
+                'legals'=>$legals,
+            ];
+
+            $res=['success'=>true,'message'=>'Legal successfully fetched','errors'=>[],'data'=>$data]; 
+
+             return response()->json($res);
+            
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
 
 
     public function getNotifications()
