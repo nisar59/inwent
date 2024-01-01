@@ -34,8 +34,6 @@
                                         <th class="text-center">Title</th>
                                         <th class="text-center">Slug</th>
                                         <th class="text-center">Effective Date</th>
-                                        <th class="text-center">Summary Of Changes</th>
-                                        <th class="text-center">Description</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -83,20 +81,6 @@ $(document).ready(function() {
             {
                 data: 'effective_date',
                 name: 'effective_date',
-                class:'text-center',
-                orderable:false,
-                searchable:false
-            },
-            {
-                data: 'summary_of_changes',
-                name: 'summary_of_changes',
-                class:'text-center',
-                orderable:false,
-                searchable:false
-            },
-            {
-                data: 'description',
-                name: 'description',
                 class:'text-center',
                 orderable:false,
                 searchable:false
