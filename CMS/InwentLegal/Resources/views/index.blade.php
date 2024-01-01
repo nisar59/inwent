@@ -34,6 +34,7 @@
                                         <th class="text-center">Title</th>
                                         <th class="text-center">Slug</th>
                                         <th class="text-center">Effective Date</th>
+                                        <th class="text-center">Status</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -85,6 +86,14 @@ $(document).ready(function() {
                 orderable:false,
                 searchable:false
             },
+            {
+                data: 'status',
+                name: 'status',
+                class:'text-center',
+                orderable:false,
+                searchable:false
+            },
+
              {
                 data: 'action',
                 name: 'action',

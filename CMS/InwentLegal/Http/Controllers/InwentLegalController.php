@@ -36,7 +36,18 @@ class InwentLegalController extends Controller
              {
                  return Carbon::parse($row->effective_date)->format('d-m-Y');
              })
-           ->rawColumns(['action'])
+
+            ->addColumn('status',function ($row){
+               $action='';
+               if($row->status==1){
+                   $action.='<a class="btn btn-success btn-sm m-1" href="'.url('inwent-legal/status/'.$row->id).'">Active</a>';
+                }else{
+                   $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('inwent-legal/status/'.$row->id).'">Deactive</a>';
+                }
+               return $action;
+           })
+
+           ->rawColumns(['action', 'status'])
            ->make(true);
         }
         return view('inwentlegal::index');
@@ -66,7 +77,9 @@ class InwentLegalController extends Controller
         ]);
         DB::beginTransaction();
         try{
-            InwentLegal::create($req->except('_token'));
+            $inputs=$req->except('_token');
+            $inputs['status']=1;
+            InwentLegal::create($inputs);
             DB::commit();
             return redirect('inwent-legal')->with('success','Inwent Legal successfully created');
          }catch(Exception $ex){
@@ -126,6 +139,38 @@ class InwentLegalController extends Controller
         return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
         }
     }
+
+    /**
+     * Update status.
+     * @param int $id
+     * @return Renderable
+     */
+    public function status($id)
+    {
+        DB::beginTransaction();
+        try{
+        $legal=InwentLegal::find($id);
+
+        if($legal->status==0){
+            $legal->status=1;
+        }
+        else{
+            $legal->status=0;
+        }
+        $legal->save();
+        DB::commit();
+         return redirect()->back()->with('success','Inwent Legal status successfully updated');
+         
+         } catch(Exception $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }catch(Throwable $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }
+    }
+
+
 
     /**
      * Remove the specified resource from storage.

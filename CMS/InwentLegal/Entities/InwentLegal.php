@@ -9,7 +9,7 @@ class InwentLegal extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','slug','effective_date','summary_of_changes','description'];
+    protected $fillable = ['title','slug','effective_date','summary_of_changes','description', 'status'];
     protected $table='inwent_legal';
     protected static function newFactory()
     {
