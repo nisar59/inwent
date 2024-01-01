@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <label>Description</label>
-                                <textarea name="description" class="editor">{{$inwentlegal->description}}</textarea>
+                                <textarea name="description" placeholder="Description" class="editor">{{$inwentlegal->description}}</textarea>
                             </div>
                         </div>
                     </div>

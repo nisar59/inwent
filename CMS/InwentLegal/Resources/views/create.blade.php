@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <label>Description</label>
-                                <textarea name="description" id="mytextarea"></textarea>
+                                <textarea name="description" placeholder="Description" class="form-control editor"></textarea>
                             </div>
                         </div>
                     </div>
@@ -67,10 +67,6 @@
   Text = Text.toLowerCase();
   Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
   $("#slug").val(Text);          
-});
-
-tinymce.init({
-        selector: '#mytextarea'
-      });    
+});   
 </script>
 @endsection
