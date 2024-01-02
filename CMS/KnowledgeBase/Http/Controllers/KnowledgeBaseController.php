@@ -110,7 +110,7 @@ class KnowledgeBaseController extends Controller
     public function edit($id)
     {
         $knowledge_base=KnowledgeBase::find($id);
-        $knowledge_base_cate=KnowledgeBaseCategories::where('status',0)->get();
+        $knowledge_base_cate=KnowledgeBaseCategories::where('status',1)->get();
         return view('knowledgebase::edit',compact('knowledge_base','knowledge_base_cate'));
     }
       /**
