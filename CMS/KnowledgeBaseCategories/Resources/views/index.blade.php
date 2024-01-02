@@ -32,6 +32,7 @@
                                 <thead class="bg-primary text-white">
                                     <tr>
                                         <th class="text-center">Title</th>
+                                        <th class="text-center">Slug</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
@@ -70,6 +71,13 @@ $(document).ready(function() {
                 name: 'title',
                 class:'text-center'
             },
+
+            {
+                data: 'slug',
+                name: 'slug',
+                class:'text-center'
+            },
+
             {
                 data: 'status',
                 name: 'status',
