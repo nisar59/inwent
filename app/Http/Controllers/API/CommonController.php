@@ -336,6 +336,43 @@ class CommonController extends Controller
 
 
 
+
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function knowledgeBaseSearch(Request $req)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {   
+
+
+            $articles=KnowledgeBase::where('title', 'LIKE', '%'.$req->search.'%');
+            $articles->orWhere('short_description', 'LIKE', '%'.$req->search.'%');
+            $articles->orWhere('description', 'LIKE', '%'.$req->search.'%');
+
+            $articles=$articles->get();
+
+            $data=[               
+                'articles'=>$articles,
+            ];
+
+            $res=['success'=>true,'message'=>'Knowledge Base Articles successfully fetched','errors'=>[],'data'=>$data]; 
+
+             return response()->json($res);
+            
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+
     public function getNotifications()
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
