@@ -64,10 +64,18 @@ class KnowledgeBaseCategoriesController extends Controller
     {
         $req->validate([
             'title'=>'required',
+            'icon'=>'required',
+            'description'=>'required'
         ]);
         DB::beginTransaction();
         try{
-            KnowledgeBaseCategories::create($req->except('_token'));
+            $path='cms/knowledge-base-categories';
+
+            $inputs=$req->except('_token', 'icon');
+            if($req->icon!=null){
+                $inputs=FileUpload($req->file, $path);
+            }
+            KnowledgeBaseCategories::create($inputs);
             DB::commit();
             return redirect('knowledge-base-categories')->with('success','Knowledge Base Category successfully created');
          }catch(Exception $ex){
@@ -141,10 +149,18 @@ class KnowledgeBaseCategoriesController extends Controller
     {
         $req->validate([
             'title'=>'required',
+            'description'=>'required',
         ]);
         DB::beginTransaction();
         try{
-            KnowledgeBaseCategories::find($id)->update($req->except('_token'));
+            $path='cms/knowledge-base-categories';
+
+            $inputs=$req->except('_token', 'icon');
+            if($req->icon!=null){
+                $inputs=FileUpload($req->file, $path);
+            }
+
+            KnowledgeBaseCategories::find($id)->update($inputs);
             DB::commit();
             return redirect('knowledge-base-categories')->with('success','Knowledge Base Category successfully Updated');
          }catch(Exception $ex){

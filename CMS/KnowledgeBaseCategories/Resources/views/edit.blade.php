@@ -31,6 +31,18 @@
                                 <label for="">Title</label>
                                 <input type="text" name="title" value="{{$knowledge_base_cate->title}}" class="form-control"  placeholder="Enter Title">
                             </div>
+
+                            <div class="col-md-12 form-group text-truncate">
+                                <label for="">Icon</label>
+                                <input type="file" name="icon" class="form-control">
+                                <a class="text-truncate" target="_blank" href="{{$knowledge_base_cate->icon}}"> <i class="fas fa-external-link-alt"></i> {{$knowledge_base_cate->icon}}</a>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <label for="">Description</label>
+                                <input type="text" name="description" value="{{$knowledge_base_cate->description}}" class="form-control"  placeholder="Enter description">
+                            </div>
+
                         </div>
                     </div>
                     <div class="card-footer text-end">

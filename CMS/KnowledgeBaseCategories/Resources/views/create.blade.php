@@ -29,8 +29,20 @@
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <label for="">Title</label>
-                                <input type="text" name="title" id="title" class="form-control"  placeholder="Enter Title">
+                                <input type="text" name="title" class="form-control"  placeholder="Enter title">
                             </div>
+
+                            <div class="col-md-12 form-group">
+                                <label for="">Icon</label>
+                                <input type="file" name="icon" class="form-control">
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <label for="">Description</label>
+                                <input type="text" name="description" class="form-control"  placeholder="Enter description">
+                            </div>
+
+
                         </div>
                     </div>
                     <div class="card-footer text-end">

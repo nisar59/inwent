@@ -9,12 +9,17 @@ class KnowledgeBaseCategories extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'icon', 'description'];
     protected $table='knowledge_base_categories';
     
     protected static function newFactory()
     {
         return \CMS\KnowledgeBaseCategories\Database\factories\KnowledgeBaseCategoriesFactory::new();
+    }
+
+    public function getIconAttribute($value)
+    {
+        return StorageFile($value);
     }
 
     
