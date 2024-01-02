@@ -306,7 +306,7 @@ class CommonController extends Controller
         try {   
 
 
-            $category=KnowledgeBaseCategories::where(['status'=>1])->where('slug', 'LIKE', '%'.$slug.'%')->get();
+            $category=KnowledgeBaseCategories::where(['status'=>1])->where('slug', 'LIKE', '%'.$slug.'%')->first();
 
             if($category==null){
                 $res=['success'=>false,'message'=>'Knowledge Base category not found','errors'=>[],'data'=>null]; 
