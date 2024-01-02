@@ -40,6 +40,12 @@
                                 <label for="">Title</label>
                                 <input type="text" name="title" id="title" class="form-control"  placeholder="Enter Title">
                             </div>
+
+                            <div class="col-md-12 form-group">
+                                <label>Short Description</label>
+                                <textarea name="short_description" placeholder="Short Description" class="form-control"></textarea>
+                            </div>
+
                             <div class="col-md-12 form-group">
                                 <label>Description</label>
                                 <textarea name="description" class="editor form-control"></textarea>

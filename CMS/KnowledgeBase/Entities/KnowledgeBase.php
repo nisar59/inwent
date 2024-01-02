@@ -10,9 +10,9 @@ class KnowledgeBase extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['knowledge_base_category_id','title','description'];
+    protected $fillable = ['knowledge_base_category_id','title','short_description','description'];
     protected $table='knowledge_base';
-    
+    protected $with=['category'];
     protected static function newFactory()
     {
         return \CMS\KnowledgeBase\Database\factories\KnowledgeBaseFactory::new();

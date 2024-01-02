@@ -73,6 +73,7 @@ class KnowledgeBaseController extends Controller
         $req->validate([
             'knowledge_base_category_id'=>'required',
             'title'=>'required',
+            'short_description'=>'required',
             'description'=>'required',
         ]);
         DB::beginTransaction();
@@ -153,6 +154,7 @@ class KnowledgeBaseController extends Controller
         $req->validate([
             'knowledge_base_category_id'=>'required',
             'title'=>'required',
+            'short_description'=>'required',
             'description'=>'required',
         ]);
         DB::beginTransaction();

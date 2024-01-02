@@ -40,6 +40,12 @@
                                 <label for="">Title</label>
                                 <input type="text" name="title" value="{{$knowledge_base->title}}" id="title" class="form-control"  placeholder="Enter Title">
                             </div>
+
+                            <div class="col-md-12 form-group">
+                                <label>Short Description</label>
+                                <textarea name="short_description" placeholder="Short Description" class="form-control">{{$knowledge_base->short_description}}</textarea>
+                            </div>
+
                             <div class="col-md-12 form-group">
                                 <label>Description</label>
                                 <textarea name="description" class="editor form-control">{{$knowledge_base->description}}</textarea>

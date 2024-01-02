@@ -317,6 +317,7 @@ class CommonController extends Controller
 
             $data=[               
                 'articles'=>$articles,
+                'category'=>$category
             ];
 
             $res=['success'=>true,'message'=>'Knowledge Base Articles successfully fetched','errors'=>[],'data'=>$data]; 
