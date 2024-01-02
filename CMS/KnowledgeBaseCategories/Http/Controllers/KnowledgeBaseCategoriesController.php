@@ -10,6 +10,7 @@ use Throwable;
 use DataTables;
 use Auth;
 use DB;
+use Str;
 class KnowledgeBaseCategoriesController extends Controller
 {
     /**
@@ -75,6 +76,7 @@ class KnowledgeBaseCategoriesController extends Controller
             if($req->icon!=null){
                 $inputs['icon']=FileUpload($req->icon, $path);
             }
+            $inputs['slug']=Str::slug($req->title);
             KnowledgeBaseCategories::create($inputs);
             DB::commit();
             return redirect('knowledge-base-categories')->with('success','Knowledge Base Category successfully created');
@@ -159,6 +161,7 @@ class KnowledgeBaseCategoriesController extends Controller
             if($req->icon!=null){
                 $inputs['icon']=FileUpload($req->icon, $path);
             }
+            $inputs['slug']=Str::slug($req->title);
 
             KnowledgeBaseCategories::find($id)->update($inputs);
             DB::commit();

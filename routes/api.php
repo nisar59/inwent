@@ -44,6 +44,10 @@ Route::group(['prefix'=>'inwent-legal', 'middleware'=>'api'],function(){
   Route::get('/', 'API\CommonController@legal');  
 });
 
+Route::group(['prefix'=>'knowledge-base', 'middleware'=>'api'],function(){
+  Route::get('/', 'API\CommonController@knowledgeBaseCategories');  
+  Route::get('{slug}', 'API\CommonController@knowledgeBaseByCategory');  
+});
 
 Route::group(['prefix'=>'notifications', 'middleware'=>['jwt.verify']],function(){
   Route::get('/', 'API\CommonController@getNotifications');

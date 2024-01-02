@@ -11,6 +11,8 @@ use CMS\MainMenu\Entities\MainMenu;
 use CMS\FooterMenu\Entities\FooterMenuHeadings;
 use CMS\BlogCategories\Entities\BlogCategories;
 use CMS\InwentLegal\Entities\InwentLegal;
+use CMS\KnowledgeBase\Entities\KnowledgeBase;
+use CMS\KnowledgeBaseCategories\Entities\KnowledgeBaseCategories;
 use CMS\Pages\Entities\Pages;
 use CMS\Blog\Entities\Blog;
 use Auth;
@@ -261,6 +263,76 @@ class CommonController extends Controller
                 return response()->json($res);
         } 
     }
+
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function knowledgeBaseCategories()
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {   
+
+            $categories=KnowledgeBaseCategories::where('status', 1)->get();
+
+            $data=[               
+                'categories'=>$categories,
+            ];
+
+            $res=['success'=>true,'message'=>'Knowledge Base Categories successfully fetched','errors'=>[],'data'=>$data]; 
+
+             return response()->json($res);
+            
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function knowledgeBaseByCategory($slug)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {   
+
+
+            $category=KnowledgeBaseCategories::where(['status'=>1])->where('slug', 'LIKE', '%'.$slug.'%')->get();
+
+            if($category==null){
+                $res=['success'=>false,'message'=>'Knowledge Base category not found','errors'=>[],'data'=>null]; 
+                 return response()->json($res);
+            }
+
+            $articles=KnowledgeBase::where(['status'=>1,'knowledge_base_category_id'=>$category->id])->get();
+
+            $data=[               
+                'articles'=>$articles,
+            ];
+
+            $res=['success'=>true,'message'=>'Knowledge Base Articles successfully fetched','errors'=>[],'data'=>$data]; 
+
+             return response()->json($res);
+            
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
 
 
     public function getNotifications()
