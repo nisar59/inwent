@@ -73,7 +73,7 @@ class KnowledgeBaseCategoriesController extends Controller
 
             $inputs=$req->except('_token', 'icon');
             if($req->icon!=null){
-                $inputs=FileUpload($req->file, $path);
+                $inputs['icon']=FileUpload($req->file, $path);
             }
             KnowledgeBaseCategories::create($inputs);
             DB::commit();
@@ -157,7 +157,7 @@ class KnowledgeBaseCategoriesController extends Controller
 
             $inputs=$req->except('_token', 'icon');
             if($req->icon!=null){
-                $inputs=FileUpload($req->file, $path);
+                $inputs['icon']=FileUpload($req->file, $path);
             }
 
             KnowledgeBaseCategories::find($id)->update($inputs);
