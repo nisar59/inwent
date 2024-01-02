@@ -20,7 +20,7 @@
         <!-- /Page Header -->
         <div class="row">
             <div class="col-sm-12">
-                <form action="{{url('knowledge-base-categories/update/'.$knowledge_base_cate->id)}}" method="POST" class="card">
+                <form action="{{url('knowledge-base-categories/update/'.$knowledge_base_cate->id)}}" method="POST" class="card" enctype="multipart/form-data">
                     @csrf
                     <div class="card-header p-3">
                         <h5 class="card-title">Edit Knowledge Base Category</h5>
