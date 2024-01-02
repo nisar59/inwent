@@ -48,6 +48,7 @@ Route::group(['prefix'=>'knowledge-base', 'middleware'=>'api'],function(){
   Route::get('/', 'API\CommonController@knowledgeBaseCategories');  
   Route::get('{slug}', 'API\CommonController@knowledgeBaseByCategory');  
   Route::post('search', 'API\CommonController@knowledgeBaseSearch');  
+  Route::get('/article/{id}', 'API\CommonController@knowledgeBaseById');  
 });
 
 Route::group(['prefix'=>'notifications', 'middleware'=>['jwt.verify']],function(){

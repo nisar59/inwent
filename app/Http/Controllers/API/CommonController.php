@@ -373,6 +373,48 @@ class CommonController extends Controller
     }
 
 
+
+
+
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function knowledgeBaseById($id)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {   
+
+
+            $article=KnowledgeBase::find($id);
+            if($article==null){
+                $res=['success'=>false,'message'=>'Knowledge Base not found','errors'=>[],'data'=>null]; 
+                 return response()->json($res);
+            }
+
+            $category=KnowledgeBaseCategories::find($article->knowledge_base_category_id);
+
+
+            $data=[               
+                'article'=>$article,
+                'category'=>$category,
+            ];
+
+            $res=['success'=>true,'message'=>'Knowledge Base Article successfully fetched','errors'=>[],'data'=>$data]; 
+
+             return response()->json($res);
+            
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
     public function getNotifications()
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
