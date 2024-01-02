@@ -17,7 +17,7 @@ class KnowledgeBase extends Model
     {
         return \CMS\KnowledgeBase\Database\factories\KnowledgeBaseFactory::new();
     }
-     public function fetch_Know_base_cate()
+     public function category()
     {
     	return $this->belongsTo(KnowledgeBaseCategories::class,'knowledge_base_category_id','id');
     }

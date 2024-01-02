@@ -43,7 +43,9 @@ class KnowledgeBaseController extends Controller
            })
            ->addColumn('knowledge_base_category_id',function ($row)
            {
-              return $row->fetch_Know_base_cate->title;
+            if($row->category()->exists() && $row->category!=null){
+              return $row->category->title;
+            }
            })
            ->rawColumns(['action','status'])
            ->make(true);

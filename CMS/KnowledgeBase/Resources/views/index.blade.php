@@ -33,7 +33,6 @@
                                     <tr>
                                         <th class="text-center">Knowledge Base Category</th>
                                         <th class="text-center">Title</th>
-                                        <th class="text-center">Description</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
@@ -75,11 +74,6 @@ $(document).ready(function() {
             {
                 data: 'title',
                 name: 'title',
-                class:'text-center'
-            },
-            {
-                data: 'description',
-                name: 'description',
                 class:'text-center'
             },
             {
