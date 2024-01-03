@@ -3,6 +3,7 @@ use Common\Countries\Entities\Countries;
 use Common\Settings\Entities\Settings;
 use Common\Cities\Entities\Cities;
 use Common\Languages\Entities\Languages;
+use Network\BoardsCategories\Entities\BoardsCategories;
 use App\Models\Notifications;
 use App\Models\UserRatings;
 
@@ -159,4 +160,9 @@ function GetUserNotifications($user_id){
 
 function GetAdminNotifications(){
 	return Notifications::where(['is_read'=>0,'notification_for'=>0])->get();
+}
+
+function BoardsCategories()
+{
+	return BoardsCategories::where(['status'=>1, 'parent_id'=>null])->get();
 }

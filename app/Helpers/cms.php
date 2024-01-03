@@ -79,6 +79,10 @@ function APPS()
         'menu'=>[
           ['title'=>'Posts', 'icon'=>'fas fa-poll-h', 'url'=>'/network/posts', 'prefix'=>'/network/posts', 'permissions'=>'posts'],
           ['title'=>'Sponsored Posts', 'icon'=>'fas fa-store', 'url'=>'/network/sponsored-posts', 'prefix'=>'/network/sponsored-posts', 'permissions'=>'sponsored-posts'],
+
+          ['title'=>'Boards Categories', 'icon'=>'fas fa-clipboard-list', 'url'=>'/network/boards-categories', 'prefix'=>'/network/boards-categories', 'permissions'=>'boards-categories'],
+
+          ['title'=>'Boards', 'icon'=>'fas fa-chalkboard-teacher', 'url'=>'/network/boards', 'prefix'=>'/network/boards', 'permissions'=>'boards-categories'],
         ]
     ],
 

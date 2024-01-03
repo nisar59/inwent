@@ -1,0 +1,11 @@
+{
+    "name": "Boards",
+    "alias": "boards",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Network\\Boards\\Providers\\BoardsServiceProvider"
+    ],
+    "files": []
+}
