@@ -54,6 +54,47 @@ class BoardsController extends Controller
         }
     }
 
+
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function clipBySlug($slug)
+    {
+        $user_id=InwntDecrypt(Auth::id());
+
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+
+            $clip=Boards::where(['status'=>1])->where('slug', 'LIKE', '%'.$slug.'%')->first();
+
+           if($clip==null){
+            $res=['success'=>false,'message'=>'Boards Clip Not Found','errors'=>[],'data'=>null];
+             return response()->json($res);
+           }
+
+            $boards=Boards::where(['status'=>1])->where('category_id', $clip->category_id)->get();
+
+            $data=[
+                'boards'=>$boards,
+                'clip'=>$clip,
+            ];
+
+            $res=['success'=>true,'message'=>'Boards successfully fetched','errors'=>[],'data'=>$data];
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      * @return Renderable

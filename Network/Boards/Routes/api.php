@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix'=>'network/boards', 'middleware'=>['jwt.verify']],function(){
     Route::post('/', 'API\BoardsController@index');
+    Route::get('clip/{slug}', 'API\BoardsController@clipBySlug');
     Route::get('categories/', 'API\BoardsController@categories');
     Route::post('store/', 'API\BoardsController@store');
 });
