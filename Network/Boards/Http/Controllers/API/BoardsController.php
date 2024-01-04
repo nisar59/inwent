@@ -17,15 +17,27 @@ class BoardsController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(Request $req)
     {
         $user_id=InwntDecrypt(Auth::id());
 
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
 
-            $boards=Boards::where(['status'=>1])->get();
+            $boards=Boards::where(['status'=>1]);
 
+            if($req->search_term!=null || $req->search_term!=""){
+                $boards->where('title', 'LIKE', '%'.$req->search_term.'%');
+            }
+            if($req->category_id!=null){
+                 $boards->where('category_id', $req->category_id);
+            }
+
+            if($req->sub_category_id!=null){
+                 $boards->where('sub_category_id', $req->sub_category_id);
+            }
+
+            $boards=$boards->get();
             $data=[
                 'boards'=>$boards,
             ];
