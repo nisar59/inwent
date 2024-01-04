@@ -52,7 +52,7 @@ class BoardsController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
 
-            $categories=BoardsCategories::where(['status'=>1])->get();
+            $categories=BoardsCategories::where(['status'=>1, 'parent_id'=>null])->get();
 
             $data=[
                 'categories'=>$categories,
