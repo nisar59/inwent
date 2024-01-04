@@ -10,6 +10,7 @@ use Network\Boards\Entities\Boards;
 use Throwable;
 use Auth;
 use DB;
+use Str;
 class BoardsController extends Controller
 {
     /**
@@ -83,6 +84,7 @@ class BoardsController extends Controller
             $user_id=InwntDecrypt(Auth::id());
             $inputs=$req->all();
             $inputs['user_id']=$user_id;
+            $inputs['slug']=Str::slug($req->title);
             Boards::create($inputs);
 
             $res=['success'=>true,'message'=>'Boards Clip successfully posted','errors'=>[],'data'=>null];
