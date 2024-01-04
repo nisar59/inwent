@@ -25,8 +25,8 @@ class PostsController extends Controller
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
-            $posts=Posts::with('user','media', 'reactions', 'comments')->where('status', 1)->latest()->get();
-            $sponsored_posts=SponsoredPosts::where('status', 1)->latest()->get();
+            $posts=Posts::with('user','media', 'reactions', 'comments')->where('status', 1)->latest()->get()->toArray();
+            $sponsored_posts=SponsoredPosts::where('status', 1)->latest()->get()->toArray();
 
             $posts=array_merge($posts, $sponsored_posts);
             shuffle($posts);
