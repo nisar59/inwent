@@ -81,8 +81,9 @@ class BoardsController extends Controller
         DB::beginTransaction();
         try {          
             $user_id=InwntDecrypt(Auth::id());
-
-            Boards::create($req->all());
+            $inputs=$req->all();
+            $inputs['user_id']=$user_id;
+            Boards::create($inputs);
 
             $res=['success'=>true,'message'=>'Boards Clip successfully posted','errors'=>[],'data'=>null];
             DB::commit();

@@ -16,5 +16,5 @@ use Illuminate\Http\Request;
 Route::group(['prefix'=>'network/boards', 'middleware'=>['jwt.verify']],function(){
     Route::get('/', 'API\BoardsController@index');
     Route::get('categories/', 'API\BoardsController@categories');
-    Route::get('store/', 'API\BoardsController@index');
+    Route::post('store/', 'API\BoardsController@store');
 });
