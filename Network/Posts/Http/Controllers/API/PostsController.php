@@ -27,6 +27,9 @@ class PostsController extends Controller
         try {          
             $posts=Posts::with('user','media', 'reactions', 'comments')->where('status', 1)->latest()->get();
             $sponsored_posts=SponsoredPosts::where('status', 1)->latest()->get();
+
+            $posts=array_merge($posts, $sponsored_posts);
+            shuffle($posts);
             $data=[
                 'posts'=>$posts,
                 'sponsored_posts'=>$sponsored_posts
