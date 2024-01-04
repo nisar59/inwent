@@ -18,6 +18,6 @@ class BoardsCategories extends Model
 
     public function sub_categories()
     {
-      return $this->hasMany(BoardsCategories::class, 'id', 'parent_id');
+      return $this->hasMany(BoardsCategories::class, 'parent_id', 'id');
     }
 }
