@@ -23,7 +23,7 @@ class BoardsController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
 
-            $boards=Boards::where(['status'=>0])->get();
+            $boards=Boards::where(['status'=>1])->get();
 
             $data=[
                 'boards'=>$boards,
@@ -52,7 +52,7 @@ class BoardsController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
 
-            $categories=BoardsCategories::where(['status'=>0])->get();
+            $categories=BoardsCategories::where(['status'=>1])->get();
 
             $data=[
                 'categories'=>$categories,
