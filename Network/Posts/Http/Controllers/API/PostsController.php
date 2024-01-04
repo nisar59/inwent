@@ -32,7 +32,6 @@ class PostsController extends Controller
             shuffle($posts);
             $data=[
                 'posts'=>$posts,
-                'sponsored_posts'=>$sponsored_posts
             ];
 
             $res=['success'=>true,'message'=>'Posts successfully fetched','errors'=>[],'data'=>$data];
