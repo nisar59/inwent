@@ -355,7 +355,7 @@ class FooterMenuController extends Controller
         DB::beginTransaction();
         try{
             $footer_menu=FooterMenu::find($id); 
-            $id=$footer_menu->cms_footer_menu_heading_id
+            $id=$footer_menu->cms_footer_menu_heading_id;
             $footer_menu->delete();
             DB::commit();
          return redirect('footer-menu/'.$id)->with('success','Footer Menu successfully deleted');
