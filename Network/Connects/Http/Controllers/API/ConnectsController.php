@@ -290,7 +290,7 @@ class ConnectsController extends Controller
 
             $user_id=InwntDecrypt(Auth::id());
             $check_exist=UserRatings::where(['user_from'=>$user_id, 'user_to'=>$req->target_id])->first();
-            if($check_exist!=null){
+            if($check_exist==null){
                 UserRatings::create([
                     'user_from'=>$user_id,
                     'user_to'=>$req->target_id,
