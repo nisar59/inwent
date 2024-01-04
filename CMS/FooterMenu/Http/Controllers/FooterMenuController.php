@@ -332,9 +332,10 @@ class FooterMenuController extends Controller
         ]);
         DB::beginTransaction();
         try{
+
             FooterMenu::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('footer-menu')->with('success','Footer Menu successfully updated');
+            return redirect('footer-menu/'.$req->cms_footer_menu_heading_id)->with('success','Footer Menu successfully updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -353,9 +354,11 @@ class FooterMenuController extends Controller
     {
         DB::beginTransaction();
         try{
-        FooterMenu::find($id)->delete();
-        DB::commit();
-         return redirect('footer-menu')->with('success','Footer Menu successfully deleted');
+            $footer_menu=FooterMenu::find($id); 
+            $id=$footer_menu->cms_footer_menu_heading_id
+            $footer_menu->delete();
+            DB::commit();
+         return redirect('footer-menu/'.$id)->with('success','Footer Menu successfully deleted');
          } catch(Exception $e){
             DB::rollback();
             return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
