@@ -85,6 +85,7 @@ class BoardsController extends Controller
             $inputs=$req->all();
             $inputs['user_id']=$user_id;
             $inputs['slug']=Str::slug($req->title);
+            $inputs['status']=1;
             Boards::create($inputs);
 
             $res=['success'=>true,'message'=>'Boards Clip successfully posted','errors'=>[],'data'=>null];

@@ -9,7 +9,7 @@ class Boards extends Model
 {
     use HasFactory;
     protected $table='network_boards';
-    protected $fillable = ['user_id','title', 'slug','weblink','description','category_id','sub_category_id','tags', 'clip', 'clip_type'];
+    protected $fillable = ['user_id','title', 'slug','weblink','description','category_id','sub_category_id','tags', 'clip', 'clip_type', 'status'];
     
     protected static function newFactory()
     {
