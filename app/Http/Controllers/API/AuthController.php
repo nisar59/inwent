@@ -23,7 +23,8 @@ class AuthController extends Controller
         DB::beginTransaction();
         try {
             $val = Validator::make($req->all(), [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
@@ -41,7 +42,7 @@ class AuthController extends Controller
             }
             
             $inputs['slug']=$slug;
-    
+            $inputs['name']=$req->first_name.' '.$req->last_name;
 
 
            $user=User::create($inputs);

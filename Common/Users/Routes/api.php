@@ -24,6 +24,11 @@ Route::group(['prefix'=>'users', 'middleware'=>['jwt.verify']],function(){
     Route::post('business-profile', 'API\UsersController@businessProfileUpdate');
 
 
+    Route::get('investor-profile', 'API\UsersController@investorProfile');
+    Route::post('investor-profile', 'API\UsersController@investorProfileUpdate');
+
+
+
     Route::get('professional-profile', 'API\ProfessionalProfileController@professionalProfile');
     Route::get('professional-profile/{slug}', 'API\ProfessionalProfileController@professionalProfileBySlug');
 

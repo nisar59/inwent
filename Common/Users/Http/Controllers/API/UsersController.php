@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Common\Users\Entities\BasicProfile;
 use Common\Users\Entities\BusinessProfile;
+use Common\Users\Entities\InvestorProfile;
 use Common\Languages\Entities\Languages;
 use Common\Countries\Entities\Countries;
 use App\Models\User;
@@ -168,6 +169,13 @@ class UsersController extends Controller
 
             $basic_profile->fill($inputs);
             $basic_profile->save();
+
+            $user_inputs=$req->only('first_name', 'last_name');
+            $user_inputs['name']=$req->first_name.' '.$req->last_name;
+
+            Auth::user()->update($user_inputs);
+            
+
             $data=[
                 'user'=>Auth::user(),
                 'basic_profile'=>$basic_profile
@@ -328,6 +336,81 @@ class UsersController extends Controller
 
 
     }
+
+
+
+
+    public function investorProfile()
+    {
+
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+            $user_id=InwntDecrypt(Auth::id()); 
+
+            $investor_profile=InvestorProfile::where(['user_id'=>$user_id])->first();
+            $countries=Countries::all();
+            $languages=Languages::all();
+
+            $data=[
+                'user'=>Auth::user(),
+                'investor_profile'=>$investor_profile,
+                'countries'=>$countries,
+                'languages'=>$languages,
+            ];
+
+            $res=['success'=>true,'message'=>'Investor profile successfully fetched','errors'=>[],'data'=>$data];
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }       
+    }
+
+
+
+
+
+    public function investorProfileUpdate(Request $req)
+    {
+
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        DB::beginTransaction();
+        try {          
+            $user_id=InwntDecrypt(Auth::id()); 
+
+            $investor_profile=InvestorProfile::firstOrNew(['user_id'=>$user_id]);
+
+            $investor_profile->fill($req->all());
+            $investor_profile->save();
+            $data=[
+                'user'=>Auth::user(),
+                'investor_profile'=>$investor_profile
+            ];
+
+            $res=['success'=>true,'message'=>'Investor profile successfully updated','errors'=>[],'data'=>$data];
+            DB::commit();
+             return response()->json($res);
+        } catch (Exception $e) {
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        }        
+
+
+    }
+
+
+
+
 
 
 
