@@ -24,7 +24,7 @@
         </div>
         <!-- /Page Header -->
         <div class="row">
-            <div class="col-12">
+  <!--           <div class="col-12">
                 <div class="card card-primary" id="filters-container">
                     <div class="card-header bg-white" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                         <h4><i class="fas fa-filter"></i> Filters</h4>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">

@@ -13,6 +13,11 @@ function APPS()
         'menu'=>[
           ['title'=>'Roles & Permissions','icon'=>'fas fa-user-shield','url'=>'roles', 'prefix'=>'/roles', 'permissions'=>''],
           ['title'=>'Admins','icon'=>'fas fa-id-card','url'=>'admins','prefix'=>'/admins', 'permissions'=>''],
+
+          ['title'=>'Professional Skills','icon'=>'fas fa-tasks','url'=>'professional-skills','prefix'=>'/professional-skills', 'permissions'=>'professional-skills'],
+
+          ['title'=>'Professional Tools','icon'=>'fas fa-list','url'=>'professional-tools','prefix'=>'/professional-tools', 'permissions'=>'professional-tools'],
+
           ['title'=>'Users','icon'=>'fas fa-users','url'=>'users','prefix'=>'/users', 'permissions'=>''],
         ],
     ],
@@ -95,8 +100,12 @@ function APPS()
         'bg'=>'#48BFE3',
         'permissions'=>[],
         'menu'=>[
+          ['title'=>'Project Config', 'icon'=>'fas fa-universal-access', 'url'=>'project-config', 'prefix'=>'/project-config', 'permissions'=>'project-config'],
+
           ['title'=>'Projects', 'icon'=>'fas fa-list-alt', 'url'=>'freelancing/projects', 'prefix'=>'/freelancing/projects', 'permissions'=>'projects'],
+
           ['title'=>'Completed Projects', 'icon'=>'fas fa-tasks', 'url'=>'freelancing/projects/completed', 'prefix'=>'/freelancing/projects/completed', 'permissions'=>''],
+
           ['title'=>'On Going Projects', 'icon'=>'fas fa-calendar-alt', 'url'=>'freelancing/projects/on-going', 'prefix'=>'/freelancing/projects/on-going', 'permissions'=>''],
         ]
     ],
