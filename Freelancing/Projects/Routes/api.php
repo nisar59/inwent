@@ -22,4 +22,8 @@ Route::group(['prefix'=>'freelancing/projects', 'middleware'=>['jwt.verify']],fu
     Route::post('proposal', 'API\ProjectsController@proposalStore');
     Route::post('create-milestone', 'API\ProjectsController@createMilestone');
 
+    Route::get('/favorites', 'API\ProjectsController@favorites');
+    Route::get('/add-favorites', 'API\ProjectsController@favoritesStore');
+
+
 });

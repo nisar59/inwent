@@ -9,6 +9,7 @@ use Freelancing\ProjectConfig\Entities\ProjectConfig;
 use Freelancing\Projects\Entities\Projects;
 use Freelancing\Projects\Entities\ProjectProposals;
 use Freelancing\Projects\Entities\ProjectMilestones;
+use Freelancing\Projects\Entities\FavoriteProjects;
 use Throwable;
 use Auth;
 use DB;
@@ -296,4 +297,71 @@ class ProjectsController extends Controller
     {
         //
     }
+
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function favorites()
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+            $user_id=InwntDecrypt(Auth::id()); 
+
+            $fvrts=FavoriteProjects::where('user_id', $user_id)->get('project_id')->toArray();
+
+            $projects=Projects::whereIn('id', $fvrts)->get();
+
+            $data=[
+                'projects'=>$projects
+            ];
+
+            $res=['success'=>true,'message'=>'Favorites Projects successfully fetched','errors'=>[],'data'=>$data];
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+
+
+
+
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function favoritesStore(Request $req)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        DB::beginTransaction();
+        try {          
+            $user_id=InwntDecrypt(Auth::id()); 
+
+            $inputs=$req->all();
+
+            FavoriteProjects::create($inputs);
+
+            $res=['success'=>true,'message'=>'Project successfully added to favorites','errors'=>[],'data'=>null];
+            DB::commit();
+             return response()->json($res);
+        } catch (Exception $e) {
+            DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+            DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+
 }
