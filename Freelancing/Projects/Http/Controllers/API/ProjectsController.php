@@ -312,7 +312,7 @@ class ProjectsController extends Controller
 
             $user_id=InwntDecrypt(Auth::id()); 
 
-            $milestones=ProjectMilestones::where('user_to', $user_id)->get('project_id')->toArray();
+            $milestones=ProjectMilestones::where('user_to', $user_id)->pluck('project_id')->toArray();
 
             $projects=Projects::whereIn('id', $milestones);
 
