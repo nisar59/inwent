@@ -308,7 +308,7 @@ class ProjectsController extends Controller
         try {      
 
             $page_size=$req->page_size;
-            $page_no=$req->page_no; 
+            $page_no=(int)$req->page_no - 1; 
 
             $user_id=InwntDecrypt(Auth::id()); 
 
