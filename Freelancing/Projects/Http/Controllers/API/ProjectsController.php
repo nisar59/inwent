@@ -278,14 +278,33 @@ class ProjectsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
+     * Display a listing of the resource.
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function freelancerProjects()
     {
-        //
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        try {          
+            $user_id=InwntDecrypt(Auth::id()); 
+
+            $milestones=ProjectMilestones::where('user_to', $user_id)->get('project_id')->toArray();
+
+            $projects=Projects::whereIn('id', $milestones)->get();
+
+            $data=[
+                'projects'=>$projects
+            ];
+
+            $res=['success'=>true,'message'=>'Projects successfully fetched','errors'=>[],'data'=>$data];
+             return response()->json($res);
+        } catch (Exception $e) {
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
     }
 
     /**
