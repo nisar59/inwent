@@ -20,15 +20,22 @@ class ProjectsController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
+            $page_size=$req->page_size;
+            $page_no=$req->page_no;
+            
             $user_id=InwntDecrypt(Auth::id()); 
 
-            $projects=Projects::where('user_id', $user_id)->get();
+            $projects=Projects::where('user_id', $user_id);
+
+            $total = $projects->count();
+            $projects   = $projects->offset($page_no)->limit($page_size)->get();
 
             $data=[
+                'total'=>$total,
                 'projects'=>$projects
             ];
 

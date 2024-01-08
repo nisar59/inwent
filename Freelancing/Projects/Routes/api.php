@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['prefix'=>'freelancing/projects', 'middleware'=>['jwt.verify']],function(){
-    Route::get('/', 'API\ProjectsController@index');
+    Route::post('/', 'API\ProjectsController@index');
     Route::get('create', 'API\ProjectsController@create');
     Route::post('store', 'API\ProjectsController@store');
     Route::get('{id}', 'API\ProjectsController@show');
