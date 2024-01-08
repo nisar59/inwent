@@ -321,7 +321,8 @@ class ProjectsController extends Controller
 
             $data=[
                 'total'=>$total,
-                'projects'=>$projects
+                'projects'=>$projects,
+                'milestones'=>$milestones
             ];
 
             $res=['success'=>true,'message'=>'Projects successfully fetched','errors'=>[],'data'=>$data];
