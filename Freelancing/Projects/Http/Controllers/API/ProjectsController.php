@@ -180,8 +180,8 @@ class ProjectsController extends Controller
             $projects=Projects::whereNot('user_id', $user_id);
 
             if($req->keyword!=null){
-                $projects->where('LOWER(job_title)', 'like', '%'.strtolower($req->keyword).'%')
-                ->Orwhere('LOWER(project_name)', 'like', '%'.strtolower($req->keyword).'%');
+                $projects->where(DB::raw('lower(job_title)'), 'like', '%'.strtolower($req->keyword).'%')
+                ->Orwhere(DB::raw('lower(project_name)'), 'like', '%'.strtolower($req->keyword).'%');
             }
 
             $total = $projects->count();
