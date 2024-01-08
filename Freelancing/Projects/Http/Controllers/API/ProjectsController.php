@@ -172,9 +172,24 @@ class ProjectsController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
             $user_id=InwntDecrypt(Auth::id());
-            $projects=Projects::whereNot('user_id', $user_id)->get();
+
+            $page_size=$req->page_size;
+            $page_no=$req->page_no;
+
+
+            $projects=Projects::whereNot('user_id', $user_id);
+
+            if($req->keyword!=null){
+                $projects->where('job_title', 'LIKE', '%'.$req->keyword.'%')
+                ->Orwhere('description', 'LIKE', '%'.$req->keyword.'%')
+                ->Orwhere('project_name', 'LIKE', '%'.$req->keyword.'%');
+            }
+
+            $total = $projects->count();
+            $projects = $projects->offset($page_no)->limit($page_size)->get();
 
             $data=[
+                'total'=>$total,
                 'projects'=>$projects
             ];
 
