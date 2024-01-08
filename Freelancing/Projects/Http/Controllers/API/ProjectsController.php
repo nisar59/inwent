@@ -26,7 +26,7 @@ class ProjectsController extends Controller
         try {          
             $page_size=$req->page_size;
             $page_no=$req->page_no;
-            
+
             $user_id=InwntDecrypt(Auth::id()); 
 
             $projects=Projects::where('user_id', $user_id);
@@ -288,17 +288,25 @@ class ProjectsController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function freelancerProjects()
+    public function freelancerProjects(Request $req)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
-        try {          
+        try {      
+
+            $page_size=$req->page_size;
+            $page_no=$req->page_no; 
+
             $user_id=InwntDecrypt(Auth::id()); 
 
             $milestones=ProjectMilestones::where('user_to', $user_id)->get('project_id')->toArray();
 
-            $projects=Projects::whereIn('id', $milestones)->get();
+            $projects=Projects::whereIn('id', $milestones);
+
+            $total = $projects->count();
+            $projects   = $projects->offset($page_no)->limit($page_size)->get();
 
             $data=[
+                'total'=>$total,
                 'projects'=>$projects
             ];
 
