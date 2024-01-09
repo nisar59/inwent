@@ -10,6 +10,8 @@ use Freelancing\Projects\Entities\Projects;
 use Freelancing\Projects\Entities\ProjectProposals;
 use Freelancing\Projects\Entities\ProjectMilestones;
 use Freelancing\Projects\Entities\FavoriteProjects;
+use Common\Wallet\Entities\Wallet;
+use Common\Wallet\Entities\WalletTransactions;
 use Throwable;
 use Auth;
 use DB;
@@ -283,6 +285,92 @@ class ProjectsController extends Controller
             ];
 
             $res=['success'=>true,'message'=>'Milestone successfully created and offer sent','errors'=>[],'data'=>$data];
+            DB::commit();
+             return response()->json($res);
+        } catch (Exception $e) {
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+
+
+
+
+
+    /**
+     * Show the form for editing the specified resource.
+     * @param int $id
+     * @return Renderable
+     */
+    public function completeMilestone(Request $req, $id)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        DB::beginTransaction();
+        try {          
+            $user_id=InwntDecrypt(Auth::id()); 
+
+            $milestone=ProjectMilestones::find($id);
+
+            if($milestone==null){
+                $res=['success'=>false,'message'=>'Milestone not found','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
+            
+
+            $user_from_wallet=Wallet::where('user_id',$milestone->user_from)->first();
+
+            $user_from_wallet->total_available_balance=(int) $user_from_wallet->total_available_balance - $milestone->milstone_price;
+            $user_from_wallet->total_debit_balance=(int) $user_from_wallet->total_debit_balance + $milestone->milstone_price;
+            $user_from_wallet->save();
+
+
+
+            $user_to_wallet=Wallet::where('user_id',$milestone->user_to)->first();
+
+            $user_to_wallet->total_available_balance=(int) $user_to_wallet->total_available_balance + $milestone->milstone_price;
+            $user_to_wallet->total_credit_balance=(int) $user_to_wallet->total_credit_balance + $milestone->milstone_price;
+            $user_to_wallet->save();
+
+
+
+            $user_transaction=WalletTransactions::create([
+                'user_id'=>$user_from_wallet->user_id,
+                'wallet_id'=>$user_from_wallet->id,
+                'transaction_module'=>1,
+                'transaction_type'=>2,
+                'amount'=>$milestone->milstone_price,
+                'user_to'=>$user_to_wallet->user_id,
+                'wallet_to'=>$user_to_wallet->id,
+                'transaction_id'=>$user_from_wallet->user_id.uniqid().$user_to_wallet->user_id,
+                'status'=>0,
+                'remarks'=>'Milestone completion fund transfer',
+                'logs'=>''
+            ]);
+
+
+            $milestone->update([
+                'completion_date'=>now(),
+                'status'=>1,
+                'paid'=>1,
+                'pay_description'=>$req->pay_description,
+            ]);
+
+
+
+            
+            $data=[
+                'user'=>Auth::user(),
+                'milestone'=>$milestone
+            ];
+
+            $res=['success'=>true,'message'=>'Milestone successfully completed','errors'=>[],'data'=>$data];
             DB::commit();
              return response()->json($res);
         } catch (Exception $e) {
