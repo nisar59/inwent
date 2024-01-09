@@ -38,7 +38,6 @@ class ProjectsController extends Controller
             $data=[
                 'total'=>$total,
                 'projects'=>$projects,
-                'page_no'=>$page_no
             ];
 
             $res=['success'=>true,'message'=>'Projects successfully fetched','errors'=>[],'data'=>$data];
