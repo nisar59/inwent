@@ -181,7 +181,7 @@ class ProjectsController extends Controller
             $page_no=$page_no * (int) $page_size;
 
 
-            $projects=Projects::whereNot('user_id', $user_id);
+            $projects=Projects::whereNot('user_id', $user_id)->where('status', 0);
 
             if($req->keyword!=null){
                 $projects->where(DB::raw('lower(job_title)'), 'like', '%'.strtolower($req->keyword).'%')
