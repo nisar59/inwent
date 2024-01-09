@@ -25,7 +25,8 @@ class ProjectsController extends Controller
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
         try {          
             $page_size=$req->page_size;
-            $page_no=$req->page_no;
+            $page_no=(int)$req->page_no - 1;
+            $page_no=$page_no * (int) $page_size;
 
             $user_id=InwntDecrypt(Auth::id()); 
 
@@ -36,7 +37,8 @@ class ProjectsController extends Controller
 
             $data=[
                 'total'=>$total,
-                'projects'=>$projects
+                'projects'=>$projects,
+                'page_no'=>$page_no
             ];
 
             $res=['success'=>true,'message'=>'Projects successfully fetched','errors'=>[],'data'=>$data];
@@ -174,7 +176,8 @@ class ProjectsController extends Controller
             $user_id=InwntDecrypt(Auth::id());
 
             $page_size=$req->page_size;
-            $page_no=$req->page_no;
+            $page_no=(int)$req->page_no - 1;
+            $page_no=$page_no * (int) $page_size;
 
 
             $projects=Projects::whereNot('user_id', $user_id);
@@ -308,7 +311,8 @@ class ProjectsController extends Controller
         try {      
 
             $page_size=$req->page_size;
-            $page_no=(int)$req->page_no - 1; 
+            $page_no=(int)$req->page_no - 1;
+            $page_no=$page_no * (int) $page_size; 
 
             $user_id=InwntDecrypt(Auth::id()); 
 
