@@ -13,7 +13,7 @@ class Projects extends Model
     use HasFactory;
 
     protected $table='freelancing_projects';
-    protected $fillable = ['user_id','project_name','project_pic','type_of_work','servive','pricing_type','price','expert_type','industry','job_type','category','qualification','topic_area','experience','activity_type','project_duration','skill_level','job_title','description','deliverables','skills','area_experties','sub_area_experties','certifications','licenses_permits','additional_information_files','web_links','invited_freelancers','agree_to_terms','agree_to_get_offers','status','hired_freelancer'];
+    protected $fillable = ['user_id','project_name','project_pic','type_of_work','servive','pricing_type','price','expert_type','industry','job_type','category','qualification','topic_area','experience','activity_type','project_duration','skill_level','job_title','description','deliverables','skills','area_experties','sub_area_experties','certifications','licenses_permits','additional_information_files','web_links','invited_freelancers','agree_to_terms','agree_to_get_offers','status','hired_freelancer', 'hire_date'];
     
     public $with=['user','type_of_work','servive','expert_type','industry', 'job_type', 'category', 'qualification', 'topic_area', 'experience', 'activity_type', 'project_duration', 'skill_level', 'purposals', 'milestones', 'freelancer'];
 

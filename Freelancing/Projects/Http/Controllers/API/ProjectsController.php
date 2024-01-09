@@ -272,6 +272,7 @@ class ProjectsController extends Controller
             ]);
             $project=Projects::find($req->project_id);
             $project->hired_freelancer=$req->user_to;
+            $project->hire_date=now();
             $project->status=1;
             
             $project->save();
