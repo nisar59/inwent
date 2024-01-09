@@ -309,6 +309,61 @@ class ProjectsController extends Controller
      * @param int $id
      * @return Renderable
      */
+    public function completeMilestoneRequest(Request $req, $id)
+    {
+        $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
+        DB::beginTransaction();
+        try {          
+            $user_id=InwntDecrypt(Auth::id()); 
+
+            $milestone=ProjectMilestones::find($id);
+
+            if($milestone==null){
+                $res=['success'=>false,'message'=>'Milestone not found','errors'=>[],'data'=>null];
+                return response()->json($res);
+            }
+
+            $milestone->update([
+                'request_completion'=>1,
+                'work_files'=>$req->work_files,
+                'explaination'=>$req->explaination,
+                'request_status'=>0,
+            ]);
+
+
+
+            
+            $data=[
+                'user'=>Auth::user(),
+                'milestone'=>$milestone
+            ];
+
+            $res=['success'=>true,'message'=>'Milestone completion successfully requested','errors'=>[],'data'=>$data];
+            DB::commit();
+             return response()->json($res);
+        } catch (Exception $e) {
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+
+        } catch(Throwable $e){
+                DB::rollback();
+                $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+                return response()->json($res);
+        } 
+    }
+
+
+
+
+
+
+
+    /**
+     * Show the form for editing the specified resource.
+     * @param int $id
+     * @return Renderable
+     */
     public function completeMilestone(Request $req, $id)
     {
         $res=['success'=>true,'message'=>'', 'errors'=>[],'data'=>null];
